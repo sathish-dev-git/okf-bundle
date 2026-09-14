@@ -43,7 +43,7 @@ sources:
     resource: "/domains/data-modeling-and-schema/query-tables/get-query-table-details.md"
     title: Endpoint reference - Get Query Table Details
 generated:
-  at: 2026-09-14T11:52:39Z
+  at: 2026-09-14T17:14:34Z
 status: stable
 ---
 

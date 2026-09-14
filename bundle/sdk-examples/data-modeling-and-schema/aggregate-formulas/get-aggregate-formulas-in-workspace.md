@@ -43,7 +43,7 @@ sources:
     resource: "/domains/data-modeling-and-schema/aggregate-formulas/get-aggregate-formulas-in-workspace.md"
     title: Endpoint reference - Get Unified Metrics in Workspace
 generated:
-  at: 2026-09-14T11:52:39Z
+  at: 2026-09-14T17:14:34Z
 status: stable
 ---
 

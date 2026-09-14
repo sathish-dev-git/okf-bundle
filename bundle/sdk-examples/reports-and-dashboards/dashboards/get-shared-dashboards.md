@@ -43,7 +43,7 @@ sources:
     resource: "/domains/reports-and-dashboards/dashboards/get-shared-dashboards.md"
     title: Endpoint reference - Get Shared Dashboards
 generated:
-  at: 2026-09-14T11:52:39Z
+  at: 2026-09-14T17:14:34Z
 status: stable
 ---
 

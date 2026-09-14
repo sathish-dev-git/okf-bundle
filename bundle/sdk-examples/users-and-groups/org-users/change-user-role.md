@@ -43,7 +43,7 @@ sources:
     resource: "/domains/users-and-groups/org-users/change-user-role.md"
     title: Endpoint reference - Change User Role
 generated:
-  at: 2026-09-14T11:52:39Z
+  at: 2026-09-14T17:14:34Z
 status: stable
 ---
 

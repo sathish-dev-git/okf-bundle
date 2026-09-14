@@ -43,7 +43,7 @@ sources:
     resource: "/domains/workspace-management/workspace-folders/get-folders.md"
     title: Endpoint reference - Get Folder List
 generated:
-  at: 2026-09-14T11:52:39Z
+  at: 2026-09-14T17:14:34Z
 status: stable
 ---
 

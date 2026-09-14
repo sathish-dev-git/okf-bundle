@@ -88,8 +88,11 @@ python3 tools/package_okf.py --tarball --version X.Y.Z
 ```
 
 Notes on step 4:
-- The README and `llms.txt` templates bake in `--repo-url` (and the other URL flags), so pass the real
-  values, not placeholders.
+- The README and `llms.txt` templates bake in the URL flags. Their defaults (`DEFAULT_REPO`, `DEFAULT_SITE`,
+  `DEFAULT_DOCS`, `DEFAULT_BASE_URL` at the top of `package_okf.py`) are the published values, so a plain
+  run is correct; do not pass placeholders. While the bundle is served from the temporary repository,
+  `DEFAULT_BASE_URL` points raw-file links there and the `git clone` line and "Canonical copies" footer
+  keep the permanent `DEFAULT_REPO`. When the repository moves, set `DEFAULT_BASE_URL = None`.
 - The `CHANGELOG.md` template in `package_okf.py` only describes the first release. For every release
   after that, either hand-edit `CHANGELOG.md` in `dist/zoho-analytics-okf/` after packaging, or extend
   the template in `package_okf.py` (`changelog()`).

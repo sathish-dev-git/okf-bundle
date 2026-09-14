@@ -43,7 +43,7 @@ sources:
     resource: "/domains/users-and-groups/org-users/get-org-admins.md"
     title: Endpoint reference - Get Org Admins
 generated:
-  at: 2026-09-14T11:52:39Z
+  at: 2026-09-14T17:14:34Z
 status: stable
 ---
 

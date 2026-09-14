@@ -43,7 +43,7 @@ sources:
     resource: "/domains/share-and-publish/slideshow-management/get-slideshows.md"
     title: Endpoint reference - Get Slide List
 generated:
-  at: 2026-09-14T11:52:39Z
+  at: 2026-09-14T17:14:34Z
 status: stable
 ---
 

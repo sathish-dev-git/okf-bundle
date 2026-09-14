@@ -43,7 +43,7 @@ sources:
     resource: "/domains/schedules-and-alerts/email-schedules/get-email-schedules.md"
     title: Endpoint reference - Get Email Schedules
 generated:
-  at: 2026-09-14T11:52:39Z
+  at: 2026-09-14T17:14:34Z
 status: stable
 ---
 

@@ -43,7 +43,7 @@ sources:
     resource: "/domains/share-and-publish/sharing/update-shared-details-for-view.md"
     title: Endpoint reference - Update Shared Details
 generated:
-  at: 2026-09-14T11:52:39Z
+  at: 2026-09-14T17:14:34Z
 status: stable
 ---
 

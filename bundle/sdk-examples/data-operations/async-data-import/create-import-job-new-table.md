@@ -43,7 +43,7 @@ sources:
     resource: "/domains/data-operations/async-data-import/create-import-job-new-table.md"
     title: Endpoint reference - Create Import Job for a New Table (Asynchronous)
 generated:
-  at: 2026-09-14T11:52:39Z
+  at: 2026-09-14T17:14:34Z
 status: stable
 ---
 

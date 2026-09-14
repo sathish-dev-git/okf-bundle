@@ -43,7 +43,7 @@ sources:
     resource: "/domains/users-and-groups/workspace-groups/remove-group-members.md"
     title: Endpoint reference - Remove Group Members
 generated:
-  at: 2026-09-14T11:52:39Z
+  at: 2026-09-14T17:14:34Z
 status: stable
 ---
 

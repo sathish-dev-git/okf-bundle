@@ -43,7 +43,7 @@ sources:
     resource: "/domains/workspace-management/workspace-preferences/add-default-workspace.md"
     title: Endpoint reference - Add Default Workspace
 generated:
-  at: 2026-09-14T11:52:39Z
+  at: 2026-09-14T17:14:34Z
 status: stable
 ---
 

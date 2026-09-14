@@ -43,7 +43,7 @@ sources:
     resource: "/domains/dsml/automl/get-deployments-for-model.md"
     title: Endpoint reference - Get Deployments For A Model
 generated:
-  at: 2026-09-14T11:52:39Z
+  at: 2026-09-14T17:14:34Z
 status: stable
 ---
 

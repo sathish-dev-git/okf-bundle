@@ -66,8 +66,12 @@ Assembles `dist/zoho-analytics-okf/`: copies the bundle to `okf/`, writes `READM
 to `tools/validate.py`, runs it, and optionally writes `dist/zoho-analytics-okf-<version>.tar.gz`.
 
 Flags: `--version` (overrides the manifest version in the copy), `--repo-url`, `--site-url`,
-`--docs-url`, `--base-url`, `--ref`, `--out`, `--tarball`. The repo URL is baked into README and
-`llms.txt` links, so pass the real one. Re-packaging preserves `dist/zoho-analytics-okf/.git`, so
+`--docs-url`, `--base-url`, `--ref`, `--out`, `--tarball`. Their defaults are the `DEFAULT_*` constants at
+the top of the file, so a plain run reproduces the published README and `llms.txt` exactly:
+`DEFAULT_REPO` and `DEFAULT_SITE` are the intended permanent homes (used by the `git clone` line and the
+"Canonical copies" footer); `DEFAULT_BASE_URL` is where the raw files are actually served from today
+(used by every raw-file link in README and `llms.txt`). When the repository moves to `DEFAULT_REPO`, set
+`DEFAULT_BASE_URL = None` and the raw base is derived from `--repo-url` again. Re-packaging preserves `dist/zoho-analytics-okf/.git`, so
 commit history survives; the working tree is otherwise replaced wholesale.
 
 The README and `llms.txt` text are templates inside `package_okf.py` (`readme()`, `llms_txt()`,

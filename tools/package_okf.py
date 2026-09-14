@@ -30,6 +30,11 @@ REPO_NAME = 'zoho-analytics-okf'
 DEFAULT_REPO = 'https://github.com/zoho/zoho-analytics-okf'
 DEFAULT_SITE = 'https://www.zoho.com/analytics/api/v2/okf'
 DEFAULT_DOCS = 'https://www.zoho.com/analytics/api/v2/'
+# Where the bundle is actually served from today. README's `git clone` line and the "Canonical copies"
+# footer keep pointing at DEFAULT_REPO / DEFAULT_SITE (the intended permanent homes); every raw-file link
+# in README and llms.txt uses this base so that agents fetch a URL that resolves now.
+# Set to None once the repository moves to DEFAULT_REPO, and the raw base is derived from --repo-url.
+DEFAULT_BASE_URL = 'https://raw.githubusercontent.com/sathish-dev-git/zoho-analytics-okf/main'
 
 
 def raw_base(repo_url, ref='main'):
@@ -322,7 +327,7 @@ def main():
     ap.add_argument('--repo-url', default=DEFAULT_REPO, help='public repository URL')
     ap.add_argument('--site-url', default=DEFAULT_SITE, help='documentation-site mirror URL')
     ap.add_argument('--docs-url', default=DEFAULT_DOCS, help='Zoho Analytics API documentation URL')
-    ap.add_argument('--base-url', help='base URL used in llms.txt links (default: raw file URL of --repo-url)')
+    ap.add_argument('--base-url', default=DEFAULT_BASE_URL, help='base URL for raw-file links in README and llms.txt (default: DEFAULT_BASE_URL, else the raw file URL of --repo-url)')
     ap.add_argument('--ref', default='main', help='git ref used to build raw file URLs')
     ap.add_argument('--out', default=DIST, help='output directory (default <repo>/dist)')
     ap.add_argument('--tarball', action='store_true', help='also write a .tar.gz next to the directory')

@@ -43,7 +43,7 @@ sources:
     resource: "/domains/share-and-publish/publish/remove-private-access.md"
     title: Endpoint reference - Remove Private Access
 generated:
-  at: 2026-09-14T11:52:39Z
+  at: 2026-09-14T17:14:34Z
 status: stable
 ---
 

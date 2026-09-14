@@ -36,7 +36,7 @@ Python 3.8+, standard library only. Run from the repository root.
 ```bash
 python3 tools/build_okf.py                 # prints endpoints=… groups=… errors=… sdk=…
 python3 tools/validate_okf.py              # must end with errors=0 warnings=0 broken_links=0
-python3 tools/package_okf.py --tarball --version X.Y.Z --repo-url https://github.com/<org>/zoho-analytics-okf
+python3 tools/package_okf.py --tarball --version X.Y.Z    # URLs come from the DEFAULT_* constants in the packager
 ```
 
 ## Updating the bundle for an API change

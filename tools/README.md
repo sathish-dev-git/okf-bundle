@@ -12,7 +12,7 @@ repository by its own path, so the working directory does not matter.
 ```bash
 python3 tools/build_okf.py
 python3 tools/validate_okf.py
-python3 tools/package_okf.py --tarball --version X.Y.Z --repo-url https://github.com/<org>/zoho-analytics-okf
+python3 tools/package_okf.py --tarball --version X.Y.Z    # URLs come from the DEFAULT_* constants in the packager
 ```
 
 What to edit inside `build_okf.py` (configuration tables such as `DOMAINS`, `TITLE_MAP`, `MD_ONLY_OPS`,

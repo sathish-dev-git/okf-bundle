@@ -43,7 +43,7 @@ sources:
     resource: "/domains/data-modeling-and-schema/formula-columns/add-formula-column.md"
     title: Endpoint reference - Add Custom Formula
 generated:
-  at: 2026-09-14T11:52:39Z
+  at: 2026-09-14T17:14:34Z
 status: stable
 ---
 

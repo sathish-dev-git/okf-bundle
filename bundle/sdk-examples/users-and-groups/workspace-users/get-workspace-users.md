@@ -43,7 +43,7 @@ sources:
     resource: "/domains/users-and-groups/workspace-users/get-workspace-users.md"
     title: Endpoint reference - Get Workspace Users
 generated:
-  at: 2026-09-14T11:52:39Z
+  at: 2026-09-14T17:14:34Z
 status: stable
 ---
 

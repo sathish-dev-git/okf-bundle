@@ -43,7 +43,7 @@ sources:
     resource: "/domains/views-management/view-operations/get-view-details.md"
     title: Endpoint reference - Get View Details
 generated:
-  at: 2026-09-14T11:52:39Z
+  at: 2026-09-14T17:14:34Z
 status: stable
 ---
 

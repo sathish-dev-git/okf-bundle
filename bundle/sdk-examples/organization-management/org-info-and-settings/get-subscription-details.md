@@ -43,7 +43,7 @@ sources:
     resource: "/domains/organization-management/org-info-and-settings/get-subscription-details.md"
     title: Endpoint reference - Get Subscription Details
 generated:
-  at: 2026-09-14T11:52:39Z
+  at: 2026-09-14T17:14:34Z
 status: stable
 ---
 

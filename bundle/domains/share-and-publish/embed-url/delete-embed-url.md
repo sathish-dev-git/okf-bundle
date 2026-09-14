@@ -41,7 +41,7 @@ api:
     pointer: null
     note: "This endpoint is documented in the markdown reference only; it is absent from the OpenAPI files."
 generated:
-  at: 2026-09-14T11:52:39Z
+  at: 2026-09-14T17:14:34Z
 status: stable
 ---
 
