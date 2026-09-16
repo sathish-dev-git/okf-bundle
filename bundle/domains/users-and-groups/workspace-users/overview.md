@@ -50,9 +50,9 @@ sources:
     resource: "/references/openapi/user-groups-grouped-api.json"
     title: OpenAPI 3 specification - user-groups-grouped-api.json
     author: team:zoho-analytics-api-docs
-    last_modified: 2026-09-10T10:56:21Z
+    last_modified: 2026-09-16T12:54:00Z
 generated:
-  at: 2026-09-14T17:14:34Z
+  at: 2026-09-16T12:54:00Z
 status: stable
 ---
 
@@ -197,7 +197,7 @@ All endpoints require the `Authorization: Zoho-oauthtoken <access-token>` header
 |---|---|---|
 | [7103](/foundations/error-codes.md#error-7103) | 404 | The organization or workspace addressed by the request does not exist, has been deleted, or is not visible to the caller. |
 | [7301](/foundations/error-codes.md#error-7301) | 403 | The request is authenticated, but the user does not hold the role or view permission required for this operation on the requested resource. |
-| [7390](/foundations/error-codes.md#error-7390) | 400 | One or more of the specified users holds the org-level Viewer role and cannot be promoted to Workspace Admin. |
+| [7390](/foundations/error-codes.md#error-7390) | 400 | The workspace does not belong to the organization in the ZANALYTICS-ORGID header. |
 | [7550](/foundations/error-codes.md#error-7550) | 400 | The specified role name does not exist as a custom role in the organization. |
 | [8040](/foundations/error-codes.md#error-8040) | 400 | One or more of the specified email addresses are not currently Workspace Admins of this workspace. |
 | [8060](/foundations/error-codes.md#error-8060) | 400 | The specified domainName does not exist. |

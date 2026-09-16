@@ -34,9 +34,9 @@ sources:
     resource: "/references/openapi/data-operations-grouped-api.json"
     title: OpenAPI 3 specification - data-operations-grouped-api.json
     author: team:zoho-analytics-api-docs
-    last_modified: 2026-09-10T10:56:20Z
+    last_modified: 2026-09-16T12:30:51Z
 generated:
-  at: 2026-09-14T17:14:34Z
+  at: 2026-09-16T12:54:00Z
 status: stable
 ---
 
@@ -657,7 +657,7 @@ Defaults: `leftHeader` `1`, `centerHeader` `0`, `rightHeader` `2`, `leftFooter` 
 | [8015](/foundations/error-codes.md#error-8015) | 400 | A name in selectedColumns does not match any column in the view. |
 | [8017](/foundations/error-codes.md#error-8017) | 400 | imageFormat is not png, jpg, or jpeg. |
 | [8077](/foundations/error-codes.md#error-8077) | 400 | CONFIG was not sent, or was sent empty. |
-| [8078](/foundations/error-codes.md#error-8078) | 400 | sqlQuery was sent but is blank. |
+| [8078](/foundations/error-codes.md#error-8078) | 400 | A mandatory attribute was sent with an empty value. The error message names the attribute. |
 | [8079](/foundations/error-codes.md#error-8079) | 400 | A mandatory attribute is missing from the configuration. |
 | [8088](/foundations/error-codes.md#error-8088) | 400 | Export is disabled for the organization. |
 | [8119](/foundations/error-codes.md#error-8119) | 400 | Invalid value for attribute. |
@@ -673,9 +673,9 @@ Defaults: `leftHeader` `1`, `centerHeader` `0`, `rightHeader` `2`, `leftFooter` 
 | [8132](/foundations/error-codes.md#error-8132) | 400 | 5 export jobs are already queued or running for the organization. |
 | [8188](/foundations/error-codes.md#error-8188) | 400 | password is blank or shorter than 6 characters. |
 | [8241](/foundations/error-codes.md#error-8241) | 409 | The view carries a restricted DATAWARNING system tag. |
-| [8507](/foundations/error-codes.md#error-8507) | 400 | CONFIG exceeds 100,000 characters. |
+| [8507](/foundations/error-codes.md#error-8507) | 400 | roleName exceeds 30 characters, or the serialized permissions object exceeds its size limit. |
 | [8535](/foundations/error-codes.md#error-8535) | 401 | The OAuth access token is missing, expired, revoked, or does not carry the scope required by this operation. |
-| [8547](/foundations/error-codes.md#error-8547) | 400 | selectedColumns is empty or holds more than 300 entries. |
+| [8547](/foundations/error-codes.md#error-8547) | 400 | viewIds is empty or has more than 1000 entries. |
 
 # Related
 

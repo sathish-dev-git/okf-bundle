@@ -16,6 +16,9 @@ sources:
   - id: group-org-users
     resource: "/domains/users-and-groups/org-users/overview.md"
     title: Organization Users - group overview
+  - id: group-custom-roles
+    resource: "/domains/users-and-groups/custom-roles/overview.md"
+    title: Custom Roles - group overview
   - id: group-workspace-users
     resource: "/domains/users-and-groups/workspace-users/overview.md"
     title: Workspace Users - group overview
@@ -85,6 +88,9 @@ sources:
   - id: group-auto-analysis
     resource: "/domains/views-management/auto-analysis/overview.md"
     title: Auto Analysis - group overview
+  - id: group-tags
+    resource: "/domains/views-management/tags/overview.md"
+    title: Tags - group overview
   - id: group-reports
     resource: "/domains/reports-and-dashboards/reports/overview.md"
     title: Reports (Analysis Views) - group overview
@@ -110,7 +116,7 @@ sources:
     resource: "/domains/dsml/automl/overview.md"
     title: AutoML - group overview
 generated:
-  at: 2026-09-14T17:14:34Z
+  at: 2026-09-16T12:54:00Z
 status: stable
 ---
 
@@ -138,6 +144,10 @@ The `ZANALYTICS-ORGID` column says whether the organization header is `required`
 | [Deactivate Users](/domains/users-and-groups/org-users/de-activate-users.md) | PUT | `ZohoAnalytics.usermanagement.update` | required | The authenticated user must be an Account Admin or Organization Admin of the specified organisation. |
 | [Change User Role](/domains/users-and-groups/org-users/change-user-role.md) | PUT | `ZohoAnalytics.usermanagement.update` | required | The authenticated user must be an Account Admin or Organization Admin of the specified organisation. |
 | [Get Org Admins](/domains/users-and-groups/org-users/get-org-admins.md) | GET | `ZohoAnalytics.share.read` | required | The authenticated user must be the **Account Admin** of the specified organisation. |
+| [Get Custom Roles](/domains/users-and-groups/custom-roles/get-custom-roles.md) | GET | `ZohoAnalytics.usermanagement.read` | required | - |
+| [Create Custom Role](/domains/users-and-groups/custom-roles/create-custom-role.md) | POST | `ZohoAnalytics.usermanagement.create` | required | - |
+| [Update Custom Role](/domains/users-and-groups/custom-roles/update-custom-role.md) | PUT | `ZohoAnalytics.usermanagement.update` | required | - |
+| [Delete Custom Role](/domains/users-and-groups/custom-roles/delete-custom-role.md) | DELETE | `ZohoAnalytics.usermanagement.delete` | required | - |
 | [Get Workspace Users](/domains/users-and-groups/workspace-users/get-workspace-users.md) | GET | `ZohoAnalytics.usermanagement.read` | required | The authenticated user must be a Workspace Admin of the specified workspace. Account Admins and Organization Admins also have access. |
 | [Add Workspace Users](/domains/users-and-groups/workspace-users/add-workspace-users.md) | POST | `ZohoAnalytics.usermanagement.create` | required | The authenticated user must be a Workspace Admin of the specified workspace. Account Admins and Organization Admins also have access. |
 | [Remove Workspace Users](/domains/users-and-groups/workspace-users/delete-workspace-users.md) | DELETE | `ZohoAnalytics.usermanagement.delete` | required | The authenticated user must be a Workspace Admin of the specified workspace. Account Admins and Organization Admins also have access. |
@@ -247,6 +257,16 @@ The `ZANALYTICS-ORGID` column says whether the organization header is `required`
 | [Delete Trash View](/domains/views-management/trash-management/delete-trash-view.md) | DELETE | `ZohoAnalytics.modeling.delete` | required | The authenticated user must be an **Account Admin** or **Organization Admin**, or a **Workspace Admin**, or the **View Owner** (the user who owned the view before it was trashed). |
 | [Auto Analyse View](/domains/views-management/auto-analysis/auto-analyse-view.md) | POST | `ZohoAnalytics.modeling.create` | required | The authenticated user must be an Account Admin or Organization Admin, or a Workspace Admin, or any user with Create Report permission on the workspace. |
 | [Auto Analyse Column](/domains/views-management/auto-analysis/auto-analyse-column.md) | POST | `ZohoAnalytics.modeling.create` | required | The authenticated user must be an Account Admin or Organization Admin, or a Workspace Admin, or any user with Create Report permission on the workspace. |
+| [Get Tags List](/domains/views-management/tags/get-tags.md) | GET | `ZohoAnalytics.metadata.read` | required | - |
+| [Get Tagged Views](/domains/views-management/tags/get-tagged-views.md) | GET | `ZohoAnalytics.metadata.read` | required | - |
+| [Get View Tags](/domains/views-management/tags/get-view-tags.md) | GET | `ZohoAnalytics.metadata.read` | required | - |
+| [Create Tag](/domains/views-management/tags/create-tag.md) | POST | `ZohoAnalytics.modeling.create` | required | - |
+| [Update Tag](/domains/views-management/tags/update-tag.md) | PUT | `ZohoAnalytics.modeling.update` | required | - |
+| [Delete Tag](/domains/views-management/tags/delete-tag.md) | DELETE | `ZohoAnalytics.modeling.delete` | required | - |
+| [Add Tag To Multiple Views](/domains/views-management/tags/add-tag-to-views.md) | POST | `ZohoAnalytics.modeling.create` | required | - |
+| [Remove Tag From Multiple Views](/domains/views-management/tags/remove-tag-from-views.md) | DELETE | `ZohoAnalytics.modeling.delete` | required | - |
+| [Add Multiple Tags To View](/domains/views-management/tags/add-tags-to-view.md) | POST | `ZohoAnalytics.modeling.create` | required | - |
+| [Remove Multiple Tags From View](/domains/views-management/tags/remove-tags-from-view.md) | DELETE | `ZohoAnalytics.modeling.delete` | required | - |
 | [Create Analysis View](/domains/reports-and-dashboards/reports/create-report.md) | POST | `ZohoAnalytics.modeling.create` | required | The authenticated user must be an **Account Admin** or **Organization Admin**, or a **Workspace Admin**, or a **Shared User**, or a **Group Member**, or any user with **Create Report** permission on the workspace. |
 | [Update Analysis View](/domains/reports-and-dashboards/reports/update-report.md) | PUT | `ZohoAnalytics.modeling.update` | required | The authenticated user must be an **Account Admin** or **Organization Admin**, or the **View Owner**, or a **Shared User**, or a **Group Member**, or any user with **Design Modify** permission on the view. |
 | [Get Report Metadata](/domains/reports-and-dashboards/reports/get-report-metadata.md) | GET | `ZohoAnalytics.modeling.read` | required | The authenticated user must be an **Account Admin** or **Organization Admin**, or the **View Owner**, or any user with **Design Modify** permission on the view. |

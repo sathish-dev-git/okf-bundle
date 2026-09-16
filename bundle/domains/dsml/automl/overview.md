@@ -62,9 +62,9 @@ sources:
     resource: "/references/openapi/dsml-grouped-api.json"
     title: OpenAPI 3 specification - dsml-grouped-api.json
     author: team:zoho-analytics-api-docs
-    last_modified: 2026-09-10T10:56:20Z
+    last_modified: 2026-09-16T12:30:51Z
 generated:
-  at: 2026-09-14T17:14:34Z
+  at: 2026-09-16T12:54:00Z
 status: stable
 ---
 
@@ -353,13 +353,13 @@ There is no `domainName` attribute on any AutoML API. Manage AutoML for a white-
 | [7301](/foundations/error-codes.md#error-7301) | 403 | The request is authenticated, but the user does not hold the role or view permission required for this operation on the requested resource. |
 | [7319](/foundations/error-codes.md#error-7319) | 400 | The view does not belong to the specified workspace. |
 | [8050](/foundations/error-codes.md#error-8050) | 400 | Invalid value provided. |
-| [8078](/foundations/error-codes.md#error-8078) | 400 | sqlQuery was sent but is blank. |
+| [8078](/foundations/error-codes.md#error-8078) | 400 | A mandatory attribute was sent with an empty value. The error message names the attribute. |
 | [8079](/foundations/error-codes.md#error-8079) | 400 | A mandatory attribute is missing from the configuration. |
 | [8119](/foundations/error-codes.md#error-8119) | 400 | Invalid value for attribute. |
-| [8504](/foundations/error-codes.md#error-8504) | 400 | CONFIG was not sent, or a mandatory key is missing. |
+| [8504](/foundations/error-codes.md#error-8504) | 400 | CONFIG was not sent. |
 | [8535](/foundations/error-codes.md#error-8535) | 401 | The OAuth access token is missing, expired, revoked, or does not carry the scope required by this operation. |
 | [8544](/foundations/error-codes.md#error-8544) | 400 | A schedule value is outside its declared range. |
-| [8547](/foundations/error-codes.md#error-8547) | 400 | selectedColumns is empty or holds more than 300 entries. |
+| [8547](/foundations/error-codes.md#error-8547) | 400 | viewIds is empty or has more than 1000 entries. |
 
 # Related
 

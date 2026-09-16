@@ -9,13 +9,13 @@ tags:
   - start-here
   - tooling
 generated:
-  at: 2026-09-14T17:14:34Z
+  at: 2026-09-16T12:54:00Z
 status: stable
 ---
 
 # Summary
 
-This bundle follows the Open Knowledge Format (OKF) v0.2: a directory tree of markdown files, each with YAML frontmatter that starts with a `type`. Reserved files `index.md` (directory listing) and `log.md` (history) carry no frontmatter except `okf_version` at the root. Links that start with `/` are relative to the bundle root. The bundle is generated from the source documents in the maintainer repository's `api-docs/` folder by `tools/build_okf.py`; regenerate it instead of editing generated files by hand.
+This bundle follows the Open Knowledge Format (OKF) v0.2: a directory tree of markdown files, each with YAML frontmatter that starts with a `type`. Reserved files `index.md` (directory listing) and `log.md` (history) carry no frontmatter except `okf_version` at the root. Links that start with `/` are relative to the bundle root. The bundle is generated from the source documents in the `analytics-api-docs` repository (a git submodule of the maintainer repository) by `tools/build_okf.py`; regenerate it instead of editing generated files by hand.
 
 # Directory Layout
 
@@ -71,7 +71,7 @@ Every concept carries `generated.at` (build time) and, where applicable, `source
 # Regenerating
 
 ```bash
-python3 tools/build_okf.py      # rebuilds bundle/ from api-docs/ and handwritten/
+python3 tools/build_okf.py      # rebuilds bundle/ from analytics-api-docs/ and handwritten/
 python3 tools/validate_okf.py   # checks frontmatter, reserved files and link targets
 ```
 

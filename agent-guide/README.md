@@ -7,6 +7,13 @@ changes: a new endpoint, a new CONFIG attribute, a changed behaviour, a new erro
 All paths in this guide are relative to the repository root (the folder that holds `agent-guide/`,
 `tools/` and `bundle/`). The repository may be cloned anywhere; nothing here depends on its absolute location.
 
+`analytics-api-docs/` is a **git submodule** of the
+[analytics-api-docs](https://github.com/sathish-dev-git/analytics-api-docs) repository, pinned to one
+commit. Where a playbook says to edit a file under `analytics-api-docs/`, that edit is made in that
+repository - either directly there, or inside the submodule on a branch that is pushed there - and this
+repository then moves its pin: `git submodule update --remote --merge analytics-api-docs`. Its own
+validator (`python3 tools/validate_api_docs.py` inside the submodule) must pass before the pin moves.
+
 ## The one rule
 
 **Never edit anything under `bundle/` by hand.** That directory is deleted and
@@ -14,10 +21,10 @@ regenerated on every build. Change the *inputs*, run the build, validate, and th
 
 ```
 inputs                                     generator                     outputs
-api-docs/MD/**/*.md                    ─┐
-api-docs/ZENESIS_OAS/*.json             ├──►  tools/build_okf.py  ──►  bundle/   (the OKF bundle)
-api-docs/ZENESIS_OAS_SAMPLES/*.json     │                                 │
-api-docs/zoho-analytics-api-common.json │                                 ▼
+analytics-api-docs/md/**/*.md                    ─┐
+analytics-api-docs/zenesis-oas/*.json             ├──►  tools/build_okf.py  ──►  bundle/   (the OKF bundle)
+analytics-api-docs/zenesis-oas-samples/*.json     │                                 │
+analytics-api-docs/zoho-analytics-api-common.json │                                 ▼
 handwritten/**/*.md                    ─┘     tools/validate_okf.py  (must print errors=0 broken_links=0)
                                                                           │
                                               tools/package_okf.py  ──►  dist/zoho-analytics-okf/   (public repo, git-ignored here)
@@ -29,14 +36,14 @@ handwritten/**/*.md                    ─┘     tools/validate_okf.py  (must p
 |---|---|---|
 | Understand the folder layout and pipeline | [01-repository-layout.md](01-repository-layout.md) | - |
 | Understand what each bundle file contains and where it comes from | [02-bundle-structure.md](02-bundle-structure.md) | - |
-| Write or edit a source markdown section so the parser picks it up | [03-source-document-format.md](03-source-document-format.md) | `api-docs/MD/...` |
-| Add a new endpoint | [04-change-playbooks.md](04-change-playbooks.md#a-add-a-new-endpoint) | `api-docs/MD`, `api-docs/ZENESIS_OAS`, samples, maybe `tools/build_okf.py` config |
-| Add or change a CONFIG attribute or response field | [04-change-playbooks.md](04-change-playbooks.md#b-add-or-change-a-config-attribute-or-response-field) | `api-docs/MD`, `api-docs/ZENESIS_OAS` |
-| Add or change an error code | [04-change-playbooks.md](04-change-playbooks.md#c-add-or-change-an-error-code) | `api-docs/MD`, maybe `CANONICAL` in the builder |
+| Write or edit a source markdown section so the parser picks it up | [03-source-document-format.md](03-source-document-format.md) | `analytics-api-docs/md/...` |
+| Add a new endpoint | [04-change-playbooks.md](04-change-playbooks.md#a-add-a-new-endpoint) | `analytics-api-docs/md`, `analytics-api-docs/zenesis-oas`, samples, maybe `tools/build_okf.py` config |
+| Add or change a CONFIG attribute or response field | [04-change-playbooks.md](04-change-playbooks.md#b-add-or-change-a-config-attribute-or-response-field) | `analytics-api-docs/md`, `analytics-api-docs/zenesis-oas` |
+| Add or change an error code | [04-change-playbooks.md](04-change-playbooks.md#c-add-or-change-an-error-code) | `analytics-api-docs/md`, maybe `CANONICAL` in the builder |
 | Add a new API group or domain | [04-change-playbooks.md](04-change-playbooks.md#d-add-a-new-api-group-or-domain) | `tools/build_okf.py` `DOMAINS`, new MD file, new or existing OAS file |
 | Change a shared rule (auth, headers, criteria, roles...) | [04-change-playbooks.md](04-change-playbooks.md#f-change-a-foundation-document) | `handwritten/foundations/` |
 | Add a workflow playbook | [04-change-playbooks.md](04-change-playbooks.md#g-add-a-workflow-playbook) | `handwritten/workflows/` |
-| Deprecate or remove an endpoint | [04-change-playbooks.md](04-change-playbooks.md#e-deprecate-or-remove-an-endpoint) | `api-docs`, OAS `deprecated: true` |
+| Deprecate or remove an endpoint | [04-change-playbooks.md](04-change-playbooks.md#e-deprecate-or-remove-an-endpoint) | `analytics-api-docs`, OAS `deprecated: true` |
 | Know which builder table to touch | [05-builder-internals.md](05-builder-internals.md) | `tools/build_okf.py` |
 | Release: version, changelog, publish | [06-rules-and-release-checklist.md](06-rules-and-release-checklist.md) | `tools/package_okf.py --version`, `dist/` |
 
@@ -44,6 +51,7 @@ handwritten/**/*.md                    ─┘     tools/validate_okf.py  (must p
 
 ```bash
 cd <repo-root>
+git submodule update --init           # once per clone: fetch analytics-api-docs at the pinned commit
 python3 tools/build_okf.py            # regenerates bundle/ ; prints endpoints=… errors=… sdk=…
 python3 tools/validate_okf.py         # must end with errors=0 warnings=0 broken_links=0
 git -C dist/zoho-analytics-okf status # (optional) see what the public copy would change

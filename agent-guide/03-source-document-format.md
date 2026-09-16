@@ -4,7 +4,7 @@ The generator is a parser with fixed expectations. Content that does not follow 
 lost, but it lands in the wrong section or is ignored. Check the existing sections in the same file and
 copy their shape exactly.
 
-## A. Markdown reference file (`api-docs/MD/<domain folder>/<GROUP>.md`)
+## A. Markdown reference file (`analytics-api-docs/md/<domain folder>/<GROUP>.md`)
 
 One file per API group. Structure:
 
@@ -130,7 +130,7 @@ CONFIG={"widgetName":"Sales widget"}
 | Case headings | `**Case N — description**` before each sample request; `**HTTP NNN <reason> — description**` before each sample response. |
 | Internal names | Never mention Java classes, XML security attributes, template names or file names of the documentation system in prose. |
 
-## B. OpenAPI file (`api-docs/ZENESIS_OAS/<domain>-grouped-api.json`)
+## B. OpenAPI file (`analytics-api-docs/zenesis-oas/<domain>-grouped-api.json`)
 
 OpenAPI 3.0 JSON. Fields the generator reads from each operation:
 
@@ -154,7 +154,7 @@ OpenAPI 3.0 JSON. Fields the generator reads from each operation:
 Error responses should use `"4XX"` and `"500"` pointing at the common file's `CommonErrorResponse` and
 `UnexpectedErrorResponse` (existing files use an absolute GitHub raw URL for that `$ref`; keep the same form).
 
-## C. SDK samples (`api-docs/ZENESIS_OAS_SAMPLES/<domain>-grouped-api-samples.json`)
+## C. SDK samples (`analytics-api-docs/zenesis-oas-samples/<domain>-grouped-api-samples.json`)
 
 ```json
 {
@@ -178,7 +178,7 @@ Keys must match the OpenAPI path template and lower-case method exactly. Languag
 as above (`LANG_FENCE` in the builder). More than one snippet per language renders as numbered variants.
 An operation with no samples entry simply gets no SDK Example document and no `api.sdk_examples`.
 
-## D. Common file (`api-docs/zoho-analytics-api-common.json`)
+## D. Common file (`analytics-api-docs/zoho-analytics-api-common.json`)
 
 `components.securitySchemes.iam-oauth2-schema.flows.authorizationCode.scopes` is the full scope list
 (drives `/foundations/oauth-scopes.md`). `components.examples.*` supply summary constants for common

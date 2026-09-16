@@ -22,9 +22,9 @@ sources:
     resource: "/references/openapi/data-operations-grouped-api.json"
     title: OpenAPI 3 specification - data-operations-grouped-api.json
     author: team:zoho-analytics-api-docs
-    last_modified: 2026-09-10T10:56:20Z
+    last_modified: 2026-09-16T12:30:51Z
 generated:
-  at: 2026-09-14T17:14:34Z
+  at: 2026-09-16T12:54:00Z
 status: stable
 ---
 
@@ -409,9 +409,9 @@ Defaults: `leftHeader` `1`, `centerHeader` `0`, `rightHeader` `2`, `leftFooter` 
 | [8133](/foundations/error-codes.md#error-8133) | 400 | The view is a dashboard, a query table, a live-connect view, or a table above the row limit. |
 | [8188](/foundations/error-codes.md#error-8188) | 400 | password is blank or shorter than 6 characters. |
 | [8241](/foundations/error-codes.md#error-8241) | 409 | The view carries a restricted DATAWARNING system tag. |
-| [8507](/foundations/error-codes.md#error-8507) | 400 | CONFIG exceeds 100,000 characters. |
+| [8507](/foundations/error-codes.md#error-8507) | 400 | roleName exceeds 30 characters, or the serialized permissions object exceeds its size limit. |
 | [8535](/foundations/error-codes.md#error-8535) | 401 | The OAuth access token is missing, expired, revoked, or does not carry the scope required by this operation. |
-| [8547](/foundations/error-codes.md#error-8547) | 400 | selectedColumns is empty or holds more than 300 entries. |
+| [8547](/foundations/error-codes.md#error-8547) | 400 | viewIds is empty or has more than 1000 entries. |
 
 # Related
 

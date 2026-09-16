@@ -30,9 +30,9 @@ sources:
     resource: "/references/openapi/data-operations-grouped-api.json"
     title: OpenAPI 3 specification - data-operations-grouped-api.json
     author: team:zoho-analytics-api-docs
-    last_modified: 2026-09-10T10:56:20Z
+    last_modified: 2026-09-16T12:30:51Z
 generated:
-  at: 2026-09-14T17:14:34Z
+  at: 2026-09-16T12:54:00Z
 status: stable
 ---
 
@@ -173,7 +173,7 @@ Notes that matter in practice:
 | [8062](/foundations/error-codes.md#error-8062) | 400 | withCustomDomain is true but no custom domain is configured for this workspace. |
 | [8130](/foundations/error-codes.md#error-8130) | 400 | Both criteria and updateAllRows were sent, or neither was. |
 | [8131](/foundations/error-codes.md#error-8131) | 400 | Both criteria and deleteAllRows were sent, or neither was. |
-| [8504](/foundations/error-codes.md#error-8504) | 400 | CONFIG was not sent, or a mandatory key is missing. |
+| [8504](/foundations/error-codes.md#error-8504) | 400 | CONFIG was not sent. |
 | [8535](/foundations/error-codes.md#error-8535) | 401 | The OAuth access token is missing, expired, revoked, or does not carry the scope required by this operation. |
 | [101021](/foundations/error-codes.md#error-101021) | 400 | Row operations are not supported on a stream table. |
 

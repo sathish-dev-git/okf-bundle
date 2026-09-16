@@ -2,11 +2,11 @@
 """
 build_okf.py - Generates the Zoho Analytics REST API v2 Open Knowledge Format (OKF v0.2) bundle.
 
-Inputs  (<repo>/api-docs):
-  MD/<domain>/<GROUP>.md                 rich narrative docs, one file per API group
-  ZENESIS_OAS/<domain>-grouped-api.json  OpenAPI 3 specs, one file per domain
-  ZENESIS_OAS_SAMPLES/*-samples.json     SDK snippets keyed by path + method
-  zoho-analytics-api-common.json         shared OAuth scopes, error envelope, common responses
+Inputs  (<repo>/analytics-api-docs - a git submodule of the analytics-api-docs repository):
+  md/<domain>/<GROUP>.md                   rich narrative docs, one file per API group
+  zenesis-oas/<domain>-grouped-api.json    OpenAPI 3 specs, one file per domain
+  zenesis-oas-samples/*-samples.json       SDK snippets keyed by path + method
+  zoho-analytics-api-common.json           shared OAuth scopes, error envelope, common responses
 Output  (<repo>/bundle): the OKF bundle (manifest name zoho-analytics-rest-api-v2).
 
 Re-running the script regenerates every generated file. Hand-written concept files live in
@@ -16,13 +16,17 @@ import json, re, os, sys, glob, shutil, html, collections, datetime
 from html.parser import HTMLParser
 
 ROOT      = os.path.dirname(os.path.dirname(os.path.abspath(__file__)))     # repository root
-SRC       = os.path.join(ROOT, 'api-docs')
-MD_DIR    = os.path.join(SRC, 'MD')
-OAS_DIR   = os.path.join(SRC, 'ZENESIS_OAS')
-SAMP_DIR  = os.path.join(SRC, 'ZENESIS_OAS_SAMPLES')
+SRC       = os.path.join(ROOT, 'analytics-api-docs')                            # git submodule
+MD_DIR    = os.path.join(SRC, 'md')
+OAS_DIR   = os.path.join(SRC, 'zenesis-oas')
+SAMP_DIR  = os.path.join(SRC, 'zenesis-oas-samples')
 COMMON    = os.path.join(SRC, 'zoho-analytics-api-common.json')
 HAND      = os.path.join(ROOT, 'handwritten')
 OUT       = os.path.join(ROOT, 'bundle')
+
+if not os.path.isdir(OAS_DIR):
+    sys.exit('analytics-api-docs/ is empty: the source documents are a git submodule. '
+             'Run: git submodule update --init')
 
 BUILDER   = 'claude-fable-5.1/okf-builder-1.0'
 NOW       = datetime.datetime.now(datetime.timezone.utc).replace(microsecond=0).isoformat().replace('+00:00', 'Z')
@@ -39,6 +43,7 @@ DOMAINS = [
     ("ORG_INFO_AND_SETTINGS", "org-info-and-settings", "Organization Info & Settings")]),
  ("02 · User & Groups", "users-and-groups", "Users & Groups", "user-groups-grouped-api.json", [
     ("ORG_USERS", "org-users", "Organization Users"),
+    ("CUSTOM_ROLES", "custom-roles", "Custom Roles"),
     ("WORKSPACE_USERS", "workspace-users", "Workspace Users"),
     ("WORKSPACE_GROUPS", "workspace-groups", "Workspace Groups")]),
  ("03 · Workspace Management", "workspace-management", "Workspace Management", "workspace-management-grouped-api.json", [
@@ -65,7 +70,8 @@ DOMAINS = [
     ("VIEW_OPERATIONS", "view-operations", "View Operations"),
     ("VIEW_PREFERENCES", "view-preferences", "View Preferences"),
     ("TRASH_MANAGEMENT", "trash-management", "Trash Management"),
-    ("AUTO_ANALYSIS", "auto-analysis", "Auto Analysis")]),
+    ("AUTO_ANALYSIS", "auto-analysis", "Auto Analysis"),
+    ("TAGS", "tags", "Tags")]),
  ("07 · Reports & Dashboards", "reports-and-dashboards", "Reports & Dashboards", "reports-dashboards-grouped-api.json", [
     ("REPORTS", "reports", "Reports (Analysis Views)"),
     ("DASHBOARDS", "dashboards", "Dashboards")]),
@@ -1414,7 +1420,7 @@ def write_log():
     write(os.path.join(OUT, 'log.md'), f'''# Bundle Update Log
 
 ## {date}
-* **Creation**: Generated the Zoho Analytics REST API v2 OKF v0.2 bundle from the markdown reference docs, OpenAPI specifications and SDK samples in `api-docs/`: {len(ENDPOINTS)} endpoint concepts across {len(DOMAINS)} domains and {len(GROUPS)} groups, {sum(1 for e in ENDPOINTS if e['op'] and e['op']['samples'])} SDK example concepts, an error catalog with {len(ERRORS)} codes, and the shared foundations (authentication, conventions, scopes, roles, identifiers, criteria syntax, asynchronous jobs, rate limits, white label, glossary).
+* **Creation**: Generated the Zoho Analytics REST API v2 OKF v0.2 bundle from the markdown reference docs, OpenAPI specifications and SDK samples in the `analytics-api-docs` repository: {len(ENDPOINTS)} endpoint concepts across {len(DOMAINS)} domains and {len(GROUPS)} groups, {sum(1 for e in ENDPOINTS if e['op'] and e['op']['samples'])} SDK example concepts, an error catalog with {len(ERRORS)} codes, and the shared foundations (authentication, conventions, scopes, roles, identifiers, criteria syntax, asynchronous jobs, rate limits, white label, glossary).
 * **Note**: Content is machine-generated from the source documents listed in each concept's `sources`. Add `verified` entries after human review.
 ''')
 

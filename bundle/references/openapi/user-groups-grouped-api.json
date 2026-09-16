@@ -16,6 +16,10 @@
       "description": "APIs that allow the Account Admin and the Organization Admins of a Zoho Analytics organization to manage its users - listing, adding, removing, activating, deactivating and changing the org-level role of the users, and listing the users who hold the Organization Admin role.\n\nThese APIs operate at the organization level. They govern the membership and role of a user within the organization, and not their access to individual workspaces, which is handled by the workspace sharing APIs.\n\nZoho Analytics also supports Client Portal (White Label) deployments, where an organization can have one or more custom-branded portal domains. When the Account Admin of the organization is also a Client Portal Admin, the write APIs in this group can be scoped to a specific portal domain using the `domainName` field in CONFIG. Users belonging to a portal domain are managed independently of the main organization domain, and `domainName` must be a valid portal domain owned by the Account Admin of the organization."
     },
     {
+      "name": "Custom Roles",
+      "description": "APIs that allow the Account Admin and the Organization Admins of a Zoho Analytics organization to define custom roles - named permission bundles that can be granted to users in place of the built-in roles.\n\nA custom role is organization-scoped and is made of three parts: a role name, an access type that decides which kinds of view the role can reach (dashboards only, reports and dashboards, or the underlying data as well), and a set of boolean permissions arranged in seven groups. The access type acts as a ceiling - enabling a permission that lies above the chosen access type is rejected with a specific error rather than being silently ignored.\n\nThese APIs define roles only. Attaching a role to a user or to a workspace is done through the user management and workspace sharing APIs. The custom roles feature must be enabled for the organization and included in its subscription plan, and none of these APIs is available through a Client Portal (White Label) custom domain."
+    },
+    {
       "name": "Workspace Users",
       "description": "APIs that manage the users and the administrators of a single Zoho Analytics workspace - controlling who has access to the workspace, the role they hold within it, and whether that access is currently active.\n\nThese APIs complement the org-level user management APIs. Org-level management controls who is a member of the organization at all, while workspace-level management controls which of those members can access a specific workspace and in what capacity.\n\nWhen the Account Admin of the organization is also a Client Portal Admin, the operations in this group can be scoped to a specific portal domain using the `domainName` field in CONFIG. Users belonging to a portal domain are listed and managed separately from the standard Zoho Analytics users."
     },
@@ -49,6 +53,23 @@
         "responses": {
           "200": {
             "description": "Successful response.",
+            "x-zenesis-statuscodes": [
+              {
+                "name": "7103",
+                "description": "Organization not found.",
+                "resolution": "Verify the ZANALYTICS-ORGID header value."
+              },
+              {
+                "name": "7301",
+                "description": "The calling user is not the Account Admin of the organization.",
+                "resolution": "This API is strictly restricted to the Account Admin. Organization Admins and other roles cannot call this endpoint."
+              },
+              {
+                "name": "8535",
+                "description": "Invalid or expired OAuth token.",
+                "resolution": "Provide a valid token with the scope ZohoAnalytics.share.read."
+              }
+            ],
             "content": {
               "application/json": {
                 "schema": {
@@ -98,32 +119,11 @@
               }
             }
           },
-          "default": {
-            "description": "Error response.",
-            "content": {
-              "application/json": {
-                "schema": {
-                  "$ref": "#/components/schemas/Error"
-                }
-              }
-            },
-            "x-zenesis-statuscodes": [
-              {
-                "name": "7103",
-                "description": "Organization not found.",
-                "resolution": "Verify the ZANALYTICS-ORGID header value."
-              },
-              {
-                "name": "7301",
-                "description": "The calling user is not the Account Admin of the organization.",
-                "resolution": "This API is strictly restricted to the Account Admin. Organization Admins and other roles cannot call this endpoint."
-              },
-              {
-                "name": "8535",
-                "description": "Invalid or expired OAuth token.",
-                "resolution": "Provide a valid token with the scope ZohoAnalytics.share.read."
-              }
-            ]
+          "4XX": {
+            "$ref": "https://raw.githubusercontent.com/sathish-dev-git/Temp/refs/heads/master/zoho-analytics-api-common.json#/components/responses/CommonErrorResponse"
+          },
+          "500": {
+            "$ref": "https://raw.githubusercontent.com/sathish-dev-git/Temp/refs/heads/master/zoho-analytics-api-common.json#/components/responses/UnexpectedErrorResponse"
           }
         },
         "x-zenesis-sections": {
@@ -160,6 +160,23 @@
         "responses": {
           "200": {
             "description": "Successful response.",
+            "x-zenesis-statuscodes": [
+              {
+                "name": "7103",
+                "description": "Organization not found.",
+                "resolution": "Verify the ZANALYTICS-ORGID header value."
+              },
+              {
+                "name": "7301",
+                "description": "The calling user is not an Account Admin or Organization Admin of the organization.",
+                "resolution": "Ensure the caller holds the Account Admin or Organization Admin role in the organization."
+              },
+              {
+                "name": "8535",
+                "description": "Invalid or expired OAuth token.",
+                "resolution": "Provide a valid token with the scope ZohoAnalytics.usermanagement.read."
+              }
+            ],
             "content": {
               "application/json": {
                 "schema": {
@@ -276,32 +293,11 @@
               }
             }
           },
-          "default": {
-            "description": "Error response.",
-            "content": {
-              "application/json": {
-                "schema": {
-                  "$ref": "#/components/schemas/Error"
-                }
-              }
-            },
-            "x-zenesis-statuscodes": [
-              {
-                "name": "7103",
-                "description": "Organization not found.",
-                "resolution": "Verify the ZANALYTICS-ORGID header value."
-              },
-              {
-                "name": "7301",
-                "description": "The calling user is not an Account Admin or Organization Admin of the organization.",
-                "resolution": "Ensure the caller holds the Account Admin or Organization Admin role in the organization."
-              },
-              {
-                "name": "8535",
-                "description": "Invalid or expired OAuth token.",
-                "resolution": "Provide a valid token with the scope ZohoAnalytics.usermanagement.read."
-              }
-            ]
+          "4XX": {
+            "$ref": "https://raw.githubusercontent.com/sathish-dev-git/Temp/refs/heads/master/zoho-analytics-api-common.json#/components/responses/CommonErrorResponse"
+          },
+          "500": {
+            "$ref": "https://raw.githubusercontent.com/sathish-dev-git/Temp/refs/heads/master/zoho-analytics-api-common.json#/components/responses/UnexpectedErrorResponse"
           }
         },
         "x-zenesis-sections": {
@@ -410,17 +406,7 @@
         },
         "responses": {
           "204": {
-            "description": "No Content. The requested action has been applied successfully. This API returns no response body on success - only the HTTP status code has to be checked. A JSON payload is returned only for a failure."
-          },
-          "default": {
-            "description": "Error response.",
-            "content": {
-              "application/json": {
-                "schema": {
-                  "$ref": "#/components/schemas/Error"
-                }
-              }
-            },
+            "description": "No Content. The requested action has been applied successfully. This API returns no response body on success - only the HTTP status code has to be checked. A JSON payload is returned only for a failure.",
             "x-zenesis-statuscodes": [
               {
                 "name": "7103",
@@ -468,6 +454,12 @@
                 "resolution": "Provide a valid token with the scope ZohoAnalytics.usermanagement.create."
               }
             ]
+          },
+          "4XX": {
+            "$ref": "https://raw.githubusercontent.com/sathish-dev-git/Temp/refs/heads/master/zoho-analytics-api-common.json#/components/responses/CommonErrorResponse"
+          },
+          "500": {
+            "$ref": "https://raw.githubusercontent.com/sathish-dev-git/Temp/refs/heads/master/zoho-analytics-api-common.json#/components/responses/UnexpectedErrorResponse"
           }
         },
         "x-zenesis-sections": {
@@ -562,17 +554,7 @@
         },
         "responses": {
           "204": {
-            "description": "No Content. The requested action has been applied successfully. This API returns no response body on success - only the HTTP status code has to be checked. A JSON payload is returned only for a failure."
-          },
-          "default": {
-            "description": "Error response.",
-            "content": {
-              "application/json": {
-                "schema": {
-                  "$ref": "#/components/schemas/Error"
-                }
-              }
-            },
+            "description": "No Content. The requested action has been applied successfully. This API returns no response body on success - only the HTTP status code has to be checked. A JSON payload is returned only for a failure.",
             "x-zenesis-statuscodes": [
               {
                 "name": "7103",
@@ -605,6 +587,12 @@
                 "resolution": "Provide a valid token with the scope ZohoAnalytics.usermanagement.delete."
               }
             ]
+          },
+          "4XX": {
+            "$ref": "https://raw.githubusercontent.com/sathish-dev-git/Temp/refs/heads/master/zoho-analytics-api-common.json#/components/responses/CommonErrorResponse"
+          },
+          "500": {
+            "$ref": "https://raw.githubusercontent.com/sathish-dev-git/Temp/refs/heads/master/zoho-analytics-api-common.json#/components/responses/UnexpectedErrorResponse"
           }
         },
         "x-zenesis-sections": {
@@ -700,17 +688,7 @@
         },
         "responses": {
           "204": {
-            "description": "No Content. The requested action has been applied successfully. This API returns no response body on success - only the HTTP status code has to be checked. A JSON payload is returned only for a failure."
-          },
-          "default": {
-            "description": "Error response.",
-            "content": {
-              "application/json": {
-                "schema": {
-                  "$ref": "#/components/schemas/Error"
-                }
-              }
-            },
+            "description": "No Content. The requested action has been applied successfully. This API returns no response body on success - only the HTTP status code has to be checked. A JSON payload is returned only for a failure.",
             "x-zenesis-statuscodes": [
               {
                 "name": "7103",
@@ -748,6 +726,12 @@
                 "resolution": "Provide a valid token with the scope ZohoAnalytics.usermanagement.update."
               }
             ]
+          },
+          "4XX": {
+            "$ref": "https://raw.githubusercontent.com/sathish-dev-git/Temp/refs/heads/master/zoho-analytics-api-common.json#/components/responses/CommonErrorResponse"
+          },
+          "500": {
+            "$ref": "https://raw.githubusercontent.com/sathish-dev-git/Temp/refs/heads/master/zoho-analytics-api-common.json#/components/responses/UnexpectedErrorResponse"
           }
         },
         "x-zenesis-sections": {
@@ -843,17 +827,7 @@
         },
         "responses": {
           "204": {
-            "description": "No Content. The requested action has been applied successfully. This API returns no response body on success - only the HTTP status code has to be checked. A JSON payload is returned only for a failure."
-          },
-          "default": {
-            "description": "Error response.",
-            "content": {
-              "application/json": {
-                "schema": {
-                  "$ref": "#/components/schemas/Error"
-                }
-              }
-            },
+            "description": "No Content. The requested action has been applied successfully. This API returns no response body on success - only the HTTP status code has to be checked. A JSON payload is returned only for a failure.",
             "x-zenesis-statuscodes": [
               {
                 "name": "7103",
@@ -886,6 +860,12 @@
                 "resolution": "Provide a valid token with the scope ZohoAnalytics.usermanagement.update."
               }
             ]
+          },
+          "4XX": {
+            "$ref": "https://raw.githubusercontent.com/sathish-dev-git/Temp/refs/heads/master/zoho-analytics-api-common.json#/components/responses/CommonErrorResponse"
+          },
+          "500": {
+            "$ref": "https://raw.githubusercontent.com/sathish-dev-git/Temp/refs/heads/master/zoho-analytics-api-common.json#/components/responses/UnexpectedErrorResponse"
           }
         },
         "x-zenesis-sections": {
@@ -996,17 +976,7 @@
         },
         "responses": {
           "204": {
-            "description": "No Content. The requested action has been applied successfully. This API returns no response body on success - only the HTTP status code has to be checked. A JSON payload is returned only for a failure."
-          },
-          "default": {
-            "description": "Error response.",
-            "content": {
-              "application/json": {
-                "schema": {
-                  "$ref": "#/components/schemas/Error"
-                }
-              }
-            },
+            "description": "No Content. The requested action has been applied successfully. This API returns no response body on success - only the HTTP status code has to be checked. A JSON payload is returned only for a failure.",
             "x-zenesis-statuscodes": [
               {
                 "name": "7103",
@@ -1044,6 +1014,12 @@
                 "resolution": "Provide a valid token with the scope ZohoAnalytics.usermanagement.update."
               }
             ]
+          },
+          "4XX": {
+            "$ref": "https://raw.githubusercontent.com/sathish-dev-git/Temp/refs/heads/master/zoho-analytics-api-common.json#/components/responses/CommonErrorResponse"
+          },
+          "500": {
+            "$ref": "https://raw.githubusercontent.com/sathish-dev-git/Temp/refs/heads/master/zoho-analytics-api-common.json#/components/responses/UnexpectedErrorResponse"
           }
         },
         "x-zenesis-sections": {
@@ -1051,6 +1027,937 @@
             "1": {
               "type": "editor",
               "value": "<blockquote>Note:<br>\n<span style=\"font-weight:normal;\">\n<ul><li>The Zoho account of the calling user must be confirmed (email verified) to invoke this API.</li><li>A maximum of 1000 email addresses can be sent in a single request. The same role is applied to every user in the list.</li><li>Organization Admins can assign only the <b>USER</b> and <b>VIEWER</b> roles. Promoting a user to <b>ORGADMIN</b> can be done only by the Account Admin of the organization, and any other caller fails with error code <b>7301</b>.</li><li>The <b>ORGADMIN</b> role cannot be assigned along with <b>domainName</b>. This combination always fails with error code <b>6089</b>, irrespective of the role of the calling user.</li><li>Every email address in the list must already be a member of the organization. Non-members cause the request to fail with error code <b>8114</b>.</li><li>The operation is idempotent. Applying the role that a user already holds succeeds silently and raises no error.</li><li>The role of a deactivated user can be changed. The new role takes effect when the user is reactivated.</li><li>Demoting an Organization Admin removes their org-wide management capabilities immediately, but does not affect their workspace-level permissions.</li><li>Setting the <b>VIEWER</b> role for a user who owns workspaces makes them read-only at the org level, but does not transfer the workspaces they own. They may continue to hold Workspace Admin access on those workspaces.</li><li>A role change performed within a client portal domain is scoped to that portal. The role of the user in the main organization and in other portals is unaffected.</li></ul>\n</span></blockquote>"
+            }
+          }
+        }
+      }
+    },
+    "/restapi/v2/orgs/roles": {
+      "get": {
+        "tags": [
+          "Custom Roles"
+        ],
+        "x-zenesis-title": "Get Custom Roles",
+        "summary": "Get Custom Roles",
+        "description": "Returns every custom role defined in the organization identified by the ZANALYTICS-ORGID header, along with the complete permission definition of each role.\n\nThis is the only way to read a role definition back - there is no get-by-ID variant. The accessType and permissions returned for a role are in exactly the shape accepted by the Update Custom Role API, so a role can be read, edited and posted back without any transformation.",
+        "operationId": "getCustomRoles",
+        "security": [
+          {
+            "iam-oauth2-schema": [
+              "ZohoAnalytics.usermanagement.read"
+            ]
+          }
+        ],
+        "parameters": [
+          {
+            "$ref": "#/components/parameters/org-id"
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "Successful response.",
+            "x-zenesis-statuscodes": [
+              {
+                "name": "6142",
+                "description": "The subscription plan of the organization does not include custom roles.",
+                "resolution": "Upgrade the plan to one that includes custom roles."
+              },
+              {
+                "name": "7301",
+                "description": "The calling user is not an Account Admin or Organization Admin of the organization, custom roles are not enabled for the organization, or the request was made through a Client Portal (White Label) custom domain.",
+                "resolution": "Call the API as an Account Admin or Organization Admin from the standard API host, with the custom roles feature enabled for the organization."
+              },
+              {
+                "name": "7309",
+                "description": "No authentication was supplied with the request.",
+                "resolution": "Send the Authorization header carrying a valid OAuth token."
+              },
+              {
+                "name": "8083",
+                "description": "The ZANALYTICS-ORGID header is missing.",
+                "resolution": "Add the ZANALYTICS-ORGID header to the request."
+              },
+              {
+                "name": "8535",
+                "description": "Invalid or expired OAuth token, or the token does not carry the usermanagement scope.",
+                "resolution": "Provide a valid token with the scope ZohoAnalytics.usermanagement.read."
+              }
+            ],
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/GetCustomRolesResponse"
+                },
+                "examples": {
+                  "customRoles": {
+                    "description": "Custom roles",
+                    "summary": "Organization holding two custom roles at different access levels. Every permission group and every flag is present, including the ones set to false.",
+                    "value": {
+                      "status": "success",
+                      "summary": "Get roles",
+                      "data": {
+                        "roles": [
+                          {
+                            "roleId": "35130000012041001",
+                            "roleName": "Data Engineer",
+                            "accessType": "ALL_DATA_REPORTS_AND_DASHBOARDS",
+                            "permissions": {
+                              "createPermissions": {
+                                "createTable": true,
+                                "createQueryTable": true,
+                                "createFolder": true,
+                                "createFormula": true
+                              },
+                              "dataPermissions": {
+                                "addRow": true,
+                                "modifyRow": true,
+                                "deleteRow": true,
+                                "importAppend": true,
+                                "importAddOrUpdate": true,
+                                "importDeleteAllAdd": true,
+                                "importDeleteUpdateAdd": true,
+                                "dataArchives": true
+                              },
+                              "designPermissions": {
+                                "designModify": true
+                              },
+                              "interactionPermissions": {
+                                "read": true,
+                                "insight": true,
+                                "vud": true,
+                                "drillDown": false,
+                                "drillThrough": false,
+                                "drillActions": false
+                              },
+                              "sharePermissions": {
+                                "share": true,
+                                "discussion": true,
+                                "privateLinks": true,
+                                "accessAdminPresets": true,
+                                "createPreset": true
+                              },
+                              "publishPermissions": {
+                                "export": true,
+                                "manageEmailSchedules": true,
+                                "allEmailSchedulesAccess": true,
+                                "manageDataAlerts": true,
+                                "allDataAlertsAccess": true,
+                                "createSlideshow": true,
+                                "publicViews": true
+                              },
+                              "datasourcePermissions": {
+                                "viewDatasource": false,
+                                "editDatasource": false,
+                                "syncData": false,
+                                "useDatasource": false,
+                                "removeDatasource": false
+                              }
+                            }
+                          },
+                          {
+                            "roleId": "35130000012042001",
+                            "roleName": "Dashboard Viewer",
+                            "accessType": "ALL_DASHBOARDS",
+                            "permissions": {
+                              "createPermissions": {
+                                "createTable": false,
+                                "createQueryTable": false,
+                                "createFolder": true,
+                                "createFormula": false
+                              },
+                              "dataPermissions": {
+                                "addRow": false,
+                                "modifyRow": false,
+                                "deleteRow": false,
+                                "importAppend": false,
+                                "importAddOrUpdate": false,
+                                "importDeleteAllAdd": false,
+                                "importDeleteUpdateAdd": false,
+                                "dataArchives": false
+                              },
+                              "designPermissions": {
+                                "designModify": false
+                              },
+                              "interactionPermissions": {
+                                "read": true,
+                                "insight": true,
+                                "vud": true,
+                                "drillDown": true,
+                                "drillThrough": true,
+                                "drillActions": true
+                              },
+                              "sharePermissions": {
+                                "share": true,
+                                "discussion": true,
+                                "privateLinks": true,
+                                "accessAdminPresets": true,
+                                "createPreset": true
+                              },
+                              "publishPermissions": {
+                                "export": true,
+                                "manageEmailSchedules": true,
+                                "allEmailSchedulesAccess": true,
+                                "manageDataAlerts": false,
+                                "allDataAlertsAccess": false,
+                                "createSlideshow": true,
+                                "publicViews": true
+                              },
+                              "datasourcePermissions": {
+                                "viewDatasource": false,
+                                "editDatasource": false,
+                                "syncData": false,
+                                "useDatasource": false,
+                                "removeDatasource": false
+                              }
+                            }
+                          }
+                        ]
+                      }
+                    }
+                  },
+                  "noCustomRoles": {
+                    "description": "No custom roles",
+                    "summary": "Organization in which no custom role has been defined yet. An empty array is a success, not an error.",
+                    "value": {
+                      "status": "success",
+                      "summary": "Get roles",
+                      "data": {
+                        "roles": []
+                      }
+                    }
+                  }
+                }
+              }
+            }
+          },
+          "4XX": {
+            "$ref": "https://raw.githubusercontent.com/sathish-dev-git/Temp/refs/heads/master/zoho-analytics-api-common.json#/components/responses/CommonErrorResponse"
+          },
+          "500": {
+            "$ref": "https://raw.githubusercontent.com/sathish-dev-git/Temp/refs/heads/master/zoho-analytics-api-common.json#/components/responses/UnexpectedErrorResponse"
+          }
+        },
+        "x-zenesis-sections": {
+          "apiRequestParameters": {
+            "1": {
+              "type": "editor",
+              "value": "<blockquote>Note:<br>\n<span style=\"font-weight:normal;\">\n<ul><li>The calling user must be an Account Admin or Organization Admin of the organization. No other role qualifies - Workspace Admins, view owners, users holding a custom role and shared users all fail with error code <b>7301</b>.</li><li>The custom roles feature must be enabled for the organization, otherwise the API fails with error code <b>7301</b> even for an Account Admin. A subscription plan that does not include custom roles fails with error code <b>6142</b>.</li><li>This API is not available through a Client Portal (White Label) custom domain. Such requests are rejected with error code <b>7301</b> before any business logic runs.</li><li>There is no path parameter for the organization - the roles returned belong to the organization named in the <b>ZANALYTICS-ORGID</b> header.</li><li>This is the only API that reads a role definition. There is no get-by-ID variant, so filter the returned list client-side on <b>roleId</b> or <b>roleName</b>.</li><li>The response is always complete - all seven permission groups and every flag are returned, including the ones set to false. This differs from the request side of the Create and Update APIs, where an omitted flag is treated as false.</li><li>The <b>accessType</b> and <b>permissions</b> of a role are returned in exactly the shape accepted by the Update Custom Role API. Read the role here, change the flags needed and send the whole object back - this round-trip is the supported way to make a partial permission edit.</li><li>The <b>roleId</b> values returned here are required as the role-id path parameter of the Update Custom Role and Delete Custom Role APIs. They are returned as strings even though they are numeric.</li><li>The response reports role definitions only. It does not indicate which users hold a role.</li><li>The list is not paginated and its order is not guaranteed. Sort client-side if presentation order matters.</li></ul>\n</span></blockquote>"
+            }
+          }
+        }
+      },
+      "post": {
+        "tags": [
+          "Custom Roles"
+        ],
+        "x-zenesis-title": "Create Custom Role",
+        "summary": "Create Custom Role",
+        "description": "Creates one custom role in the organization identified by the ZANALYTICS-ORGID header, and returns its identifier.\n\nThe role name, the access type and the permissions are all mandatory. The permissions are validated as a whole against the access type and against the cross-group dependency rules before anything is stored, so a rejected request creates nothing and can be corrected and retried safely.",
+        "operationId": "createCustomRole",
+        "security": [
+          {
+            "iam-oauth2-schema": [
+              "ZohoAnalytics.usermanagement.create"
+            ]
+          }
+        ],
+        "parameters": [
+          {
+            "$ref": "#/components/parameters/org-id"
+          }
+        ],
+        "requestBody": {
+          "required": true,
+          "content": {
+            "application/x-www-form-urlencoded": {
+              "schema": {
+                "type": "object",
+                "properties": {
+                  "CONFIG": {
+                    "$ref": "#/components/schemas/CreateCustomRoleConfig"
+                  }
+                },
+                "required": [
+                  "CONFIG"
+                ]
+              },
+              "encoding": {
+                "CONFIG": {
+                  "contentType": "application/json"
+                }
+              },
+              "examples": {
+                "dashboardOnlyRole": {
+                  "description": "Dashboard only",
+                  "summary": "Creates a role at the most restricted access level. No data, design or datasource permission may appear, and createFolder is the only creation flag available. export is enabled alongside manageEmailSchedules, as the dependency rule requires.",
+                  "value": {
+                    "CONFIG": {
+                      "roleName": "Dashboard Viewer",
+                      "accessType": "ALL_DASHBOARDS",
+                      "permissions": {
+                        "interactionPermissions": {
+                          "read": true,
+                          "vud": true,
+                          "drillDown": true,
+                          "insight": true,
+                          "drillThrough": true,
+                          "drillActions": true
+                        },
+                        "publishPermissions": {
+                          "export": true,
+                          "publicViews": true,
+                          "createSlideshow": true,
+                          "manageEmailSchedules": true,
+                          "allEmailSchedulesAccess": true
+                        },
+                        "sharePermissions": {
+                          "share": true,
+                          "discussion": true,
+                          "accessAdminPresets": true,
+                          "createPreset": true,
+                          "privateLinks": true
+                        },
+                        "createPermissions": {
+                          "createFolder": true
+                        }
+                      }
+                    }
+                  }
+                },
+                "reportAnalystRole": {
+                  "description": "Reports and dashboards",
+                  "summary": "Creates a role that reaches reports as well as dashboards. Raising the access level unlocks manageDataAlerts, which ALL_DASHBOARDS would reject with error 7576.",
+                  "value": {
+                    "CONFIG": {
+                      "roleName": "Report Analyst",
+                      "accessType": "ALL_REPORTS_AND_DASHBOARDS",
+                      "permissions": {
+                        "interactionPermissions": {
+                          "read": true,
+                          "vud": true,
+                          "drillDown": true,
+                          "insight": true,
+                          "drillThrough": true,
+                          "drillActions": true
+                        },
+                        "publishPermissions": {
+                          "export": true,
+                          "publicViews": true,
+                          "manageDataAlerts": true,
+                          "allDataAlertsAccess": true,
+                          "createSlideshow": true,
+                          "manageEmailSchedules": true,
+                          "allEmailSchedulesAccess": true
+                        },
+                        "sharePermissions": {
+                          "share": true,
+                          "discussion": true,
+                          "accessAdminPresets": true,
+                          "createPreset": true,
+                          "privateLinks": true
+                        },
+                        "createPermissions": {
+                          "createFolder": true
+                        }
+                      }
+                    }
+                  }
+                },
+                "fullAccessRole": {
+                  "description": "Full access",
+                  "summary": "Creates a role at the only level that allows dataPermissions, designPermissions, datasourcePermissions and the table creation flags. designModify pulls in both preset permissions, useDatasource pulls in createTable, and every other datasource flag pulls in viewDatasource.",
+                  "value": {
+                    "CONFIG": {
+                      "roleName": "Data Engineer",
+                      "accessType": "ALL_DATA_REPORTS_AND_DASHBOARDS",
+                      "permissions": {
+                        "createPermissions": {
+                          "createTable": true,
+                          "createQueryTable": true,
+                          "createFolder": true,
+                          "createFormula": true
+                        },
+                        "dataPermissions": {
+                          "addRow": true,
+                          "modifyRow": true,
+                          "deleteRow": true,
+                          "importAppend": true,
+                          "importAddOrUpdate": true,
+                          "importDeleteAllAdd": true,
+                          "importDeleteUpdateAdd": true
+                        },
+                        "designPermissions": {
+                          "designModify": true
+                        },
+                        "interactionPermissions": {
+                          "read": true,
+                          "vud": true,
+                          "drillDown": true,
+                          "insight": true,
+                          "drillThrough": true,
+                          "drillActions": true
+                        },
+                        "sharePermissions": {
+                          "share": true,
+                          "discussion": true,
+                          "privateLinks": true,
+                          "accessAdminPresets": true,
+                          "createPreset": true
+                        },
+                        "publishPermissions": {
+                          "export": true,
+                          "manageEmailSchedules": true,
+                          "allEmailSchedulesAccess": true,
+                          "manageDataAlerts": true,
+                          "allDataAlertsAccess": true,
+                          "createSlideshow": true,
+                          "publicViews": true
+                        },
+                        "datasourcePermissions": {
+                          "viewDatasource": true,
+                          "editDatasource": true,
+                          "syncData": true,
+                          "useDatasource": true,
+                          "removeDatasource": true
+                        }
+                      }
+                    }
+                  }
+                }
+              }
+            }
+          }
+        },
+        "responses": {
+          "200": {
+            "description": "Successful response.",
+            "x-zenesis-statuscodes": [
+              {
+                "name": "6142",
+                "description": "The subscription plan of the organization does not include custom roles.",
+                "resolution": "Upgrade the plan to one that includes custom roles."
+              },
+              {
+                "name": "7301",
+                "description": "The calling user is not an Account Admin or Organization Admin of the organization, custom roles are not enabled for the organization, or the request was made through a Client Portal (White Label) custom domain.",
+                "resolution": "Call the API as an Account Admin or Organization Admin from the standard API host, with the custom roles feature enabled for the organization."
+              },
+              {
+                "name": "7309",
+                "description": "No authentication was supplied with the request.",
+                "resolution": "Send the Authorization header carrying a valid OAuth token."
+              },
+              {
+                "name": "7553",
+                "description": "A role with the given roleName already exists in the organization. The check covers built-in role names as well as other custom roles.",
+                "resolution": "Choose a different name for the role."
+              },
+              {
+                "name": "7554",
+                "description": "The accessType value did not resolve to a known access level.",
+                "resolution": "Send one of ALL_DASHBOARDS, ALL_REPORTS_AND_DASHBOARDS or ALL_DATA_REPORTS_AND_DASHBOARDS."
+              },
+              {
+                "name": "7559",
+                "description": "manageEmailSchedules is enabled but export is not.",
+                "resolution": "Set publishPermissions.export to true, or disable manageEmailSchedules."
+              },
+              {
+                "name": "7573",
+                "description": "A dataPermissions flag is enabled while accessType is below ALL_DATA_REPORTS_AND_DASHBOARDS.",
+                "resolution": "Raise accessType to ALL_DATA_REPORTS_AND_DASHBOARDS, or set every dataPermissions flag to false."
+              },
+              {
+                "name": "7574",
+                "description": "designModify is enabled while accessType is below ALL_DATA_REPORTS_AND_DASHBOARDS.",
+                "resolution": "Raise accessType to ALL_DATA_REPORTS_AND_DASHBOARDS, or disable designModify."
+              },
+              {
+                "name": "7575",
+                "description": "createTable, createQueryTable or createFormula is enabled while accessType is below ALL_DATA_REPORTS_AND_DASHBOARDS.",
+                "resolution": "Raise accessType to ALL_DATA_REPORTS_AND_DASHBOARDS, or disable those flags. createFolder is allowed at every level."
+              },
+              {
+                "name": "7576",
+                "description": "manageDataAlerts is enabled while accessType is ALL_DASHBOARDS.",
+                "resolution": "Use ALL_REPORTS_AND_DASHBOARDS or ALL_DATA_REPORTS_AND_DASHBOARDS, or disable manageDataAlerts."
+              },
+              {
+                "name": "7577",
+                "description": "dataArchives is enabled but not every other dataPermissions flag is enabled.",
+                "resolution": "Enable every dataPermissions flag, or disable dataArchives."
+              },
+              {
+                "name": "7578",
+                "description": "designModify is enabled without both accessAdminPresets and createPreset.",
+                "resolution": "Set sharePermissions.accessAdminPresets and sharePermissions.createPreset to true."
+              },
+              {
+                "name": "7579",
+                "description": "interactionPermissions.read is missing or false. Read permission must always be enabled.",
+                "resolution": "Set interactionPermissions.read to true."
+              },
+              {
+                "name": "7584",
+                "description": "A datasourcePermissions flag is enabled while accessType is below ALL_DATA_REPORTS_AND_DASHBOARDS.",
+                "resolution": "Raise accessType to ALL_DATA_REPORTS_AND_DASHBOARDS, or disable the datasourcePermissions group."
+              },
+              {
+                "name": "7585",
+                "description": "useDatasource is enabled but createTable is not.",
+                "resolution": "Set createPermissions.createTable to true."
+              },
+              {
+                "name": "7586",
+                "description": "editDatasource, syncData, useDatasource or removeDatasource is enabled without viewDatasource.",
+                "resolution": "Set datasourcePermissions.viewDatasource to true."
+              },
+              {
+                "name": "8078",
+                "description": "A mandatory attribute was sent with an empty value. The error message names the attribute.",
+                "resolution": "Provide a non-empty value for the attribute."
+              },
+              {
+                "name": "8083",
+                "description": "The ZANALYTICS-ORGID header is missing.",
+                "resolution": "Add the ZANALYTICS-ORGID header to the request."
+              },
+              {
+                "name": "8504",
+                "description": "CONFIG was not sent, or a mandatory attribute is missing from it.",
+                "resolution": "Send a CONFIG object containing every mandatory attribute."
+              },
+              {
+                "name": "8507",
+                "description": "roleName exceeds 30 characters, or the serialized permissions object exceeds its size limit.",
+                "resolution": "Shorten the value."
+              },
+              {
+                "name": "8509",
+                "description": "roleName contains characters other than letters, digits, spaces, underscore and hyphen, or accessType is not one of the three allowed values.",
+                "resolution": "Correct the value."
+              },
+              {
+                "name": "8534",
+                "description": "CONFIG is not valid JSON.",
+                "resolution": "Fix the JSON and URL encode it correctly."
+              },
+              {
+                "name": "8539",
+                "description": "An attribute carries a value that is structurally valid but not accepted, such as an empty roleName.",
+                "resolution": "Send a non-empty, valid value."
+              },
+              {
+                "name": "8535",
+                "description": "Invalid or expired OAuth token, or the token does not carry the usermanagement scope.",
+                "resolution": "Provide a valid token with the scope ZohoAnalytics.usermanagement.create."
+              }
+            ],
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/CreateCustomRoleResponse"
+                },
+                "examples": {
+                  "roleCreated": {
+                    "description": "Role created",
+                    "summary": "Returns the identifier of the newly created role. This is the only place the identifier is returned on creation.",
+                    "value": {
+                      "status": "success",
+                      "summary": "Create role",
+                      "data": {
+                        "roleId": "35130000012043001"
+                      }
+                    }
+                  }
+                }
+              }
+            }
+          },
+          "4XX": {
+            "$ref": "https://raw.githubusercontent.com/sathish-dev-git/Temp/refs/heads/master/zoho-analytics-api-common.json#/components/responses/CommonErrorResponse"
+          },
+          "500": {
+            "$ref": "https://raw.githubusercontent.com/sathish-dev-git/Temp/refs/heads/master/zoho-analytics-api-common.json#/components/responses/UnexpectedErrorResponse"
+          }
+        },
+        "x-zenesis-sections": {
+          "apiRequestParameters": {
+            "1": {
+              "type": "editor",
+              "value": "<blockquote>Note:<br>\n<span style=\"font-weight:normal;\">\n<ul><li>The calling user must be an Account Admin or Organization Admin of the organization, custom roles must be enabled for the organization, and the request must not arrive through a Client Portal (White Label) custom domain. Any of these failing yields error code <b>7301</b>.</li><li><b>roleName</b>, <b>accessType</b> and <b>permissions</b> are all mandatory. Omitting any of them fails with error code <b>8504</b>; sending one with an empty value fails with error code <b>8539</b> or <b>8078</b>.</li><li><b>roleName</b> is limited to 1 to 30 characters made of letters, digits, spaces, underscore and hyphen, and must be unique across the organization - the uniqueness check covers built-in role names too. A longer name fails with error code <b>8507</b>, disallowed characters fail with <b>8509</b>, and a clash fails with <b>7553</b>.</li><li><b>accessType</b> is a ceiling. Every permission group is only available at or above a given level - see the CustomRolePermissions schema. Enabling a permission above the chosen level is an error (<b>7573</b>, <b>7574</b>, <b>7575</b>, <b>7576</b> or <b>7584</b> depending on the group), not a silent no-op.</li><li><b>interactionPermissions.read</b> must be explicitly true. It is not defaulted - a <b>permissions</b> object that omits <b>interactionPermissions</b> entirely, or sets <b>read</b> to false, fails with error code <b>7579</b> before any other rule is evaluated.</li><li>Every flag that is omitted from <b>permissions</b> is treated as false. A group that is left out is entirely disabled.</li><li>Four rules reach across permission groups: <b>designModify</b> requires both <b>accessAdminPresets</b> and <b>createPreset</b> (<b>7578</b>); <b>manageEmailSchedules</b> requires <b>export</b> (<b>7559</b>); <b>useDatasource</b> requires <b>createTable</b> (<b>7585</b>); and <b>editDatasource</b>, <b>syncData</b>, <b>useDatasource</b> and <b>removeDatasource</b> each require <b>viewDatasource</b> (<b>7586</b>). <b>dataArchives</b> additionally requires every other data permission to be enabled (<b>7577</b>).</li><li>All validation runs before anything is stored, and the rules fire in a fixed order, so a payload with several problems reports one error at a time. A rejected request creates no role and is safe to correct and retry.</li><li>This API is not an upsert. Re-creating an existing name fails with error code <b>7553</b> rather than returning or updating the existing role.</li><li>One role is created per call. There is no bulk-create variant.</li><li>Creating a role grants nothing by itself. Until the role is assigned to a user or a workspace through the user management and sharing APIs, it has no effect.</li><li>Only the new <b>roleId</b> is returned. Use the Get Custom Roles API to read the stored definition back.</li></ul>\n</span></blockquote>"
+            }
+          }
+        }
+      }
+    },
+    "/restapi/v2/orgs/roles/{role-id}": {
+      "put": {
+        "tags": [
+          "Custom Roles"
+        ],
+        "x-zenesis-title": "Update Custom Role",
+        "summary": "Update Custom Role",
+        "description": "Renames a custom role, replaces its access type and permissions, or does both in one call.\n\nThis is a replace, not a merge. Whenever permissions is supplied, the stored definition is discarded and rebuilt from the object sent - every flag left out becomes false. Read the current definition with the Get Custom Roles API, edit it, and send the whole object back. Sending roleName alone is the one edit that leaves the permission definition untouched.",
+        "operationId": "updateCustomRole",
+        "security": [
+          {
+            "iam-oauth2-schema": [
+              "ZohoAnalytics.usermanagement.update"
+            ]
+          }
+        ],
+        "parameters": [
+          {
+            "$ref": "#/components/parameters/org-id"
+          },
+          {
+            "$ref": "#/components/parameters/role-id"
+          }
+        ],
+        "requestBody": {
+          "required": true,
+          "content": {
+            "application/x-www-form-urlencoded": {
+              "schema": {
+                "type": "object",
+                "properties": {
+                  "CONFIG": {
+                    "$ref": "#/components/schemas/UpdateCustomRoleConfig"
+                  }
+                },
+                "required": [
+                  "CONFIG"
+                ]
+              },
+              "encoding": {
+                "CONFIG": {
+                  "contentType": "application/json"
+                }
+              },
+              "examples": {
+                "renameOnly": {
+                  "description": "Rename only",
+                  "summary": "Renames the role. accessType and permissions are preserved untouched, so this is the one edit that needs no prior read.",
+                  "value": {
+                    "CONFIG": {
+                      "roleName": "Report Analyst EMEA"
+                    }
+                  }
+                },
+                "replacePermissions": {
+                  "description": "Replace permissions",
+                  "summary": "Replaces the access level and the entire permission set after reading the current definition with the Get Custom Roles API. The role name is preserved. accessType is resent even though it is unchanged, because permissions cannot be sent on its own.",
+                  "value": {
+                    "CONFIG": {
+                      "accessType": "ALL_DATA_REPORTS_AND_DASHBOARDS",
+                      "permissions": {
+                        "createPermissions": {
+                          "createTable": true,
+                          "createQueryTable": true,
+                          "createFolder": true,
+                          "createFormula": true
+                        },
+                        "dataPermissions": {
+                          "addRow": true,
+                          "modifyRow": true,
+                          "deleteRow": true,
+                          "importAppend": true,
+                          "importAddOrUpdate": true,
+                          "importDeleteAllAdd": true,
+                          "importDeleteUpdateAdd": true
+                        },
+                        "designPermissions": {
+                          "designModify": true
+                        },
+                        "interactionPermissions": {
+                          "read": true,
+                          "vud": true,
+                          "drillDown": true,
+                          "insight": true,
+                          "drillThrough": true,
+                          "drillActions": true
+                        },
+                        "sharePermissions": {
+                          "share": true,
+                          "discussion": true,
+                          "privateLinks": true,
+                          "accessAdminPresets": true,
+                          "createPreset": true
+                        },
+                        "publishPermissions": {
+                          "export": true,
+                          "manageEmailSchedules": true,
+                          "allEmailSchedulesAccess": true,
+                          "manageDataAlerts": true,
+                          "allDataAlertsAccess": true,
+                          "createSlideshow": true,
+                          "publicViews": true
+                        }
+                      }
+                    }
+                  }
+                },
+                "renameAndDowngrade": {
+                  "description": "Rename and downgrade",
+                  "summary": "Renames the role and lowers it to the dashboard-only level in one call. Every permission above the new ceiling has been removed from the payload - leaving a higher-level flag enabled would fail the request.",
+                  "value": {
+                    "CONFIG": {
+                      "roleName": "Dashboard Only",
+                      "accessType": "ALL_DASHBOARDS",
+                      "permissions": {
+                        "interactionPermissions": {
+                          "read": true,
+                          "vud": true,
+                          "drillDown": true,
+                          "insight": true
+                        },
+                        "sharePermissions": {
+                          "share": true,
+                          "discussion": true
+                        },
+                        "publishPermissions": {
+                          "export": true
+                        },
+                        "createPermissions": {
+                          "createFolder": true
+                        }
+                      }
+                    }
+                  }
+                }
+              }
+            }
+          }
+        },
+        "responses": {
+          "204": {
+            "description": "No Content. The requested action has been applied successfully. This API returns no response body on success - only the HTTP status code has to be checked. A JSON payload is returned only for a failure.",
+            "x-zenesis-statuscodes": [
+              {
+                "name": "6142",
+                "description": "The subscription plan of the organization does not include custom roles.",
+                "resolution": "Upgrade the plan to one that includes custom roles."
+              },
+              {
+                "name": "7301",
+                "description": "The calling user is not an Account Admin or Organization Admin of the organization, custom roles are not enabled for the organization, or the request was made through a Client Portal (White Label) custom domain.",
+                "resolution": "Call the API as an Account Admin or Organization Admin from the standard API host, with the custom roles feature enabled for the organization."
+              },
+              {
+                "name": "7309",
+                "description": "No authentication was supplied with the request.",
+                "resolution": "Send the Authorization header carrying a valid OAuth token."
+              },
+              {
+                "name": "7548",
+                "description": "No custom role exists for the given role-id in this organization.",
+                "resolution": "Verify the role identifier using the Get Custom Roles API."
+              },
+              {
+                "name": "7553",
+                "description": "A role with the given roleName already exists in the organization. The check covers built-in role names as well as other custom roles.",
+                "resolution": "Choose a different name for the role."
+              },
+              {
+                "name": "7554",
+                "description": "The accessType value did not resolve to a known access level.",
+                "resolution": "Send one of ALL_DASHBOARDS, ALL_REPORTS_AND_DASHBOARDS or ALL_DATA_REPORTS_AND_DASHBOARDS."
+              },
+              {
+                "name": "7559",
+                "description": "manageEmailSchedules is enabled but export is not.",
+                "resolution": "Set publishPermissions.export to true, or disable manageEmailSchedules."
+              },
+              {
+                "name": "7573",
+                "description": "A dataPermissions flag is enabled while accessType is below ALL_DATA_REPORTS_AND_DASHBOARDS.",
+                "resolution": "Raise accessType to ALL_DATA_REPORTS_AND_DASHBOARDS, or set every dataPermissions flag to false."
+              },
+              {
+                "name": "7574",
+                "description": "designModify is enabled while accessType is below ALL_DATA_REPORTS_AND_DASHBOARDS.",
+                "resolution": "Raise accessType to ALL_DATA_REPORTS_AND_DASHBOARDS, or disable designModify."
+              },
+              {
+                "name": "7575",
+                "description": "createTable, createQueryTable or createFormula is enabled while accessType is below ALL_DATA_REPORTS_AND_DASHBOARDS.",
+                "resolution": "Raise accessType to ALL_DATA_REPORTS_AND_DASHBOARDS, or disable those flags. createFolder is allowed at every level."
+              },
+              {
+                "name": "7576",
+                "description": "manageDataAlerts is enabled while accessType is ALL_DASHBOARDS.",
+                "resolution": "Use ALL_REPORTS_AND_DASHBOARDS or ALL_DATA_REPORTS_AND_DASHBOARDS, or disable manageDataAlerts."
+              },
+              {
+                "name": "7577",
+                "description": "dataArchives is enabled but not every other dataPermissions flag is enabled.",
+                "resolution": "Enable every dataPermissions flag, or disable dataArchives."
+              },
+              {
+                "name": "7578",
+                "description": "designModify is enabled without both accessAdminPresets and createPreset.",
+                "resolution": "Set sharePermissions.accessAdminPresets and sharePermissions.createPreset to true."
+              },
+              {
+                "name": "7579",
+                "description": "interactionPermissions.read is missing or false. Read permission must always be enabled.",
+                "resolution": "Set interactionPermissions.read to true."
+              },
+              {
+                "name": "7580",
+                "description": "One of accessType and permissions was sent without the other.",
+                "resolution": "Send accessType and permissions together, or send neither."
+              },
+              {
+                "name": "7581",
+                "description": "The CONFIG contained neither roleName nor accessType, so there is nothing to update.",
+                "resolution": "Send roleName, or accessType together with permissions."
+              },
+              {
+                "name": "7584",
+                "description": "A datasourcePermissions flag is enabled while accessType is below ALL_DATA_REPORTS_AND_DASHBOARDS.",
+                "resolution": "Raise accessType to ALL_DATA_REPORTS_AND_DASHBOARDS, or disable the datasourcePermissions group."
+              },
+              {
+                "name": "7585",
+                "description": "useDatasource is enabled but createTable is not.",
+                "resolution": "Set createPermissions.createTable to true."
+              },
+              {
+                "name": "7586",
+                "description": "editDatasource, syncData, useDatasource or removeDatasource is enabled without viewDatasource.",
+                "resolution": "Set datasourcePermissions.viewDatasource to true."
+              },
+              {
+                "name": "8083",
+                "description": "The ZANALYTICS-ORGID header is missing.",
+                "resolution": "Add the ZANALYTICS-ORGID header to the request."
+              },
+              {
+                "name": "8504",
+                "description": "CONFIG was not sent, or a mandatory attribute is missing from it.",
+                "resolution": "Send a CONFIG object containing every mandatory attribute."
+              },
+              {
+                "name": "8507",
+                "description": "roleName exceeds 30 characters, or the serialized permissions object exceeds its size limit.",
+                "resolution": "Shorten the value."
+              },
+              {
+                "name": "8509",
+                "description": "roleName contains characters other than letters, digits, spaces, underscore and hyphen, or accessType is not one of the three allowed values.",
+                "resolution": "Correct the value."
+              },
+              {
+                "name": "8525",
+                "description": "The role-id in the request URI is not numeric, so the request matched no route.",
+                "resolution": "Send a numeric role identifier."
+              },
+              {
+                "name": "8534",
+                "description": "CONFIG is not valid JSON.",
+                "resolution": "Fix the JSON and URL encode it correctly."
+              },
+              {
+                "name": "8535",
+                "description": "Invalid or expired OAuth token, or the token does not carry the usermanagement scope.",
+                "resolution": "Provide a valid token with the scope ZohoAnalytics.usermanagement.update."
+              }
+            ]
+          },
+          "4XX": {
+            "$ref": "https://raw.githubusercontent.com/sathish-dev-git/Temp/refs/heads/master/zoho-analytics-api-common.json#/components/responses/CommonErrorResponse"
+          },
+          "500": {
+            "$ref": "https://raw.githubusercontent.com/sathish-dev-git/Temp/refs/heads/master/zoho-analytics-api-common.json#/components/responses/UnexpectedErrorResponse"
+          }
+        },
+        "x-zenesis-sections": {
+          "apiRequestParameters": {
+            "1": {
+              "type": "editor",
+              "value": "<blockquote>Note:<br>\n<span style=\"font-weight:normal;\">\n<ul><li>The calling user must be an Account Admin or Organization Admin of the organization, custom roles must be enabled for the organization, and the request must not arrive through a Client Portal (White Label) custom domain. Any of these failing yields error code <b>7301</b>.</li><li>At least one of <b>roleName</b> or <b>accessType</b> must be present. A CONFIG carrying neither fails with error code <b>7581</b>.</li><li><b>accessType</b> and <b>permissions</b> are all-or-nothing. Sending one without the other - including sending <b>permissions</b> alone - fails with error code <b>7580</b>. To change permissions without changing the level, resend the role's current <b>accessType</b> alongside them.</li><li>Exactly three CONFIG shapes are valid: <b>roleName</b> alone (rename, permissions preserved); <b>accessType</b> with <b>permissions</b> (level and permission set replaced, name preserved); and all three together (everything replaced).</li><li><b>permissions</b> is replaced, never merged. A payload containing one group wipes the other six, and any flag left out becomes false. Always start from the definition returned by the Get Custom Roles API.</li><li>Whenever <b>permissions</b> is supplied it is validated in full with the same rules as the Create Custom Role API, so an update can fail with any of the create-time permission errors.</li><li>Lowering <b>accessType</b> is a two-part change. The lower level and the cleaned permission set must arrive in the same payload - a higher-level flag left enabled fails with <b>7573</b>, <b>7574</b>, <b>7575</b>, <b>7576</b> or <b>7584</b> depending on the group.</li><li>The new <b>roleName</b> follows the same rules as on creation - 1 to 30 characters, letters, digits, spaces, underscore and hyphen only, and unique across the organization (<b>7553</b>).</li><li>Validation happens before anything is stored. A rejected update leaves the role exactly as it was.</li><li>Changes apply immediately to every user who holds the role. There is no versioning, draft or staged rollout.</li><li>A non-numeric role-id never reaches the API and fails at routing with error code <b>8525</b>; a numeric but unknown role-id fails with <b>7548</b>.</li><li>The API returns HTTP 204 No Content with an empty body on success. Read the new definition back with the Get Custom Roles API.</li></ul>\n</span></blockquote>"
+            }
+          }
+        }
+      },
+      "delete": {
+        "tags": [
+          "Custom Roles"
+        ],
+        "x-zenesis-title": "Delete Custom Role",
+        "summary": "Delete Custom Role",
+        "description": "Deletes a custom role definition from the organization.\n\nOnly the definition is removed. Users who held the role are not deleted, and reassigning them is done through the user management APIs. The operation cannot be undone, and re-creating the same name later produces a new role with a new identifier.",
+        "operationId": "deleteCustomRole",
+        "security": [
+          {
+            "iam-oauth2-schema": [
+              "ZohoAnalytics.usermanagement.delete"
+            ]
+          }
+        ],
+        "parameters": [
+          {
+            "$ref": "#/components/parameters/org-id"
+          },
+          {
+            "$ref": "#/components/parameters/role-id"
+          }
+        ],
+        "responses": {
+          "204": {
+            "description": "No Content. The requested action has been applied successfully. This API returns no response body on success - only the HTTP status code has to be checked. A JSON payload is returned only for a failure.",
+            "x-zenesis-statuscodes": [
+              {
+                "name": "6142",
+                "description": "The subscription plan of the organization does not include custom roles.",
+                "resolution": "Upgrade the plan to one that includes custom roles."
+              },
+              {
+                "name": "7301",
+                "description": "The calling user is not an Account Admin or Organization Admin of the organization, custom roles are not enabled for the organization, or the request was made through a Client Portal (White Label) custom domain.",
+                "resolution": "Call the API as an Account Admin or Organization Admin from the standard API host, with the custom roles feature enabled for the organization."
+              },
+              {
+                "name": "7309",
+                "description": "No authentication was supplied with the request.",
+                "resolution": "Send the Authorization header carrying a valid OAuth token."
+              },
+              {
+                "name": "7548",
+                "description": "No custom role exists for the given role-id in this organization.",
+                "resolution": "Verify the role identifier using the Get Custom Roles API."
+              },
+              {
+                "name": "8083",
+                "description": "The ZANALYTICS-ORGID header is missing.",
+                "resolution": "Add the ZANALYTICS-ORGID header to the request."
+              },
+              {
+                "name": "8525",
+                "description": "The role-id in the request URI is not numeric, so the request matched no route.",
+                "resolution": "Send a numeric role identifier."
+              },
+              {
+                "name": "8535",
+                "description": "Invalid or expired OAuth token, or the token does not carry the usermanagement scope.",
+                "resolution": "Provide a valid token with the scope ZohoAnalytics.usermanagement.delete."
+              }
+            ]
+          },
+          "4XX": {
+            "$ref": "https://raw.githubusercontent.com/sathish-dev-git/Temp/refs/heads/master/zoho-analytics-api-common.json#/components/responses/CommonErrorResponse"
+          },
+          "500": {
+            "$ref": "https://raw.githubusercontent.com/sathish-dev-git/Temp/refs/heads/master/zoho-analytics-api-common.json#/components/responses/UnexpectedErrorResponse"
+          }
+        },
+        "x-zenesis-sections": {
+          "apiRequestParameters": {
+            "1": {
+              "type": "editor",
+              "value": "<blockquote>Note:<br>\n<span style=\"font-weight:normal;\">\n<ul><li>The calling user must be an Account Admin or Organization Admin of the organization, custom roles must be enabled for the organization, and the request must not arrive through a Client Portal (White Label) custom domain. Any of these failing yields error code <b>7301</b>.</li><li>This API removes the role definition only. Users who held the role are not deleted - reassigning them is done through the user management APIs, not here.</li><li>The operation is irreversible. The definition cannot be restored, and re-creating the same name produces a new role with a new <b>roleId</b> and no history.</li><li>The API is not idempotent. A second delete of the same role-id fails with error code <b>7548</b> rather than returning 204. Treat that as already deleted rather than as a failure to retry.</li><li>The response reports nothing about impact - it does not say how many users held the role. Establish that through the user management APIs before deleting.</li><li>A non-numeric role-id never reaches the API and fails at routing with error code <b>8525</b>; a numeric but unknown role-id fails with <b>7548</b>.</li><li>One role is deleted per call. There is no bulk-delete variant.</li><li>The API returns HTTP 204 No Content with an empty body on success. Confirm with the Get Custom Roles API.</li></ul>\n</span></blockquote>"
             }
           }
         }
@@ -1083,6 +1990,23 @@
         "responses": {
           "200": {
             "description": "Successful response.",
+            "x-zenesis-statuscodes": [
+              {
+                "name": "7103",
+                "description": "Workspace not found.",
+                "resolution": "Verify the workspace-id value in the request URI."
+              },
+              {
+                "name": "7301",
+                "description": "The calling user is not a Workspace Admin, Account Admin or Organization Admin of the workspace.",
+                "resolution": "Ensure that the caller has at least Workspace Admin access to the workspace."
+              },
+              {
+                "name": "8535",
+                "description": "Invalid or expired OAuth token.",
+                "resolution": "Provide a valid token with the scope ZohoAnalytics.usermanagement.read."
+              }
+            ],
             "content": {
               "application/json": {
                 "schema": {
@@ -1219,32 +2143,11 @@
               }
             }
           },
-          "default": {
-            "description": "Error response.",
-            "content": {
-              "application/json": {
-                "schema": {
-                  "$ref": "#/components/schemas/Error"
-                }
-              }
-            },
-            "x-zenesis-statuscodes": [
-              {
-                "name": "7103",
-                "description": "Workspace not found.",
-                "resolution": "Verify the workspace-id value in the request URI."
-              },
-              {
-                "name": "7301",
-                "description": "The calling user is not a Workspace Admin, Account Admin or Organization Admin of the workspace.",
-                "resolution": "Ensure that the caller has at least Workspace Admin access to the workspace."
-              },
-              {
-                "name": "8535",
-                "description": "Invalid or expired OAuth token.",
-                "resolution": "Provide a valid token with the scope ZohoAnalytics.usermanagement.read."
-              }
-            ]
+          "4XX": {
+            "$ref": "https://raw.githubusercontent.com/sathish-dev-git/Temp/refs/heads/master/zoho-analytics-api-common.json#/components/responses/CommonErrorResponse"
+          },
+          "500": {
+            "$ref": "https://raw.githubusercontent.com/sathish-dev-git/Temp/refs/heads/master/zoho-analytics-api-common.json#/components/responses/UnexpectedErrorResponse"
           }
         },
         "x-zenesis-sections": {
@@ -1407,17 +2310,7 @@
         },
         "responses": {
           "204": {
-            "description": "No Content. The requested action has been applied successfully. This API returns no response body on success - only the HTTP status code has to be checked. A JSON payload is returned only for a failure."
-          },
-          "default": {
-            "description": "Error response.",
-            "content": {
-              "application/json": {
-                "schema": {
-                  "$ref": "#/components/schemas/Error"
-                }
-              }
-            },
+            "description": "No Content. The requested action has been applied successfully. This API returns no response body on success - only the HTTP status code has to be checked. A JSON payload is returned only for a failure.",
             "x-zenesis-statuscodes": [
               {
                 "name": "7103",
@@ -1450,6 +2343,12 @@
                 "resolution": "Provide a valid token with the scope ZohoAnalytics.usermanagement.create."
               }
             ]
+          },
+          "4XX": {
+            "$ref": "https://raw.githubusercontent.com/sathish-dev-git/Temp/refs/heads/master/zoho-analytics-api-common.json#/components/responses/CommonErrorResponse"
+          },
+          "500": {
+            "$ref": "https://raw.githubusercontent.com/sathish-dev-git/Temp/refs/heads/master/zoho-analytics-api-common.json#/components/responses/UnexpectedErrorResponse"
           }
         },
         "x-zenesis-doc": {
@@ -1560,17 +2459,7 @@
         },
         "responses": {
           "204": {
-            "description": "No Content. The requested action has been applied successfully. This API returns no response body on success - only the HTTP status code has to be checked. A JSON payload is returned only for a failure."
-          },
-          "default": {
-            "description": "Error response.",
-            "content": {
-              "application/json": {
-                "schema": {
-                  "$ref": "#/components/schemas/Error"
-                }
-              }
-            },
+            "description": "No Content. The requested action has been applied successfully. This API returns no response body on success - only the HTTP status code has to be checked. A JSON payload is returned only for a failure.",
             "x-zenesis-statuscodes": [
               {
                 "name": "7103",
@@ -1598,6 +2487,12 @@
                 "resolution": "Provide a valid token with the scope ZohoAnalytics.usermanagement.delete."
               }
             ]
+          },
+          "4XX": {
+            "$ref": "https://raw.githubusercontent.com/sathish-dev-git/Temp/refs/heads/master/zoho-analytics-api-common.json#/components/responses/CommonErrorResponse"
+          },
+          "500": {
+            "$ref": "https://raw.githubusercontent.com/sathish-dev-git/Temp/refs/heads/master/zoho-analytics-api-common.json#/components/responses/UnexpectedErrorResponse"
           }
         },
         "x-zenesis-sections": {
@@ -1761,17 +2656,7 @@
         },
         "responses": {
           "204": {
-            "description": "No Content. The requested action has been applied successfully. This API returns no response body on success - only the HTTP status code has to be checked. A JSON payload is returned only for a failure."
-          },
-          "default": {
-            "description": "Error response.",
-            "content": {
-              "application/json": {
-                "schema": {
-                  "$ref": "#/components/schemas/Error"
-                }
-              }
-            },
+            "description": "No Content. The requested action has been applied successfully. This API returns no response body on success - only the HTTP status code has to be checked. A JSON payload is returned only for a failure.",
             "x-zenesis-statuscodes": [
               {
                 "name": "7103",
@@ -1804,6 +2689,12 @@
                 "resolution": "Provide a valid token with the scope ZohoAnalytics.usermanagement.update."
               }
             ]
+          },
+          "4XX": {
+            "$ref": "https://raw.githubusercontent.com/sathish-dev-git/Temp/refs/heads/master/zoho-analytics-api-common.json#/components/responses/CommonErrorResponse"
+          },
+          "500": {
+            "$ref": "https://raw.githubusercontent.com/sathish-dev-git/Temp/refs/heads/master/zoho-analytics-api-common.json#/components/responses/UnexpectedErrorResponse"
           }
         },
         "x-zenesis-doc": {
@@ -1918,31 +2809,7 @@
         },
         "responses": {
           "204": {
-            "description": "No Content. The requested action has been applied successfully. This API returns no response body on success - only the HTTP status code has to be checked. A JSON payload is returned only for a failure."
-          },
-          "default": {
-            "description": "Error response.",
-            "content": {
-              "application/json": {
-                "schema": {
-                  "$ref": "#/components/schemas/Error"
-                },
-                "examples": {
-                  "permissionDenied": {
-                    "description": "Permission denied",
-                    "summary": "Returned when a Workspace Admin or an Organization Admin attempts to invoke this API.",
-                    "value": {
-                      "status": "failure",
-                      "summary": "SECURITY_NOT_PERMITTED",
-                      "data": {
-                        "errorCode": 7301,
-                        "errorMessage": "You do not have the permission to do this operation. Only Account Admin has the permission."
-                      }
-                    }
-                  }
-                }
-              }
-            },
+            "description": "No Content. The requested action has been applied successfully. This API returns no response body on success - only the HTTP status code has to be checked. A JSON payload is returned only for a failure.",
             "x-zenesis-statuscodes": [
               {
                 "name": "7103",
@@ -1975,6 +2842,12 @@
                 "resolution": "Provide a valid token with the scope ZohoAnalytics.usermanagement.update."
               }
             ]
+          },
+          "4XX": {
+            "$ref": "https://raw.githubusercontent.com/sathish-dev-git/Temp/refs/heads/master/zoho-analytics-api-common.json#/components/responses/CommonErrorResponse"
+          },
+          "500": {
+            "$ref": "https://raw.githubusercontent.com/sathish-dev-git/Temp/refs/heads/master/zoho-analytics-api-common.json#/components/responses/UnexpectedErrorResponse"
           }
         },
         "x-zenesis-sections": {
@@ -2014,6 +2887,23 @@
         "responses": {
           "200": {
             "description": "Successful response.",
+            "x-zenesis-statuscodes": [
+              {
+                "name": "7103",
+                "description": "Workspace not found.",
+                "resolution": "Verify the workspace-id value in the request URI."
+              },
+              {
+                "name": "7301",
+                "description": "The calling user is not an Account Admin or Organization Admin of the organization.",
+                "resolution": "Only Account Admins and Organization Admins can manage the Workspace Admins of a workspace."
+              },
+              {
+                "name": "8535",
+                "description": "Invalid or expired OAuth token.",
+                "resolution": "Provide a valid token with the scope ZohoAnalytics.share.read."
+              }
+            ],
             "content": {
               "application/json": {
                 "schema": {
@@ -2084,32 +2974,11 @@
               }
             }
           },
-          "default": {
-            "description": "Error response.",
-            "content": {
-              "application/json": {
-                "schema": {
-                  "$ref": "#/components/schemas/Error"
-                }
-              }
-            },
-            "x-zenesis-statuscodes": [
-              {
-                "name": "7103",
-                "description": "Workspace not found.",
-                "resolution": "Verify the workspace-id value in the request URI."
-              },
-              {
-                "name": "7301",
-                "description": "The calling user is not an Account Admin or Organization Admin of the organization.",
-                "resolution": "Only Account Admins and Organization Admins can manage the Workspace Admins of a workspace."
-              },
-              {
-                "name": "8535",
-                "description": "Invalid or expired OAuth token.",
-                "resolution": "Provide a valid token with the scope ZohoAnalytics.share.read."
-              }
-            ]
+          "4XX": {
+            "$ref": "https://raw.githubusercontent.com/sathish-dev-git/Temp/refs/heads/master/zoho-analytics-api-common.json#/components/responses/CommonErrorResponse"
+          },
+          "500": {
+            "$ref": "https://raw.githubusercontent.com/sathish-dev-git/Temp/refs/heads/master/zoho-analytics-api-common.json#/components/responses/UnexpectedErrorResponse"
           }
         },
         "x-zenesis-sections": {
@@ -2208,17 +3077,7 @@
         },
         "responses": {
           "204": {
-            "description": "No Content. The requested action has been applied successfully. This API returns no response body on success - only the HTTP status code has to be checked. A JSON payload is returned only for a failure."
-          },
-          "default": {
-            "description": "Error response.",
-            "content": {
-              "application/json": {
-                "schema": {
-                  "$ref": "#/components/schemas/Error"
-                }
-              }
-            },
+            "description": "No Content. The requested action has been applied successfully. This API returns no response body on success - only the HTTP status code has to be checked. A JSON payload is returned only for a failure.",
             "x-zenesis-statuscodes": [
               {
                 "name": "7103",
@@ -2251,6 +3110,12 @@
                 "resolution": "Provide a valid token with the scope ZohoAnalytics.share.create."
               }
             ]
+          },
+          "4XX": {
+            "$ref": "https://raw.githubusercontent.com/sathish-dev-git/Temp/refs/heads/master/zoho-analytics-api-common.json#/components/responses/CommonErrorResponse"
+          },
+          "500": {
+            "$ref": "https://raw.githubusercontent.com/sathish-dev-git/Temp/refs/heads/master/zoho-analytics-api-common.json#/components/responses/UnexpectedErrorResponse"
           }
         },
         "x-zenesis-sections": {
@@ -2348,17 +3213,7 @@
         },
         "responses": {
           "204": {
-            "description": "No Content. The requested action has been applied successfully. This API returns no response body on success - only the HTTP status code has to be checked. A JSON payload is returned only for a failure."
-          },
-          "default": {
-            "description": "Error response.",
-            "content": {
-              "application/json": {
-                "schema": {
-                  "$ref": "#/components/schemas/Error"
-                }
-              }
-            },
+            "description": "No Content. The requested action has been applied successfully. This API returns no response body on success - only the HTTP status code has to be checked. A JSON payload is returned only for a failure.",
             "x-zenesis-statuscodes": [
               {
                 "name": "7103",
@@ -2391,6 +3246,12 @@
                 "resolution": "Provide a valid token with the scope ZohoAnalytics.share.delete."
               }
             ]
+          },
+          "4XX": {
+            "$ref": "https://raw.githubusercontent.com/sathish-dev-git/Temp/refs/heads/master/zoho-analytics-api-common.json#/components/responses/CommonErrorResponse"
+          },
+          "500": {
+            "$ref": "https://raw.githubusercontent.com/sathish-dev-git/Temp/refs/heads/master/zoho-analytics-api-common.json#/components/responses/UnexpectedErrorResponse"
           }
         },
         "x-zenesis-sections": {
@@ -2430,6 +3291,23 @@
         "responses": {
           "200": {
             "description": "Successful response.",
+            "x-zenesis-statuscodes": [
+              {
+                "name": "7103",
+                "description": "Workspace not found.",
+                "resolution": "Verify the workspace-id value in the request URI."
+              },
+              {
+                "name": "7301",
+                "description": "The calling user is not a Workspace Admin, Account Admin or Organization Admin of the workspace.",
+                "resolution": "Ensure that the caller has at least Workspace Admin access to the workspace."
+              },
+              {
+                "name": "8535",
+                "description": "Invalid or expired OAuth token.",
+                "resolution": "Provide a valid token with the scope ZohoAnalytics.share.read."
+              }
+            ],
             "content": {
               "application/json": {
                 "schema": {
@@ -2519,32 +3397,11 @@
               }
             }
           },
-          "default": {
-            "description": "Error response.",
-            "content": {
-              "application/json": {
-                "schema": {
-                  "$ref": "#/components/schemas/Error"
-                }
-              }
-            },
-            "x-zenesis-statuscodes": [
-              {
-                "name": "7103",
-                "description": "Workspace not found.",
-                "resolution": "Verify the workspace-id value in the request URI."
-              },
-              {
-                "name": "7301",
-                "description": "The calling user is not a Workspace Admin, Account Admin or Organization Admin of the workspace.",
-                "resolution": "Ensure that the caller has at least Workspace Admin access to the workspace."
-              },
-              {
-                "name": "8535",
-                "description": "Invalid or expired OAuth token.",
-                "resolution": "Provide a valid token with the scope ZohoAnalytics.share.read."
-              }
-            ]
+          "4XX": {
+            "$ref": "https://raw.githubusercontent.com/sathish-dev-git/Temp/refs/heads/master/zoho-analytics-api-common.json#/components/responses/CommonErrorResponse"
+          },
+          "500": {
+            "$ref": "https://raw.githubusercontent.com/sathish-dev-git/Temp/refs/heads/master/zoho-analytics-api-common.json#/components/responses/UnexpectedErrorResponse"
           }
         },
         "x-zenesis-sections": {
@@ -2652,36 +3509,6 @@
         "responses": {
           "200": {
             "description": "Successful response.",
-            "content": {
-              "application/json": {
-                "schema": {
-                  "$ref": "#/components/schemas/CreateGroupResponse"
-                },
-                "examples": {
-                  "groupCreated": {
-                    "description": "Group created",
-                    "summary": "Returns the identifier of the newly created group.",
-                    "value": {
-                      "status": "success",
-                      "summary": "Create group",
-                      "data": {
-                        "groupId": "320862000000295001"
-                      }
-                    }
-                  }
-                }
-              }
-            }
-          },
-          "default": {
-            "description": "Error response.",
-            "content": {
-              "application/json": {
-                "schema": {
-                  "$ref": "#/components/schemas/Error"
-                }
-              }
-            },
             "x-zenesis-statuscodes": [
               {
                 "name": "7103",
@@ -2713,7 +3540,33 @@
                 "description": "Invalid or expired OAuth token.",
                 "resolution": "Provide a valid token with the scope ZohoAnalytics.share.create."
               }
-            ]
+            ],
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/CreateGroupResponse"
+                },
+                "examples": {
+                  "groupCreated": {
+                    "description": "Group created",
+                    "summary": "Returns the identifier of the newly created group.",
+                    "value": {
+                      "status": "success",
+                      "summary": "Create group",
+                      "data": {
+                        "groupId": "320862000000295001"
+                      }
+                    }
+                  }
+                }
+              }
+            }
+          },
+          "4XX": {
+            "$ref": "https://raw.githubusercontent.com/sathish-dev-git/Temp/refs/heads/master/zoho-analytics-api-common.json#/components/responses/CommonErrorResponse"
+          },
+          "500": {
+            "$ref": "https://raw.githubusercontent.com/sathish-dev-git/Temp/refs/heads/master/zoho-analytics-api-common.json#/components/responses/UnexpectedErrorResponse"
           }
         },
         "x-zenesis-sections": {
@@ -2756,6 +3609,28 @@
         "responses": {
           "200": {
             "description": "Successful response.",
+            "x-zenesis-statuscodes": [
+              {
+                "name": "7103",
+                "description": "Workspace not found.",
+                "resolution": "Verify the workspace-id value in the request URI."
+              },
+              {
+                "name": "7301",
+                "description": "The calling user is not a Workspace Admin, Account Admin or Organization Admin of the workspace.",
+                "resolution": "Ensure that the caller has at least Workspace Admin access to the workspace."
+              },
+              {
+                "name": "7338",
+                "description": "The specified group-id does not belong to this workspace.",
+                "resolution": "Retrieve the correct group identifier using the Get Group List API."
+              },
+              {
+                "name": "8535",
+                "description": "Invalid or expired OAuth token.",
+                "resolution": "Provide a valid token with the scope ZohoAnalytics.share.read."
+              }
+            ],
             "content": {
               "application/json": {
                 "schema": {
@@ -2806,51 +3681,11 @@
               }
             }
           },
-          "default": {
-            "description": "Error response.",
-            "content": {
-              "application/json": {
-                "schema": {
-                  "$ref": "#/components/schemas/Error"
-                },
-                "examples": {
-                  "crossWorkspaceGroup": {
-                    "description": "Wrong workspace",
-                    "summary": "Returned when the group identifier does not belong to the workspace in the request URI.",
-                    "value": {
-                      "status": "failure",
-                      "summary": "GRPID_NOT_BELONGS_TO_DB",
-                      "data": {
-                        "errorCode": 7338,
-                        "errorMessage": "Group(s) does not belongs to current workspace"
-                      }
-                    }
-                  }
-                }
-              }
-            },
-            "x-zenesis-statuscodes": [
-              {
-                "name": "7103",
-                "description": "Workspace not found.",
-                "resolution": "Verify the workspace-id value in the request URI."
-              },
-              {
-                "name": "7301",
-                "description": "The calling user is not a Workspace Admin, Account Admin or Organization Admin of the workspace.",
-                "resolution": "Ensure that the caller has at least Workspace Admin access to the workspace."
-              },
-              {
-                "name": "7338",
-                "description": "The specified group-id does not belong to this workspace.",
-                "resolution": "Retrieve the correct group identifier using the Get Group List API."
-              },
-              {
-                "name": "8535",
-                "description": "Invalid or expired OAuth token.",
-                "resolution": "Provide a valid token with the scope ZohoAnalytics.share.read."
-              }
-            ]
+          "4XX": {
+            "$ref": "https://raw.githubusercontent.com/sathish-dev-git/Temp/refs/heads/master/zoho-analytics-api-common.json#/components/responses/CommonErrorResponse"
+          },
+          "500": {
+            "$ref": "https://raw.githubusercontent.com/sathish-dev-git/Temp/refs/heads/master/zoho-analytics-api-common.json#/components/responses/UnexpectedErrorResponse"
           }
         },
         "x-zenesis-sections": {
@@ -2944,17 +3779,7 @@
         },
         "responses": {
           "204": {
-            "description": "No Content. The requested action has been applied successfully. This API returns no response body on success - only the HTTP status code has to be checked. A JSON payload is returned only for a failure."
-          },
-          "default": {
-            "description": "Error response.",
-            "content": {
-              "application/json": {
-                "schema": {
-                  "$ref": "#/components/schemas/Error"
-                }
-              }
-            },
+            "description": "No Content. The requested action has been applied successfully. This API returns no response body on success - only the HTTP status code has to be checked. A JSON payload is returned only for a failure.",
             "x-zenesis-statuscodes": [
               {
                 "name": "7103",
@@ -2982,6 +3807,12 @@
                 "resolution": "Provide a valid token with the scope ZohoAnalytics.share.update."
               }
             ]
+          },
+          "4XX": {
+            "$ref": "https://raw.githubusercontent.com/sathish-dev-git/Temp/refs/heads/master/zoho-analytics-api-common.json#/components/responses/CommonErrorResponse"
+          },
+          "500": {
+            "$ref": "https://raw.githubusercontent.com/sathish-dev-git/Temp/refs/heads/master/zoho-analytics-api-common.json#/components/responses/UnexpectedErrorResponse"
           }
         },
         "x-zenesis-sections": {
@@ -3021,17 +3852,7 @@
         ],
         "responses": {
           "204": {
-            "description": "No Content. The requested action has been applied successfully. This API returns no response body on success - only the HTTP status code has to be checked. A JSON payload is returned only for a failure."
-          },
-          "default": {
-            "description": "Error response.",
-            "content": {
-              "application/json": {
-                "schema": {
-                  "$ref": "#/components/schemas/Error"
-                }
-              }
-            },
+            "description": "No Content. The requested action has been applied successfully. This API returns no response body on success - only the HTTP status code has to be checked. A JSON payload is returned only for a failure.",
             "x-zenesis-statuscodes": [
               {
                 "name": "7103",
@@ -3054,6 +3875,12 @@
                 "resolution": "Provide a valid token with the scope ZohoAnalytics.share.delete."
               }
             ]
+          },
+          "4XX": {
+            "$ref": "https://raw.githubusercontent.com/sathish-dev-git/Temp/refs/heads/master/zoho-analytics-api-common.json#/components/responses/CommonErrorResponse"
+          },
+          "500": {
+            "$ref": "https://raw.githubusercontent.com/sathish-dev-git/Temp/refs/heads/master/zoho-analytics-api-common.json#/components/responses/UnexpectedErrorResponse"
           }
         },
         "x-zenesis-sections": {
@@ -3158,17 +3985,7 @@
         },
         "responses": {
           "204": {
-            "description": "No Content. The requested action has been applied successfully. This API returns no response body on success - only the HTTP status code has to be checked. A JSON payload is returned only for a failure."
-          },
-          "default": {
-            "description": "Error response.",
-            "content": {
-              "application/json": {
-                "schema": {
-                  "$ref": "#/components/schemas/Error"
-                }
-              }
-            },
+            "description": "No Content. The requested action has been applied successfully. This API returns no response body on success - only the HTTP status code has to be checked. A JSON payload is returned only for a failure.",
             "x-zenesis-statuscodes": [
               {
                 "name": "7103",
@@ -3191,6 +4008,12 @@
                 "resolution": "Provide a valid token with the scope ZohoAnalytics.share.create."
               }
             ]
+          },
+          "4XX": {
+            "$ref": "https://raw.githubusercontent.com/sathish-dev-git/Temp/refs/heads/master/zoho-analytics-api-common.json#/components/responses/CommonErrorResponse"
+          },
+          "500": {
+            "$ref": "https://raw.githubusercontent.com/sathish-dev-git/Temp/refs/heads/master/zoho-analytics-api-common.json#/components/responses/UnexpectedErrorResponse"
           }
         },
         "x-zenesis-sections": {
@@ -3290,17 +4113,7 @@
         },
         "responses": {
           "204": {
-            "description": "No Content. The requested action has been applied successfully. This API returns no response body on success - only the HTTP status code has to be checked. A JSON payload is returned only for a failure."
-          },
-          "default": {
-            "description": "Error response.",
-            "content": {
-              "application/json": {
-                "schema": {
-                  "$ref": "#/components/schemas/Error"
-                }
-              }
-            },
+            "description": "No Content. The requested action has been applied successfully. This API returns no response body on success - only the HTTP status code has to be checked. A JSON payload is returned only for a failure.",
             "x-zenesis-statuscodes": [
               {
                 "name": "7103",
@@ -3323,6 +4136,12 @@
                 "resolution": "Provide a valid token with the scope ZohoAnalytics.share.delete."
               }
             ]
+          },
+          "4XX": {
+            "$ref": "https://raw.githubusercontent.com/sathish-dev-git/Temp/refs/heads/master/zoho-analytics-api-common.json#/components/responses/CommonErrorResponse"
+          },
+          "500": {
+            "$ref": "https://raw.githubusercontent.com/sathish-dev-git/Temp/refs/heads/master/zoho-analytics-api-common.json#/components/responses/UnexpectedErrorResponse"
           }
         },
         "x-zenesis-sections": {
@@ -4101,18 +4920,24 @@
       },
       "GetCustomRolesResponse": {
         "type": "object",
+        "title": "GetCustomRolesResponse",
+        "description": "Response returned by the Get Custom Roles API.",
         "properties": {
           "status": {
-            "type": "string"
+            "type": "string",
+            "description": "Status of the API request."
           },
           "summary": {
-            "type": "string"
+            "type": "string",
+            "description": "Summary of the action performed."
           },
           "data": {
             "type": "object",
+            "description": "Holds the response data of the API.",
             "properties": {
               "roles": {
                 "type": "array",
+                "description": "Every custom role defined in the organization, each with its complete permission definition. Empty when no custom role has been defined.",
                 "items": {
                   "$ref": "#/components/schemas/CustomRole"
                 }
@@ -4128,31 +4953,31 @@
               "roles": [
                 {
                   "roleId": "35130000012041001",
-                  "roleName": "DashboardPowerUser",
-                  "accessType": "ALL_DASHBOARDS",
+                  "roleName": "Data Engineer",
+                  "accessType": "ALL_DATA_REPORTS_AND_DASHBOARDS",
                   "permissions": {
                     "createPermissions": {
-                      "createTable": false,
-                      "createQueryTable": false,
-                      "createFolder": false,
-                      "createFormula": false
+                      "createTable": true,
+                      "createQueryTable": true,
+                      "createFolder": true,
+                      "createFormula": true
                     },
                     "dataPermissions": {
-                      "addRow": false,
-                      "modifyRow": false,
-                      "deleteRow": false,
-                      "importAppend": false,
-                      "importAddOrUpdate": false,
-                      "importDeleteAllAdd": false,
-                      "importDeleteUpdateAdd": false,
-                      "dataArchives": false
+                      "addRow": true,
+                      "modifyRow": true,
+                      "deleteRow": true,
+                      "importAppend": true,
+                      "importAddOrUpdate": true,
+                      "importDeleteAllAdd": true,
+                      "importDeleteUpdateAdd": true,
+                      "dataArchives": true
                     },
                     "designPermissions": {
-                      "designModify": false
+                      "designModify": true
                     },
                     "interactionPermissions": {
                       "read": true,
-                      "insight": false,
+                      "insight": true,
                       "vud": true,
                       "drillDown": false,
                       "drillThrough": false,
@@ -4160,31 +4985,38 @@
                     },
                     "sharePermissions": {
                       "share": true,
-                      "discussion": false,
-                      "privateLinks": false,
-                      "accessAdminPresets": false,
-                      "createPreset": false
+                      "discussion": true,
+                      "privateLinks": true,
+                      "accessAdminPresets": true,
+                      "createPreset": true
                     },
                     "publishPermissions": {
                       "export": true,
-                      "manageEmailSchedules": false,
-                      "allEmailSchedulesAccess": false,
-                      "manageDataAlerts": false,
-                      "allDataAlertsAccess": false,
-                      "createSlideshow": false,
-                      "publicViews": false
+                      "manageEmailSchedules": true,
+                      "allEmailSchedulesAccess": true,
+                      "manageDataAlerts": true,
+                      "allDataAlertsAccess": true,
+                      "createSlideshow": true,
+                      "publicViews": true
+                    },
+                    "datasourcePermissions": {
+                      "viewDatasource": false,
+                      "editDatasource": false,
+                      "syncData": false,
+                      "useDatasource": false,
+                      "removeDatasource": false
                     }
                   }
                 },
                 {
                   "roleId": "35130000012042001",
-                  "roleName": "Analyst",
-                  "accessType": "ALL_REPORTS_AND_DASHBOARDS",
+                  "roleName": "Dashboard Viewer",
+                  "accessType": "ALL_DASHBOARDS",
                   "permissions": {
                     "createPermissions": {
                       "createTable": false,
                       "createQueryTable": false,
-                      "createFolder": false,
+                      "createFolder": true,
                       "createFormula": false
                     },
                     "dataPermissions": {
@@ -4209,20 +5041,27 @@
                       "drillActions": true
                     },
                     "sharePermissions": {
-                      "share": false,
+                      "share": true,
                       "discussion": true,
-                      "privateLinks": false,
-                      "accessAdminPresets": false,
-                      "createPreset": false
+                      "privateLinks": true,
+                      "accessAdminPresets": true,
+                      "createPreset": true
                     },
                     "publishPermissions": {
-                      "export": false,
-                      "manageEmailSchedules": false,
-                      "allEmailSchedulesAccess": false,
-                      "manageDataAlerts": true,
+                      "export": true,
+                      "manageEmailSchedules": true,
+                      "allEmailSchedulesAccess": true,
+                      "manageDataAlerts": false,
                       "allDataAlertsAccess": false,
-                      "createSlideshow": false,
-                      "publicViews": false
+                      "createSlideshow": true,
+                      "publicViews": true
+                    },
+                    "datasourcePermissions": {
+                      "viewDatasource": false,
+                      "editDatasource": false,
+                      "syncData": false,
+                      "useDatasource": false,
+                      "removeDatasource": false
                     }
                   }
                 }
@@ -4233,20 +5072,29 @@
       },
       "CustomRole": {
         "type": "object",
-        "description": "Represents a custom role and its permissions.",
+        "title": "CustomRole",
+        "description": "A custom role and its complete permission definition, as returned by the Get Custom Roles API.",
         "properties": {
           "roleId": {
-            "type": "string"
+            "type": "string",
+            "description": "Unique identifier of the role, returned as a string. This is the role-id path parameter of the Update Custom Role and Delete Custom Role APIs."
           },
           "roleName": {
-            "type": "string"
+            "type": "string",
+            "description": "Display name of the role, unique across the organization."
           },
           "accessType": {
             "type": "string",
+            "description": "Access level of the role, which decides the kinds of view the role can reach and which permission groups may be enabled.",
             "enum": [
               "ALL_DASHBOARDS",
               "ALL_REPORTS_AND_DASHBOARDS",
               "ALL_DATA_REPORTS_AND_DASHBOARDS"
+            ],
+            "x-zenesis-enums-desc": [
+              "Dashboards only - the most restricted level",
+              "Reports and dashboards - additionally allows managing data alerts",
+              "Tables, reports and dashboards - the only level at which data, design, table creation and datasource permissions are available"
             ]
           },
           "permissions": {
@@ -4256,7 +5104,8 @@
       },
       "CustomRolePermissionsResponse": {
         "type": "object",
-        "description": "Permissions of the custom role grouped by category.",
+        "title": "CustomRolePermissionsResponse",
+        "description": "Complete permission definition of a custom role, in seven groups. Every group and every flag is always present in the response, including the ones set to false.",
         "properties": {
           "createPermissions": {
             "$ref": "#/components/schemas/CustomRoleCreatePermissionsResponse"
@@ -4275,48 +5124,65 @@
           },
           "publishPermissions": {
             "$ref": "#/components/schemas/CustomRolePublishPermissions"
+          },
+          "datasourcePermissions": {
+            "$ref": "#/components/schemas/CustomRoleDatasourcePermissions"
           }
         }
       },
       "CustomRoleCreatePermissionsResponse": {
         "type": "object",
-        "description": "Create permissions returned for a custom role.",
+        "title": "CustomRoleCreatePermissionsResponse",
+        "description": "Creation permissions of a custom role as returned by the Get Custom Roles API. Every flag is present.",
         "properties": {
+          "createFolder": {
+            "type": "boolean",
+            "description": "Allows creating folders. Available at every accessType."
+          },
           "createTable": {
-            "type": "boolean"
+            "type": "boolean",
+            "description": "Allows creating tables and importing data into new ones. Requires accessType ALL_DATA_REPORTS_AND_DASHBOARDS, otherwise error 7575."
           },
           "createQueryTable": {
-            "type": "boolean"
-          },
-          "createFolder": {
-            "type": "boolean"
+            "type": "boolean",
+            "description": "Allows creating query tables. Requires accessType ALL_DATA_REPORTS_AND_DASHBOARDS, otherwise error 7575."
           },
           "createFormula": {
-            "type": "boolean"
+            "type": "boolean",
+            "description": "Allows creating formula columns. Requires accessType ALL_DATA_REPORTS_AND_DASHBOARDS, otherwise error 7575."
           }
         }
       },
       "CreateCustomRoleConfig": {
         "type": "object",
-        "description": "JSONObject with configuration for creating a custom role.",
+        "title": "CreateCustomRoleConfig",
+        "description": "Configuration that defines the custom role to be created. All three attributes are mandatory, and the permissions are validated as a whole against the access type before anything is stored.",
         "properties": {
           "roleName": {
             "type": "string",
-            "description": "Name of the custom role.",
+            "description": "Display name of the role. 1 to 30 characters made of letters, digits, spaces, underscore and hyphen only, and unique across the organization including against built-in role names - a clash fails with error 7553.",
+            "minLength": 1,
+            "maxLength": 30,
+            "pattern": "^[A-Za-z0-9 _-]+$",
             "examples": [
-              "Sales Analyst"
+              "Dashboard Viewer"
             ]
           },
           "accessType": {
             "type": "string",
-            "description": "Access type of the custom role.",
+            "description": "Access level of the role. It sets a ceiling on the permissions that may be enabled - see CustomRolePermissions. Each level includes everything below it.",
             "enum": [
               "ALL_DASHBOARDS",
               "ALL_REPORTS_AND_DASHBOARDS",
               "ALL_DATA_REPORTS_AND_DASHBOARDS"
             ],
+            "x-zenesis-enums-desc": [
+              "Dashboards only - the most restricted level",
+              "Reports and dashboards - additionally allows managing data alerts",
+              "Tables, reports and dashboards - the only level at which data, design, table creation and datasource permissions are available"
+            ],
             "examples": [
-              "ALL_REPORTS_AND_DASHBOARDS"
+              "ALL_DASHBOARDS"
             ]
           },
           "permissions": {
@@ -4330,20 +5196,33 @@
         ],
         "examples": [
           {
-            "roleName": "Sales Analyst",
-            "accessType": "ALL_REPORTS_AND_DASHBOARDS",
+            "roleName": "Dashboard Viewer",
+            "accessType": "ALL_DASHBOARDS",
             "permissions": {
-              "createPermissions": {
-                "createTable": true,
-                "createQueryTable": true
-              },
-              "dataPermissions": {
-                "addRow": true,
-                "modifyRow": true
-              },
               "interactionPermissions": {
                 "read": true,
-                "drillDown": true
+                "vud": true,
+                "drillDown": true,
+                "insight": true,
+                "drillThrough": true,
+                "drillActions": true
+              },
+              "publishPermissions": {
+                "export": true,
+                "publicViews": true,
+                "createSlideshow": true,
+                "manageEmailSchedules": true,
+                "allEmailSchedulesAccess": true
+              },
+              "sharePermissions": {
+                "share": true,
+                "discussion": true,
+                "accessAdminPresets": true,
+                "createPreset": true,
+                "privateLinks": true
+              },
+              "createPermissions": {
+                "createFolder": true
               }
             }
           }
@@ -4351,22 +5230,31 @@
       },
       "UpdateCustomRoleConfig": {
         "type": "object",
-        "description": "JSONObject with configuration for updating an existing custom role.",
+        "title": "UpdateCustomRoleConfig",
+        "description": "Configuration that carries the changes to apply to an existing custom role. At least one of roleName or accessType must be present (otherwise error 7581), and accessType and permissions must always be sent together (otherwise error 7580). This leaves exactly three valid shapes: roleName alone, accessType with permissions, or all three.",
         "properties": {
           "roleName": {
             "type": "string",
-            "description": "Updated name of the custom role.",
+            "description": "New display name of the role. 1 to 30 characters made of letters, digits, spaces, underscore and hyphen only, and unique across the organization - a clash fails with error 7553. Omit to keep the current name. Sending roleName alone renames the role and leaves accessType and permissions untouched.",
+            "minLength": 1,
+            "maxLength": 30,
+            "pattern": "^[A-Za-z0-9 _-]+$",
             "examples": [
-              "Sales Analyst"
+              "Report Analyst EMEA"
             ]
           },
           "accessType": {
             "type": "string",
-            "description": "Updated access type of the custom role.",
+            "description": "New access level of the role. Must be sent together with permissions, otherwise error 7580. Resend the current level if only the permissions change. Lowering the level requires every permission above the new ceiling to be absent or false in the same payload.",
             "enum": [
               "ALL_DASHBOARDS",
               "ALL_REPORTS_AND_DASHBOARDS",
               "ALL_DATA_REPORTS_AND_DASHBOARDS"
+            ],
+            "x-zenesis-enums-desc": [
+              "Dashboards only - the most restricted level",
+              "Reports and dashboards - additionally allows managing data alerts",
+              "Tables, reports and dashboards - the only level at which data, design, table creation and datasource permissions are available"
             ],
             "examples": [
               "ALL_REPORTS_AND_DASHBOARDS"
@@ -4376,17 +5264,29 @@
             "$ref": "#/components/schemas/CustomRolePermissions"
           }
         },
-        "required": [
-          "accessType",
-          "permissions"
-        ],
         "examples": [
           {
-            "accessType": "ALL_REPORTS_AND_DASHBOARDS",
+            "roleName": "Report Analyst EMEA"
+          },
+          {
+            "roleName": "Dashboard Only",
+            "accessType": "ALL_DASHBOARDS",
             "permissions": {
-              "dataPermissions": {
-                "addRow": true,
-                "modifyRow": false
+              "interactionPermissions": {
+                "read": true,
+                "vud": true,
+                "drillDown": true,
+                "insight": true
+              },
+              "sharePermissions": {
+                "share": true,
+                "discussion": true
+              },
+              "publishPermissions": {
+                "export": true
+              },
+              "createPermissions": {
+                "createFolder": true
               }
             }
           }
@@ -4394,7 +5294,8 @@
       },
       "CustomRolePermissions": {
         "type": "object",
-        "description": "Permissions granted to the custom role, grouped by category.",
+        "title": "CustomRolePermissions",
+        "description": "Permission definition of a custom role, in up to seven groups of boolean flags. Every flag that is omitted is treated as false, and a group that is left out is entirely disabled - which is why an update must resend the complete object. interactionPermissions.read must always be true (error 7579). The accessType of the role sets a ceiling: interactionPermissions, sharePermissions, createPermissions.createFolder and every publishPermissions flag except manageDataAlerts are available at every level; manageDataAlerts and allDataAlertsAccess need ALL_REPORTS_AND_DASHBOARDS or higher; dataPermissions, designPermissions, datasourcePermissions and the remaining createPermissions need ALL_DATA_REPORTS_AND_DASHBOARDS. The serialized object is limited to 5,000 characters, and each group to 500.",
         "properties": {
           "createPermissions": {
             "$ref": "#/components/schemas/CustomRoleCreatePermissions"
@@ -4413,137 +5314,238 @@
           },
           "publishPermissions": {
             "$ref": "#/components/schemas/CustomRolePublishPermissions"
+          },
+          "datasourcePermissions": {
+            "$ref": "#/components/schemas/CustomRoleDatasourcePermissions"
           }
         }
       },
       "CustomRoleCreatePermissions": {
         "type": "object",
-        "description": "Permissions related to creating resources.",
+        "title": "CustomRoleCreatePermissions",
+        "description": "Permissions related to creating folders, tables, query tables and formula columns. createFolder is available at every accessType; the other three require ALL_DATA_REPORTS_AND_DASHBOARDS. An omitted flag is treated as false.",
         "properties": {
+          "createFolder": {
+            "type": "boolean",
+            "description": "Allows creating folders. Available at every accessType."
+          },
           "createTable": {
-            "type": "boolean"
+            "type": "boolean",
+            "description": "Allows creating tables and importing data into new ones. Requires accessType ALL_DATA_REPORTS_AND_DASHBOARDS, otherwise error 7575."
           },
           "createQueryTable": {
-            "type": "boolean"
-          },
-          "createFolder": {
-            "type": "boolean"
+            "type": "boolean",
+            "description": "Allows creating query tables. Requires accessType ALL_DATA_REPORTS_AND_DASHBOARDS, otherwise error 7575."
           },
           "createFormula": {
-            "type": "boolean"
+            "type": "boolean",
+            "description": "Allows creating formula columns. Requires accessType ALL_DATA_REPORTS_AND_DASHBOARDS, otherwise error 7575."
           }
         }
       },
       "CustomRoleDataPermissions": {
         "type": "object",
-        "description": "Permissions related to data operations.",
+        "title": "CustomRoleDataPermissions",
+        "description": "Permissions related to adding, changing and importing rows. Every flag in this group requires accessType ALL_DATA_REPORTS_AND_DASHBOARDS, otherwise error 7573. An omitted flag is treated as false.",
         "properties": {
           "addRow": {
-            "type": "boolean"
+            "type": "boolean",
+            "description": "Allows adding rows to a table."
           },
           "modifyRow": {
-            "type": "boolean"
+            "type": "boolean",
+            "description": "Allows changing existing rows."
           },
           "deleteRow": {
-            "type": "boolean"
+            "type": "boolean",
+            "description": "Allows deleting rows. Also confers the bulk delete-all-rows capability."
           },
           "importAppend": {
-            "type": "boolean"
+            "type": "boolean",
+            "description": "Allows importing data in append mode."
           },
           "importAddOrUpdate": {
-            "type": "boolean"
+            "type": "boolean",
+            "description": "Allows importing data in add-or-update mode."
           },
           "importDeleteAllAdd": {
-            "type": "boolean"
+            "type": "boolean",
+            "description": "Allows importing data in delete-all-and-add mode."
           },
           "importDeleteUpdateAdd": {
-            "type": "boolean"
+            "type": "boolean",
+            "description": "Allows importing data in delete-update-and-add mode."
           },
           "dataArchives": {
-            "type": "boolean"
+            "type": "boolean",
+            "description": "Allows managing scheduled data deletion. Requires every other flag in this group to be true as well, otherwise error 7577."
           }
         }
       },
       "CustomRoleDesignPermissions": {
         "type": "object",
-        "description": "Permissions related to design operations.",
+        "title": "CustomRoleDesignPermissions",
+        "description": "Permissions related to changing the design of a view. Requires accessType ALL_DATA_REPORTS_AND_DASHBOARDS, otherwise error 7574. An omitted flag is treated as false.",
         "properties": {
           "designModify": {
-            "type": "boolean"
+            "type": "boolean",
+            "description": "Allows changing the design of a view - formatting, layout and structure. Additionally requires sharePermissions.accessAdminPresets and sharePermissions.createPreset to be true, otherwise error 7578."
           }
         }
       },
       "CustomRoleInteractionPermissions": {
         "type": "object",
-        "description": "Permissions related to interaction operations.",
+        "title": "CustomRoleInteractionPermissions",
+        "description": "Permissions related to viewing and exploring a view. Available at every accessType. An omitted flag is treated as false, except that read is mandatory.",
         "properties": {
           "read": {
-            "type": "boolean"
+            "type": "boolean",
+            "description": "Allows viewing the shared item. Must always be true - a missing or false value fails with error 7579 before any other rule is evaluated."
           },
           "vud": {
-            "type": "boolean"
+            "type": "boolean",
+            "description": "Allows viewing the underlying data of a report."
           },
           "drillDown": {
-            "type": "boolean"
+            "type": "boolean",
+            "description": "Allows drilling down within a report."
           },
           "drillThrough": {
-            "type": "boolean"
+            "type": "boolean",
+            "description": "Allows drilling through to a linked report."
           },
           "drillActions": {
-            "type": "boolean"
+            "type": "boolean",
+            "description": "Allows running drill actions."
           },
           "insight": {
-            "type": "boolean"
+            "type": "boolean",
+            "description": "Allows using the AI and insight features on a view."
           }
         }
       },
       "CustomRoleSharePermissions": {
         "type": "object",
-        "description": "Permissions related to sharing operations.",
+        "title": "CustomRoleSharePermissions",
+        "description": "Permissions related to re-sharing, discussions, private links and presets. Available at every accessType. An omitted flag is treated as false.",
         "properties": {
           "share": {
-            "type": "boolean"
+            "type": "boolean",
+            "description": "Allows re-sharing a view with other users."
           },
           "discussion": {
-            "type": "boolean"
+            "type": "boolean",
+            "description": "Allows taking part in view discussions and comments."
           },
           "privateLinks": {
-            "type": "boolean"
+            "type": "boolean",
+            "description": "Allows generating private links for a view."
           },
           "accessAdminPresets": {
-            "type": "boolean"
+            "type": "boolean",
+            "description": "Allows viewing presets created by the workspace administrator. Required, together with createPreset, when designModify is enabled."
           },
           "createPreset": {
-            "type": "boolean"
+            "type": "boolean",
+            "description": "Allows creating personal filter and column presets. Required, together with accessAdminPresets, when designModify is enabled."
           }
         }
       },
       "CustomRolePublishPermissions": {
         "type": "object",
-        "description": "Permissions related to publishing operations.",
+        "title": "CustomRolePublishPermissions",
+        "description": "Permissions related to exporting, email schedules, data alerts, slideshows and public views. Every flag except manageDataAlerts and allDataAlertsAccess is available at every accessType; those two need ALL_REPORTS_AND_DASHBOARDS or higher, otherwise error 7576. An omitted flag is treated as false.",
         "properties": {
           "export": {
-            "type": "boolean"
+            "type": "boolean",
+            "description": "Allows exporting view data. Required when manageEmailSchedules is enabled."
           },
           "manageEmailSchedules": {
-            "type": "boolean"
+            "type": "boolean",
+            "description": "Allows creating and editing email schedules. Requires export to be true, otherwise error 7559."
           },
           "allEmailSchedulesAccess": {
-            "type": "boolean"
+            "type": "boolean",
+            "description": "Widens manageEmailSchedules from the schedules the user created to every email schedule. Has no effect unless manageEmailSchedules is true."
           },
           "manageDataAlerts": {
-            "type": "boolean"
+            "type": "boolean",
+            "description": "Allows creating and editing data alerts. Requires accessType ALL_REPORTS_AND_DASHBOARDS or higher, otherwise error 7576."
           },
           "allDataAlertsAccess": {
-            "type": "boolean"
+            "type": "boolean",
+            "description": "Widens manageDataAlerts from the alerts the user created to every data alert. Has no effect unless manageDataAlerts is true. Requires accessType ALL_REPORTS_AND_DASHBOARDS or higher."
           },
           "createSlideshow": {
-            "type": "boolean"
+            "type": "boolean",
+            "description": "Allows creating slideshows from dashboards."
           },
           "publicViews": {
-            "type": "boolean"
+            "type": "boolean",
+            "description": "Allows making a view publicly accessible."
           }
         }
+      },
+      "CustomRoleDatasourcePermissions": {
+        "type": "object",
+        "title": "CustomRoleDatasourcePermissions",
+        "description": "Permissions related to viewing and managing the datasource behind a table. Every flag in this group requires accessType ALL_DATA_REPORTS_AND_DASHBOARDS, otherwise error 7584. An omitted flag is treated as false.",
+        "properties": {
+          "viewDatasource": {
+            "type": "boolean",
+            "description": "Allows seeing the datasource behind a table. Required by every other flag in this group, otherwise error 7586."
+          },
+          "editDatasource": {
+            "type": "boolean",
+            "description": "Allows changing datasource connection details. Requires viewDatasource."
+          },
+          "syncData": {
+            "type": "boolean",
+            "description": "Allows triggering a data sync. Requires viewDatasource."
+          },
+          "useDatasource": {
+            "type": "boolean",
+            "description": "Allows building new tables from an existing datasource. Requires viewDatasource and createPermissions.createTable, otherwise error 7585."
+          },
+          "removeDatasource": {
+            "type": "boolean",
+            "description": "Allows removing a datasource. Requires viewDatasource."
+          }
+        }
+      },
+      "CreateCustomRoleResponse": {
+        "type": "object",
+        "title": "CreateCustomRoleResponse",
+        "description": "Response returned by the Create Custom Role API.",
+        "properties": {
+          "status": {
+            "type": "string",
+            "description": "Status of the API request."
+          },
+          "summary": {
+            "type": "string",
+            "description": "Summary of the action performed."
+          },
+          "data": {
+            "type": "object",
+            "description": "Holds the response data of the API.",
+            "properties": {
+              "roleId": {
+                "type": "string",
+                "description": "ID of the newly created role, returned as a string. This is the only place it is returned on creation. It becomes the role-id path parameter of the Update Custom Role and Delete Custom Role APIs."
+              }
+            }
+          }
+        },
+        "examples": [
+          {
+            "status": "success",
+            "summary": "Create role",
+            "data": {
+              "roleId": "35130000012043001"
+            }
+          }
+        ]
       },
       "Error": {
         "type": "object",

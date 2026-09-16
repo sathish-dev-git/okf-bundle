@@ -43,9 +43,9 @@ sources:
     resource: "/references/openapi/data-modeling-schema-grouped-api.json"
     title: OpenAPI 3 specification - data-modeling-schema-grouped-api.json
     author: team:zoho-analytics-api-docs
-    last_modified: 2026-09-10T10:56:20Z
+    last_modified: 2026-09-16T12:30:51Z
 generated:
-  at: 2026-09-14T17:14:34Z
+  at: 2026-09-16T12:54:00Z
 status: stable
 ---
 
@@ -202,7 +202,7 @@ Every failure returns HTTP 4xx/5xx with the JSON error envelope; `data.errorCode
 | [7301](/foundations/error-codes.md#error-7301) | 403 | User does not have permission. | Ensure the user is a Workspace Admin or has Design Modify permission on the view. |
 | [7319](/foundations/error-codes.md#error-7319) | 400 | The view ID does not belong to the specified workspace. | Confirm the `<view-id>` is correct. |
 | [8119](/foundations/error-codes.md#error-8119) | 400 | Invalid value for `sortOrder`. Only `1` (Ascending) and `2` (Descending) are accepted. | Use `1` for ascending or `2` for descending. |
-| [8180](/foundations/error-codes.md#error-8180) | 400 | One or more column IDs in the `columns` array do not belong to this view. | Verify all column IDs using Get Table Metadata. |
+| [8180](/foundations/error-codes.md#error-8180) | 403 | One or more column IDs in the `columns` array do not belong to this view. | Verify all column IDs using Get Table Metadata. |
 | [8182](/foundations/error-codes.md#error-8182) | 403 | `resetSort: true` and `sortOrder` cannot be used together. | Use either `resetSort: true` (with no other fields) or `columns` + `sortOrder` (without `resetSort`). |
 | [8535](/foundations/error-codes.md#error-8535) | 401 | The OAuth access token is missing, expired, revoked, or does not carry the scope required by this operation. | Regenerate the access token with the required scope (see the endpoint document) and retry. |
 

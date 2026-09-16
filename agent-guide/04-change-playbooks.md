@@ -10,11 +10,15 @@ python3 tools/validate_okf.py    # must end errors=0 warnings=0 broken_links=0
 
 Never edit `bundle/` or `dist/` directly — see [01-repository-layout.md](01-repository-layout.md).
 
+Every path under `analytics-api-docs/` belongs to the analytics-api-docs repository (a git submodule).
+Make those edits there, run its validator, push, then move the pin here with
+`git submodule update --remote --merge analytics-api-docs` before the two commands above.
+
 ---
 
 ## A. Add a new endpoint
 
-1. **Pick the domain and group.** Find the group's markdown file under `api-docs/MD/<domain folder>/`.
+1. **Pick the domain and group.** Find the group's markdown file under `analytics-api-docs/md/<domain folder>/`.
    If the group or domain doesn't exist yet, do playbook D first.
 2. **Add the markdown section.** Append a new `## N. <Title>` section at the end of the group file
    (appending avoids renumbering every later section and its `#N-slug` links). Follow the endpoint
@@ -25,7 +29,7 @@ Never edit `bundle/` or `dist/` directly — see [01-repository-layout.md](01-re
    generic Notes & Behaviour instead of its intended section.
 3. **Update the group's `## Index` table** with the new row, and add the new row's `<N>` in any spot
    you actually inserted-in-the-middle-of (again, prefer appending).
-4. **Add the OpenAPI operation** to `api-docs/ZENESIS_OAS/<domain>-grouped-api.json`:
+4. **Add the OpenAPI operation** to `analytics-api-docs/zenesis-oas/<domain>-grouped-api.json`:
    - `operationId` unique across every file.
    - `x-zenesis-title` (or `summary`) equal to the markdown `## N. Title`, character for character —
      otherwise add a `TITLE_MAP` entry in `tools/build_okf.py` (see
@@ -39,7 +43,7 @@ Never edit `bundle/` or `dist/` directly — see [01-repository-layout.md](01-re
    `tools/build_okf.py` instead of skipping the endpoint. Remove the entry once the real operation
    exists.
 6. **Add SDK samples** (optional but expected) to
-   `api-docs/ZENESIS_OAS_SAMPLES/<domain>-grouped-api-samples.json`, keyed by the exact OpenAPI path
+   `analytics-api-docs/zenesis-oas-samples/<domain>-grouped-api-samples.json`, keyed by the exact OpenAPI path
    template and lower-case method, using the language keys in `LANG_FENCE`/`LANG_TITLE` order. No
    entry simply means no SDK Example document is generated for that operation.
 7. **New identifiers or error codes introduced?** See playbooks B/C below.
@@ -83,20 +87,20 @@ Never edit `bundle/` or `dist/` directly — see [01-repository-layout.md](01-re
 
 ## D. Add a new API group or domain
 
-1. **New group in an existing domain:** create `api-docs/MD/<domain folder>/<GROUP>.md` following the
+1. **New group in an existing domain:** create `analytics-api-docs/md/<domain folder>/<GROUP>.md` following the
    file skeleton in [03-source-document-format.md §A](03-source-document-format.md) (H1, preamble,
    optional concept sections, `## Index`, `## 1. …` endpoint sections, Appendices A–D as needed). Add
    `(md file stem, group slug, group title)` to that domain's group list in the `DOMAINS` table in
    `tools/build_okf.py`.
-2. **New domain:** create the markdown folder under `api-docs/MD/`, create or choose the OpenAPI file
-   `api-docs/ZENESIS_OAS/<domain>-grouped-api.json`, and add a full new tuple to `DOMAINS`:
+2. **New domain:** create the markdown folder under `analytics-api-docs/md/`, create or choose the OpenAPI file
+   `analytics-api-docs/zenesis-oas/<domain>-grouped-api.json`, and add a full new tuple to `DOMAINS`:
    `(md folder, domain slug, domain title, oas file, [groups...])`.
 3. Set `info.description` and the relevant `tags[].description` in the domain's OpenAPI file — these
    feed `render_domain_overview` for `/domains/<domain>/overview.md`.
 4. If any markdown file will link to this group using the legacy `<STEM>_API_DOC_INFO.md` pattern and
    `kebab(stem)` doesn't already equal the new group slug, add a `LEGACY_ALIAS` entry in
    `tools/build_okf.py`.
-5. Create the matching `api-docs/ZENESIS_OAS_SAMPLES/<domain>-grouped-api-samples.json` (can start
+5. Create the matching `analytics-api-docs/zenesis-oas-samples/<domain>-grouped-api-samples.json` (can start
    with no entries and be filled in per operation later).
 6. Add each endpoint following playbook A.
 7. Rebuild and validate; confirm the new domain/group shows up in `endpoint-catalog.md`,
@@ -126,7 +130,7 @@ Never edit `bundle/` or `dist/` directly — see [01-repository-layout.md](01-re
 1. **Generated foundations** (`error-codes.md`, `error-codes-quick-reference.md`, `oauth-scopes.md`,
    `rate-limits-and-quotas.md`, `permission-matrix.md`, `identifiers.md`) are never edited directly.
    Change their sources instead: error tables (playbook C), scopes in
-   `api-docs/zoho-analytics-api-common.json`, `x-zenesis-security.throttles` or `**Rate Limit**` rows,
+   `analytics-api-docs/zoho-analytics-api-common.json`, `x-zenesis-security.throttles` or `**Rate Limit**` rows,
    `**Permission Required**` rows, or the `ID_SOURCES` table / OpenAPI parameters.
 2. **Hand-written foundations** (the other 13 files listed in
    [02-bundle-structure.md](02-bundle-structure.md)) are edited directly under
@@ -145,6 +149,6 @@ Never edit `bundle/` or `dist/` directly — see [01-repository-layout.md](01-re
    entry is needed.
 3. Link to real endpoint files using bundle-relative paths (e.g.
    `/domains/<domain>/<group>/<endpoint-file>.md`), not the legacy `<GROUP>_API_DOC_INFO.md#N-slug`
-   syntax used inside `api-docs/MD` — that syntax only applies to source markdown, not files that are
+   syntax used inside `analytics-api-docs/md` — that syntax only applies to source markdown, not files that are
    already inside the generated bundle.
 4. Rebuild and validate.

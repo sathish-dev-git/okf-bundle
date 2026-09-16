@@ -38,9 +38,9 @@ sources:
     resource: "/references/openapi/data-operations-grouped-api.json"
     title: OpenAPI 3 specification - data-operations-grouped-api.json
     author: team:zoho-analytics-api-docs
-    last_modified: 2026-09-10T10:56:20Z
+    last_modified: 2026-09-16T12:30:51Z
 generated:
-  at: 2026-09-14T17:14:34Z
+  at: 2026-09-16T12:54:00Z
 status: stable
 ---
 
@@ -381,13 +381,13 @@ One further gate applies to every API here:
 | [7104](/foundations/error-codes.md#error-7104) | 404 | The view (table, report, dashboard, query table) or other named object addressed by the request does not exist in the given workspace. |
 | [7301](/foundations/error-codes.md#error-7301) | 403 | The request is authenticated, but the user does not hold the role or view permission required for this operation on the requested resource. |
 | [8077](/foundations/error-codes.md#error-8077) | 400 | CONFIG was not sent, or was sent empty. |
-| [8078](/foundations/error-codes.md#error-8078) | 400 | sqlQuery was sent but is blank. |
+| [8078](/foundations/error-codes.md#error-8078) | 400 | A mandatory attribute was sent with an empty value. The error message names the attribute. |
 | [8079](/foundations/error-codes.md#error-8079) | 400 | A mandatory attribute is missing from the configuration. |
 | [8182](/foundations/error-codes.md#error-8182) | 403 | resetSort and sortOrder cannot be used together. |
 | [8183](/foundations/error-codes.md#error-8183) | 400 | The syncIntervalId does not belong to this datasource. |
-| [8504](/foundations/error-codes.md#error-8504) | 400 | CONFIG was not sent, or a mandatory key is missing. |
-| [8507](/foundations/error-codes.md#error-8507) | 400 | CONFIG exceeds 100,000 characters. |
-| [8509](/foundations/error-codes.md#error-8509) | 400 | serviceName or databaseType is not one of the accepted values. |
+| [8504](/foundations/error-codes.md#error-8504) | 400 | CONFIG was not sent. |
+| [8507](/foundations/error-codes.md#error-8507) | 400 | roleName exceeds 30 characters, or the serialized permissions object exceeds its size limit. |
+| [8509](/foundations/error-codes.md#error-8509) | 400 | roleName contains characters other than letters, digits, spaces, underscore and hyphen, or accessType is not one of the three allowed values. |
 | [8535](/foundations/error-codes.md#error-8535) | 401 | The OAuth access token is missing, expired, revoked, or does not carry the scope required by this operation. |
 | [18055](/foundations/error-codes.md#error-18055) | 400 | The databaseType is not available for the given serviceName. |
 | [18056](/foundations/error-codes.md#error-18056) | 400 | The table has no datasource behind it. |

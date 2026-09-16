@@ -1,7 +1,7 @@
 # 01 - Repository layout
 
-This repository is self-contained: sources, tooling, the generated bundle and the packaged distribution
-sit side by side. Folder names say what a folder is for; every folder that a maintainer touches has a
+Tooling, hand-written sources, the generated bundle and the packaged distribution sit side by side. The
+API source documents are the one thing not stored here: they arrive through a git submodule. Folder names say what a folder is for; every folder that a maintainer touches has a
 `README.md`.
 
 ```
@@ -9,29 +9,31 @@ sit side by side. Folder names say what a folder is for; every folder that a mai
 ├── README.md                         repository entry point: layout, pipeline, quick start
 ├── CLAUDE.md                         pointer for AI coding agents -> agent-guide/README.md
 ├── .gitignore                        ignores dist/ and tarballs
+├── .gitmodules                       declares the analytics-api-docs submodule (url, branch = main)
 ├── agent-guide/                      this guide (internal, never published)
-├── api-docs/                         SOURCES - the only place API facts are authored (README inside)
-│   ├── MD/
+├── analytics-api-docs/               SOURCES - git submodule of the analytics-api-docs repository, pinned to one commit
+│   ├── md/
 │   │   ├── 01 · Organization Management/ORG_INFO_AND_SETTINGS.md
-│   │   ├── 02 · User & Groups/{ORG_USERS,WORKSPACE_USERS,WORKSPACE_GROUPS}.md
+│   │   ├── 02 · User & Groups/{ORG_USERS,CUSTOM_ROLES,WORKSPACE_USERS,WORKSPACE_GROUPS}.md
 │   │   ├── 03 · Workspace Management/{WORKSPACE_OPERATIONS,WORKSPACE_FOLDERS,WORKSPACE_PREFERENCES,DOMAIN_AND_WHITE_LABEL}.md
 │   │   ├── 04 · Data Modeling & Schema/{TABLE_AND_SCHEMA,COLUMNS,LOOKUPS_AND_RELATIONSHIPS,QUERY_TABLES,FORMULA_COLUMNS,AGGREGATE_FORMULAS,WORKSPACE_VARIABLES}.md
 │   │   ├── 05 · Data Operations/{SYNC_DATA_IMPORT,ASYNC_DATA_IMPORT,SYNC_DATA_EXPORT,ASYNC_DATA_EXPORT,ROW_OPERATIONS,DATA_SYNC_AND_CONNECTIVITY}.md
-│   │   ├── 06 · Views Management/{VIEW_OPERATIONS,VIEW_PREFERENCES,TRASH_MANAGEMENT,AUTO_ANALYSIS}.md
+│   │   ├── 06 · Views Management/{VIEW_OPERATIONS,VIEW_PREFERENCES,TRASH_MANAGEMENT,AUTO_ANALYSIS,TAGS}.md
 │   │   ├── 07 · Reports & Dashboards/{REPORTS,DASHBOARDS}.md
 │   │   ├── 08 · Share & Publish/{SHARING,PUBLISH,EMBED_URL,SLIDESHOW_MANAGEMENT}.md
 │   │   ├── 09 · Schedules & Alerts/EMAIL_SCHEDULES.md
 │   │   └── 10 · DSML/AUTOML_ANALYSIS.md
-│   ├── ZENESIS_OAS/<domain>-grouped-api.json          OpenAPI 3, one file per domain (10 files)
-│   ├── ZENESIS_OAS_SAMPLES/<domain>-grouped-api-samples.json   SDK snippets keyed by path + method
-│   └── zoho-analytics-api-common.json                 OAuth scopes, Error schema, common responses
+│   ├── zenesis-oas/<domain>-grouped-api.json          OpenAPI 3, one file per domain (10 files)
+│   ├── zenesis-oas-samples/<domain>-grouped-api-samples.json   SDK snippets keyed by path + method
+│   ├── zoho-analytics-api-common.json                 OAuth scopes, Error schema, common responses
+│   └── tools/validate_api_docs.py                     that repository's own naming and completeness check
 ├── handwritten/                      SOURCES - hand-authored concepts copied into the bundle on every build (README inside)
 │   ├── overview.md                       -> bundle /overview.md
 │   ├── how-to-use-this-bundle.md         -> bundle /how-to-use-this-bundle.md
 │   ├── foundations/*.md                  -> bundle /foundations/<same name>.md
 │   └── workflows/*.md                    -> bundle /workflows/<same name>.md
 ├── tools/                            (README inside)
-│   ├── build_okf.py                  generator: api-docs + handwritten -> bundle
+│   ├── build_okf.py                  generator: analytics-api-docs + handwritten -> bundle
 │   ├── validate_okf.py               OKF conformance + link + provenance checks
 │   └── package_okf.py                bundle -> dist/ public repo layout (+ tarball)
 ├── bundle/                           THE BUNDLE - generated, deleted and rebuilt on every build; committed
@@ -47,10 +49,10 @@ The bundle directory is named `bundle/` in this repository; the bundle's own nam
 
 | Folder | Written by | Edited by agents? |
 |---|---|---|
-| `api-docs/MD` | API documentation authors | **Yes**, this is where endpoint facts change. |
-| `api-docs/ZENESIS_OAS` | Exported from the Zenesis documentation system | Yes, when adding operations, schemas, samples or error codes. Keep valid JSON. |
-| `api-docs/ZENESIS_OAS_SAMPLES` | Same system | Yes, when adding SDK snippets for a new operation. |
-| `api-docs/zoho-analytics-api-common.json` | Same system | Rarely: only for a new OAuth scope or a new common error example. |
+| `analytics-api-docs/md` | API documentation authors, in the analytics-api-docs repository | **Yes, upstream** - this is where endpoint facts change. Here, only the pin moves. |
+| `analytics-api-docs/zenesis-oas` | Exported from the Zenesis documentation system, in the analytics-api-docs repository | Yes, upstream, when adding operations, schemas, samples or error codes. Keep valid JSON. |
+| `analytics-api-docs/zenesis-oas-samples` | Same system, same repository | Yes, upstream, when adding SDK snippets for a new operation. |
+| `analytics-api-docs/zoho-analytics-api-common.json` | Same system, same repository | Rarely: only for a new OAuth scope or a new common error example. |
 | `handwritten/` | Bundle maintainers | **Yes**, for cross-cutting rules and playbooks. |
 | `tools/build_okf.py` | Bundle maintainers | Yes, but only its configuration tables in normal operation. |
 | `bundle/` | `build_okf.py` | **Never.** |

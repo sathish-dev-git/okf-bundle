@@ -26,9 +26,9 @@ sources:
     resource: "/references/openapi/data-operations-grouped-api.json"
     title: OpenAPI 3 specification - data-operations-grouped-api.json
     author: team:zoho-analytics-api-docs
-    last_modified: 2026-09-10T10:56:20Z
+    last_modified: 2026-09-16T12:30:51Z
 generated:
-  at: 2026-09-14T17:14:34Z
+  at: 2026-09-16T12:54:00Z
 status: stable
 ---
 
@@ -224,7 +224,7 @@ The new-table import has no such checks — there is no existing table yet — b
 | [8139](/foundations/error-codes.md#error-8139) | 400 | The DATA parameter exceeds 10,000,000 characters. |
 | [8148](/foundations/error-codes.md#error-8148) | 400 | Separator configuration errors. |
 | [8149](/foundations/error-codes.md#error-8149) | 400 | A columnSeparators entry has fewer than two values. |
-| [8504](/foundations/error-codes.md#error-8504) | 400 | CONFIG was not sent, or a mandatory key is missing. |
+| [8504](/foundations/error-codes.md#error-8504) | 400 | CONFIG was not sent. |
 | [8516](/foundations/error-codes.md#error-8516) | 400 | A CONFIG value has the wrong JSON type. |
 | [8535](/foundations/error-codes.md#error-8535) | 401 | The OAuth access token is missing, expired, revoked, or does not carry the scope required by this operation. |
 

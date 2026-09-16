@@ -20,7 +20,7 @@ sources:
     resource: /domains/index.md
     title: White Label sections and Case samples across the markdown reference
 generated:
-  at: 2026-09-14T17:14:34Z
+  at: 2026-09-16T12:54:00Z
 status: stable
 ---
 

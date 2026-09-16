@@ -18,7 +18,7 @@ bundle/
 ├── workflows/                     Playbooks               (handwritten/workflows/*.md)
 ├── sdk-examples/<domain>/<group>/ SDK Example per operation (generated: render_sdk)
 └── references/
-    ├── openapi/*.json             copies of api-docs/ZENESIS_OAS/*.json + zoho-analytics-api-common.json
+    ├── openapi/*.json             copies of analytics-api-docs/zenesis-oas/*.json + zoho-analytics-api-common.json
     └── endpoint-catalog.json      machine-readable catalog (generated: catalog_json)
 ```
 
@@ -35,7 +35,7 @@ Every directory gets an `index.md` from `write_indexes()`, listing `overview.md`
 | `API Domain` | `/domains/<domain>/overview.md` | `render_domain_overview` | `info.description` and `tags[].description` of the domain's OpenAPI file, plus generated group and endpoint tables. |
 | `API Group` | `/domains/<domain>/<group>/overview.md` | `render_group_overview` | The markdown file's preamble (text between the H1 and `## Index`) and every non-endpoint `##` section except `Index`, `Appendix A`, `Appendix B`; appendix headings lose their `Appendix X -` prefix. Plus a generated endpoints table and the union of error codes used in the group. |
 | `API Endpoint` | `/domains/<domain>/<group>/<kebab(operationId)>.md` | `render_endpoint` | One `## N. Title` markdown section joined with one OpenAPI operation. See the section map below. |
-| `SDK Example` | `/sdk-examples/<domain>/<group>/<kebab(operationId)>.md` | `render_sdk` | `ZENESIS_OAS_SAMPLES/<domain>-grouped-api-samples.json[path][method]`, one `##` per language in the order cURL, C#, Go, Java, PHP, Python, Node.js, Ruby, Deluge. |
+| `SDK Example` | `/sdk-examples/<domain>/<group>/<kebab(operationId)>.md` | `render_sdk` | `zenesis-oas-samples/<domain>-grouped-api-samples.json[path][method]`, one `##` per language in the order cURL, C#, Go, Java, PHP, Python, Node.js, Ruby, Deluge. |
 | `Playbook` | `/workflows/<name>.md` | copy of handwritten | Hand-written multi-endpoint procedures. |
 | `Error Catalog` | `/foundations/error-codes.md` | `render_error_catalog` | Aggregated from every endpoint's Error Codes table, every OpenAPI `x-zenesis-statuscodes`, sample failure responses (for HTTP status and summary constants) and the common examples file. |
 | `Reference` (generated) | `/foundations/{error-codes-quick-reference,oauth-scopes,rate-limits-and-quotas,permission-matrix,identifiers}.md` | `render_error_quick_reference`, `render_scopes`, `render_rate_limits`, `render_permission_matrix`, `render_identifiers` | Scopes from the common file; throttles from OpenAPI `x-zenesis-security` and markdown `**Rate Limit**` rows; permissions from each endpoint's `**Permission Required**` row; identifiers from OpenAPI path and header parameters plus the `ID_SOURCES` table in the builder. |

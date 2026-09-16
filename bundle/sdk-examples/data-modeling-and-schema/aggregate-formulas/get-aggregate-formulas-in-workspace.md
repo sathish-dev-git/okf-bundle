@@ -38,12 +38,12 @@ sources:
     resource: "/references/openapi/data-modeling-schema-grouped-api.json"
     title: OpenAPI 3 specification - data-modeling-schema-grouped-api.json
     author: team:zoho-analytics-api-docs
-    last_modified: 2026-09-10T10:56:20Z
+    last_modified: 2026-09-16T12:30:51Z
   - id: endpoint-doc
     resource: "/domains/data-modeling-and-schema/aggregate-formulas/get-aggregate-formulas-in-workspace.md"
     title: Endpoint reference - Get Unified Metrics in Workspace
 generated:
-  at: 2026-09-14T17:14:34Z
+  at: 2026-09-16T12:54:00Z
 status: stable
 ---
 

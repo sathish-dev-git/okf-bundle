@@ -14,6 +14,10 @@ api:
       title: Organization Users
       doc: "/domains/users-and-groups/org-users/overview.md"
       endpoint_count: 7
+    - group: custom-roles
+      title: Custom Roles
+      doc: "/domains/users-and-groups/custom-roles/overview.md"
+      endpoint_count: 4
     - group: workspace-users
       title: Workspace Users
       doc: "/domains/users-and-groups/workspace-users/overview.md"
@@ -22,16 +26,16 @@ api:
       title: Workspace Groups
       doc: "/domains/users-and-groups/workspace-groups/overview.md"
       endpoint_count: 7
-  endpoint_count: 22
+  endpoint_count: 26
   openapi: "/references/openapi/user-groups-grouped-api.json"
 sources:
   - id: openapi-spec
     resource: "/references/openapi/user-groups-grouped-api.json"
     title: OpenAPI 3 specification - user-groups-grouped-api.json
     author: team:zoho-analytics-api-docs
-    last_modified: 2026-09-10T10:56:21Z
+    last_modified: 2026-09-16T12:54:00Z
 generated:
-  at: 2026-09-14T17:14:34Z
+  at: 2026-09-16T12:54:00Z
 status: stable
 ---
 
@@ -44,6 +48,7 @@ API for managing users and groups in Zoho Analytics — covering org-level users
 | Group | Endpoints | Description |
 |---|---|---|
 | [Organization Users](/domains/users-and-groups/org-users/overview.md) | 7 | APIs that allow the Account Admin and the Organization Admins of a Zoho Analytics organization to manage its users - listing, adding, removing, activating, deactivating and changing the org-level role of the users, and listing the users who hold the Organization Admin role. |
+| [Custom Roles](/domains/users-and-groups/custom-roles/overview.md) | 4 | APIs that allow the Account Admin and the Organization Admins of a Zoho Analytics organization to define custom roles - named permission bundles that can be granted to users in place of the built-in roles. |
 | [Workspace Users](/domains/users-and-groups/workspace-users/overview.md) | 8 | APIs that manage the users and the administrators of a single Zoho Analytics workspace - controlling who has access to the workspace, the role they hold within it, and whether that access is currently active. |
 | [Workspace Groups](/domains/users-and-groups/workspace-groups/overview.md) | 7 | APIs that manage the groups of a Zoho Analytics workspace. |
 
@@ -58,6 +63,10 @@ API for managing users and groups in Zoho Analytics — covering org-level users
 | [Deactivate Users](/domains/users-and-groups/org-users/de-activate-users.md) | PUT | `/restapi/v2/users/inactive` | `deActivateUsers` | `ZohoAnalytics.usermanagement.update` | 204 |
 | [Change User Role](/domains/users-and-groups/org-users/change-user-role.md) | PUT | `/restapi/v2/users/role` | `changeUserRole` | `ZohoAnalytics.usermanagement.update` | 204 |
 | [Get Org Admins](/domains/users-and-groups/org-users/get-org-admins.md) | GET | `/restapi/v2/orgadmins` | `getOrgAdmins` | `ZohoAnalytics.share.read` | 200 |
+| [Get Custom Roles](/domains/users-and-groups/custom-roles/get-custom-roles.md) | GET | `/restapi/v2/orgs/roles` | `getCustomRoles` | `ZohoAnalytics.usermanagement.read` | 200 |
+| [Create Custom Role](/domains/users-and-groups/custom-roles/create-custom-role.md) | POST | `/restapi/v2/orgs/roles` | `createCustomRole` | `ZohoAnalytics.usermanagement.create` | 200 |
+| [Update Custom Role](/domains/users-and-groups/custom-roles/update-custom-role.md) | PUT | `/restapi/v2/orgs/roles/{role-id}` | `updateCustomRole` | `ZohoAnalytics.usermanagement.update` | 204 |
+| [Delete Custom Role](/domains/users-and-groups/custom-roles/delete-custom-role.md) | DELETE | `/restapi/v2/orgs/roles/{role-id}` | `deleteCustomRole` | `ZohoAnalytics.usermanagement.delete` | 204 |
 | [Get Workspace Users](/domains/users-and-groups/workspace-users/get-workspace-users.md) | GET | `/restapi/v2/workspaces/{workspace-id}/users` | `getWorkspaceUsers` | `ZohoAnalytics.usermanagement.read` | 200 |
 | [Add Workspace Users](/domains/users-and-groups/workspace-users/add-workspace-users.md) | POST | `/restapi/v2/workspaces/{workspace-id}/users` | `addWorkspaceUsers` | `ZohoAnalytics.usermanagement.create` | 204 |
 | [Remove Workspace Users](/domains/users-and-groups/workspace-users/delete-workspace-users.md) | DELETE | `/restapi/v2/workspaces/{workspace-id}/users` | `deleteWorkspaceUsers` | `ZohoAnalytics.usermanagement.delete` | 204 |

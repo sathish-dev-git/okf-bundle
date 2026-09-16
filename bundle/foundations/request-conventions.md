@@ -17,7 +17,7 @@ sources:
     resource: /references/openapi
     title: OpenAPI 3 specifications (parameters, requestBody encodings)
 generated:
-  at: 2026-09-14T17:14:34Z
+  at: 2026-09-16T12:54:00Z
 status: stable
 ---
 

@@ -38,12 +38,12 @@ sources:
     resource: "/references/openapi/workspace-management-grouped-api.json"
     title: OpenAPI 3 specification - workspace-management-grouped-api.json
     author: team:zoho-analytics-api-docs
-    last_modified: 2026-09-10T10:56:21Z
+    last_modified: 2026-09-16T12:30:51Z
   - id: endpoint-doc
     resource: "/domains/workspace-management/workspace-folders/rename-folder.md"
     title: Endpoint reference - Rename Folder
 generated:
-  at: 2026-09-14T17:14:34Z
+  at: 2026-09-16T12:54:00Z
 status: stable
 ---
 

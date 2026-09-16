@@ -13,11 +13,11 @@
   },
   "counts": {
     "domains": 10,
-    "groups": 33,
-    "endpoints": 168,
-    "error_codes": 278,
+    "groups": 35,
+    "endpoints": 182,
+    "error_codes": 306,
     "oauth_scopes": 31,
-    "sdk_example_documents": 166,
+    "sdk_example_documents": 180,
     "workflow_playbooks": 8
   },
   "entry_points": {
@@ -38,6 +38,6 @@
     "note": "Content is derived from the Zoho Analytics API reference documents and OpenAPI specifications. No concept carries a verified entry yet."
   },
   "generated": {
-    "at": "2026-09-14T17:14:34Z"
+    "at": "2026-09-16T12:54:00Z"
   }
 }

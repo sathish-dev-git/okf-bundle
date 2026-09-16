@@ -47,7 +47,7 @@ sources:
     title: "Shared OpenAPI components (scopes, error envelope)"
     author: team:zoho-analytics-api-docs
 generated:
-  at: 2026-09-14T17:14:34Z
+  at: 2026-09-16T12:54:00Z
 status: stable
 ---
 
@@ -79,11 +79,11 @@ Scopes are requested during the OAuth authorization step (see [Authentication](/
 | [`ZohoAnalytics.data.delete`](#zohoanalyticsdatadelete) | Delete data from Zoho Analytics. | 1 |
 | [`ZohoAnalytics.data.all`](#zohoanalyticsdataall) | Full access to data in Zoho Analytics. | 0 |
 | [`ZohoAnalytics.modeling.read`](#zohoanalyticsmodelingread) | Read modeling objects in Zoho Analytics. | 4 |
-| [`ZohoAnalytics.modeling.create`](#zohoanalyticsmodelingcreate) | Create modeling objects in Zoho Analytics. | 24 |
-| [`ZohoAnalytics.modeling.update`](#zohoanalyticsmodelingupdate) | Update modeling objects in Zoho Analytics. | 22 |
-| [`ZohoAnalytics.modeling.delete`](#zohoanalyticsmodelingdelete) | Delete modeling objects in Zoho Analytics. | 12 |
+| [`ZohoAnalytics.modeling.create`](#zohoanalyticsmodelingcreate) | Create modeling objects in Zoho Analytics. | 27 |
+| [`ZohoAnalytics.modeling.update`](#zohoanalyticsmodelingupdate) | Update modeling objects in Zoho Analytics. | 23 |
+| [`ZohoAnalytics.modeling.delete`](#zohoanalyticsmodelingdelete) | Delete modeling objects in Zoho Analytics. | 15 |
 | [`ZohoAnalytics.modeling.all`](#zohoanalyticsmodelingall) | Full access to modeling objects in Zoho Analytics. | 0 |
-| [`ZohoAnalytics.metadata.read`](#zohoanalyticsmetadataread) | Read metadata from Zoho Analytics. | 33 |
+| [`ZohoAnalytics.metadata.read`](#zohoanalyticsmetadataread) | Read metadata from Zoho Analytics. | 36 |
 | [`ZohoAnalytics.metadata.create`](#zohoanalyticsmetadatacreate) | Create metadata in Zoho Analytics. | 2 |
 | [`ZohoAnalytics.metadata.update`](#zohoanalyticsmetadataupdate) | Update metadata in Zoho Analytics. | 9 |
 | [`ZohoAnalytics.metadata.delete`](#zohoanalyticsmetadatadelete) | Delete metadata from Zoho Analytics. | 0 |
@@ -98,10 +98,10 @@ Scopes are requested during the OAuth authorization step (see [Authentication](/
 | [`ZohoAnalytics.embed.update`](#zohoanalyticsembedupdate) | Update embedded content in Zoho Analytics. | 3 |
 | [`ZohoAnalytics.embed.delete`](#zohoanalyticsembeddelete) | Delete embedded content in Zoho Analytics. | 3 |
 | [`ZohoAnalytics.embed.all`](#zohoanalyticsembedall) | Full access to embedded content in Zoho Analytics. | 0 |
-| [`ZohoAnalytics.usermanagement.read`](#zohoanalyticsusermanagementread) | Read user management data in Zoho Analytics. | 4 |
-| [`ZohoAnalytics.usermanagement.create`](#zohoanalyticsusermanagementcreate) | Create user management data in Zoho Analytics. | 2 |
-| [`ZohoAnalytics.usermanagement.update`](#zohoanalyticsusermanagementupdate) | Update user management data in Zoho Analytics. | 5 |
-| [`ZohoAnalytics.usermanagement.delete`](#zohoanalyticsusermanagementdelete) | Delete user management data in Zoho Analytics. | 2 |
+| [`ZohoAnalytics.usermanagement.read`](#zohoanalyticsusermanagementread) | Read user management data in Zoho Analytics. | 5 |
+| [`ZohoAnalytics.usermanagement.create`](#zohoanalyticsusermanagementcreate) | Create user management data in Zoho Analytics. | 3 |
+| [`ZohoAnalytics.usermanagement.update`](#zohoanalyticsusermanagementupdate) | Update user management data in Zoho Analytics. | 6 |
+| [`ZohoAnalytics.usermanagement.delete`](#zohoanalyticsusermanagementdelete) | Delete user management data in Zoho Analytics. | 3 |
 | [`ZohoAnalytics.usermanagement.all`](#zohoanalyticsusermanagementall) | Full access to user management in Zoho Analytics. | 0 |
 | [`ZohoAnalytics.fullaccess.all`](#zohoanalyticsfullaccessall) | Full access to all Zoho Analytics features. | 0 |
 
@@ -189,6 +189,9 @@ Create modeling objects in Zoho Analytics.
 | [Restore Trash View](/domains/views-management/trash-management/restore-trash-view.md) | POST | `/restapi/v2/workspaces/{workspace-id}/trash/{view-id}` |
 | [Auto Analyse View](/domains/views-management/auto-analysis/auto-analyse-view.md) | POST | `/restapi/v2/workspaces/{workspace-id}/views/{view-id}/autoanalyse` |
 | [Auto Analyse Column](/domains/views-management/auto-analysis/auto-analyse-column.md) | POST | `/restapi/v2/workspaces/{workspace-id}/views/{view-id}/columns/{column-id}/autoanalyse` |
+| [Create Tag](/domains/views-management/tags/create-tag.md) | POST | `/restapi/v2/workspaces/{workspace-id}/tags` |
+| [Add Tag To Multiple Views](/domains/views-management/tags/add-tag-to-views.md) | POST | `/restapi/v2/workspaces/{workspace-id}/tags/{tag-id}/views` |
+| [Add Multiple Tags To View](/domains/views-management/tags/add-tags-to-view.md) | POST | `/restapi/v2/workspaces/{workspace-id}/views/{view-id}/tags` |
 | [Create Analysis View](/domains/reports-and-dashboards/reports/create-report.md) | POST | `/restapi/v2/workspaces/{workspace-id}/reports` |
 | [Create Dashboard](/domains/reports-and-dashboards/dashboards/create-dashboard.md) | POST | `/restapi/v2/workspaces/{workspace-id}/dashboards` |
 | [Create Email Schedule](/domains/schedules-and-alerts/email-schedules/create-email-schedule.md) | POST | `/restapi/v2/workspaces/{workspace-id}/emailschedules` |
@@ -222,6 +225,7 @@ Update modeling objects in Zoho Analytics.
 | [Edit Aggregate Formula](/domains/data-modeling-and-schema/aggregate-formulas/edit-aggregate-formula.md) | PUT | `/restapi/v2/workspaces/{workspace-id}/views/{view-id}/aggregateformulas/{formula-id}` |
 | [Edit Variable](/domains/data-modeling-and-schema/workspace-variables/update-variable.md) | PUT | `/restapi/v2/workspaces/{workspace-id}/variables/{variable-id}` |
 | [Rename View](/domains/views-management/view-operations/rename-view.md) | PUT | `/restapi/v2/workspaces/{workspace-id}/views/{view-id}` |
+| [Update Tag](/domains/views-management/tags/update-tag.md) | PUT | `/restapi/v2/workspaces/{workspace-id}/tags/{tag-id}` |
 | [Update Analysis View](/domains/reports-and-dashboards/reports/update-report.md) | PUT | `/restapi/v2/workspaces/{workspace-id}/reports/{view-id}` |
 | [Update Dashboard](/domains/reports-and-dashboards/dashboards/update-dashboard.md) | PUT | `/restapi/v2/workspaces/{workspace-id}/dashboards/{dashboard-id}` |
 | [Update Email Schedule](/domains/schedules-and-alerts/email-schedules/update-email-schedule.md) | PUT | `/restapi/v2/workspaces/{workspace-id}/emailschedules/{schedule-id}` |
@@ -241,6 +245,9 @@ Delete modeling objects in Zoho Analytics.
 | [Delete Variable](/domains/data-modeling-and-schema/workspace-variables/delete-variable.md) | DELETE | `/restapi/v2/workspaces/{workspace-id}/variables/{variable-id}` |
 | [Delete View](/domains/views-management/view-operations/delete-view.md) | DELETE | `/restapi/v2/workspaces/{workspace-id}/views/{view-id}` |
 | [Delete Trash View](/domains/views-management/trash-management/delete-trash-view.md) | DELETE | `/restapi/v2/workspaces/{workspace-id}/trash/{view-id}` |
+| [Delete Tag](/domains/views-management/tags/delete-tag.md) | DELETE | `/restapi/v2/workspaces/{workspace-id}/tags/{tag-id}` |
+| [Remove Tag From Multiple Views](/domains/views-management/tags/remove-tag-from-views.md) | DELETE | `/restapi/v2/workspaces/{workspace-id}/tags/{tag-id}/views` |
+| [Remove Multiple Tags From View](/domains/views-management/tags/remove-tags-from-view.md) | DELETE | `/restapi/v2/workspaces/{workspace-id}/views/{view-id}/tags` |
 | [Delete Email Schedule](/domains/schedules-and-alerts/email-schedules/delete-email-schedule.md) | DELETE | `/restapi/v2/workspaces/{workspace-id}/emailschedules/{schedule-id}` |
 | [Delete AutoML Analysis](/domains/dsml/automl/delete-auto-ml-analysis.md) | DELETE | `/restapi/v2/automl/workspaces/{workspace-id}/analysis/{analysis-id}` |
 | [Delete AutoML Analysis Model](/domains/dsml/automl/delete-auto-ml-analysis-model.md) | DELETE | `/restapi/v2/automl/workspaces/{workspace-id}/analysis/{analysis-id}/models/{model-id}` |
@@ -283,6 +290,9 @@ Read metadata from Zoho Analytics.
 | [Get View Dependents](/domains/views-management/view-operations/get-view-dependents.md) | GET | `/restapi/v2/workspaces/{workspace-id}/views/{view-id}/dependents` |
 | [Get Recent Views](/domains/views-management/view-operations/get-recent-views.md) | GET | `/restapi/v2/recentviews` |
 | [Get Trash Views](/domains/views-management/trash-management/get-trash-views.md) | GET | `/restapi/v2/workspaces/{workspace-id}/trash` |
+| [Get Tags List](/domains/views-management/tags/get-tags.md) | GET | `/restapi/v2/workspaces/{workspace-id}/tags` |
+| [Get Tagged Views](/domains/views-management/tags/get-tagged-views.md) | GET | `/restapi/v2/workspaces/{workspace-id}/tags/{tag-id}/views` |
+| [Get View Tags](/domains/views-management/tags/get-view-tags.md) | GET | `/restapi/v2/workspaces/{workspace-id}/views/{view-id}/tags` |
 | [Get All Dashboards](/domains/reports-and-dashboards/dashboards/get-dashboards.md) | GET | `/restapi/v2/dashboards` |
 | [Get Owned Dashboards](/domains/reports-and-dashboards/dashboards/get-owned-dashboards.md) | GET | `/restapi/v2/dashboards/owned` |
 | [Get Shared Dashboards](/domains/reports-and-dashboards/dashboards/get-shared-dashboards.md) | GET | `/restapi/v2/dashboards/shared` |
@@ -438,6 +448,7 @@ Read user management data in Zoho Analytics.
 | [Get Resource Details](/domains/organization-management/org-info-and-settings/get-resource-details.md) | GET | `/restapi/v2/resources` |
 | [Get Subscription Details](/domains/organization-management/org-info-and-settings/get-subscription-details.md) | GET | `/restapi/v2/subscription` |
 | [Get Users](/domains/users-and-groups/org-users/get-users.md) | GET | `/restapi/v2/users` |
+| [Get Custom Roles](/domains/users-and-groups/custom-roles/get-custom-roles.md) | GET | `/restapi/v2/orgs/roles` |
 | [Get Workspace Users](/domains/users-and-groups/workspace-users/get-workspace-users.md) | GET | `/restapi/v2/workspaces/{workspace-id}/users` |
 
 ## ZohoAnalytics.usermanagement.create
@@ -447,6 +458,7 @@ Create user management data in Zoho Analytics.
 | Operation | Method | Path |
 |---|---|---|
 | [Add Users](/domains/users-and-groups/org-users/add-users.md) | POST | `/restapi/v2/users` |
+| [Create Custom Role](/domains/users-and-groups/custom-roles/create-custom-role.md) | POST | `/restapi/v2/orgs/roles` |
 | [Add Workspace Users](/domains/users-and-groups/workspace-users/add-workspace-users.md) | POST | `/restapi/v2/workspaces/{workspace-id}/users` |
 
 ## ZohoAnalytics.usermanagement.update
@@ -458,6 +470,7 @@ Update user management data in Zoho Analytics.
 | [Activate Users](/domains/users-and-groups/org-users/activate-users.md) | PUT | `/restapi/v2/users/active` |
 | [Deactivate Users](/domains/users-and-groups/org-users/de-activate-users.md) | PUT | `/restapi/v2/users/inactive` |
 | [Change User Role](/domains/users-and-groups/org-users/change-user-role.md) | PUT | `/restapi/v2/users/role` |
+| [Update Custom Role](/domains/users-and-groups/custom-roles/update-custom-role.md) | PUT | `/restapi/v2/orgs/roles/{role-id}` |
 | [Change Workspace Users Status](/domains/users-and-groups/workspace-users/change-workspace-users-status.md) | PUT | `/restapi/v2/workspaces/{workspace-id}/users/status` |
 | [Change Workspace Users Role](/domains/users-and-groups/workspace-users/change-workspace-users-role.md) | PUT | `/restapi/v2/workspaces/{workspace-id}/users/role` |
 
@@ -468,6 +481,7 @@ Delete user management data in Zoho Analytics.
 | Operation | Method | Path |
 |---|---|---|
 | [Remove Users](/domains/users-and-groups/org-users/remove-users.md) | DELETE | `/restapi/v2/users` |
+| [Delete Custom Role](/domains/users-and-groups/custom-roles/delete-custom-role.md) | DELETE | `/restapi/v2/orgs/roles/{role-id}` |
 | [Remove Workspace Users](/domains/users-and-groups/workspace-users/delete-workspace-users.md) | DELETE | `/restapi/v2/workspaces/{workspace-id}/users` |
 
 ## ZohoAnalytics.usermanagement.all

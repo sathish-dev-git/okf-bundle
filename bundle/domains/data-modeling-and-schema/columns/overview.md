@@ -50,9 +50,9 @@ sources:
     resource: "/references/openapi/data-modeling-schema-grouped-api.json"
     title: OpenAPI 3 specification - data-modeling-schema-grouped-api.json
     author: team:zoho-analytics-api-docs
-    last_modified: 2026-09-10T10:56:20Z
+    last_modified: 2026-09-16T12:30:51Z
 generated:
-  at: 2026-09-14T17:14:34Z
+  at: 2026-09-16T12:54:00Z
 status: stable
 ---
 
@@ -165,8 +165,8 @@ All endpoints require the `Authorization: Zoho-oauthtoken <access-token>` header
 | [7439](/foundations/error-codes.md#error-7439) | 400 | The specified view is not a table. |
 | [8119](/foundations/error-codes.md#error-8119) | 400 | Invalid value for attribute. |
 | [8173](/foundations/error-codes.md#error-8173) | 400 | The number of columns sent in bulk mode exceeds the allowed limit. |
-| [8179](/foundations/error-codes.md#error-8179) | 400 | One or more non-system columns are missing from the columns array. |
-| [8180](/foundations/error-codes.md#error-8180) | 400 | One or more column IDs in the columns array do not belong to this view. |
+| [8179](/foundations/error-codes.md#error-8179) | 403 | The calling user is not an Account Admin, Organization Admin or Workspace Admin of the workspace. |
+| [8180](/foundations/error-codes.md#error-8180) | 403 | The calling user is a read-only user. Read-only users cannot change tag associations regardless of any other permission. |
 | [8182](/foundations/error-codes.md#error-8182) | 403 | resetSort and sortOrder cannot be used together. |
 
 # Related

@@ -16,6 +16,9 @@ sources:
   - id: group-org-users
     resource: "/domains/users-and-groups/org-users/overview.md"
     title: Organization Users - group overview
+  - id: group-custom-roles
+    resource: "/domains/users-and-groups/custom-roles/overview.md"
+    title: Custom Roles - group overview
   - id: group-workspace-users
     resource: "/domains/users-and-groups/workspace-users/overview.md"
     title: Workspace Users - group overview
@@ -85,6 +88,9 @@ sources:
   - id: group-auto-analysis
     resource: "/domains/views-management/auto-analysis/overview.md"
     title: Auto Analysis - group overview
+  - id: group-tags
+    resource: "/domains/views-management/tags/overview.md"
+    title: Tags - group overview
   - id: group-reports
     resource: "/domains/reports-and-dashboards/reports/overview.md"
     title: Reports (Analysis Views) - group overview
@@ -113,54 +119,54 @@ sources:
     resource: "/references/openapi/org-management-grouped-api.json"
     title: OpenAPI 3 specification - org-management-grouped-api.json
     author: team:zoho-analytics-api-docs
-    last_modified: 2026-09-10T10:56:20Z
+    last_modified: 2026-09-16T12:30:51Z
   - id: openapi-spec
     resource: "/references/openapi/user-groups-grouped-api.json"
     title: OpenAPI 3 specification - user-groups-grouped-api.json
     author: team:zoho-analytics-api-docs
-    last_modified: 2026-09-10T10:56:21Z
+    last_modified: 2026-09-16T12:54:00Z
   - id: openapi-spec
     resource: "/references/openapi/workspace-management-grouped-api.json"
     title: OpenAPI 3 specification - workspace-management-grouped-api.json
     author: team:zoho-analytics-api-docs
-    last_modified: 2026-09-10T10:56:21Z
+    last_modified: 2026-09-16T12:30:51Z
   - id: openapi-spec
     resource: "/references/openapi/data-modeling-schema-grouped-api.json"
     title: OpenAPI 3 specification - data-modeling-schema-grouped-api.json
     author: team:zoho-analytics-api-docs
-    last_modified: 2026-09-10T10:56:20Z
+    last_modified: 2026-09-16T12:30:51Z
   - id: openapi-spec
     resource: "/references/openapi/data-operations-grouped-api.json"
     title: OpenAPI 3 specification - data-operations-grouped-api.json
     author: team:zoho-analytics-api-docs
-    last_modified: 2026-09-10T10:56:20Z
+    last_modified: 2026-09-16T12:30:51Z
   - id: openapi-spec
     resource: "/references/openapi/views-management-grouped-api.json"
     title: OpenAPI 3 specification - views-management-grouped-api.json
     author: team:zoho-analytics-api-docs
-    last_modified: 2026-09-10T10:56:21Z
+    last_modified: 2026-09-16T12:30:51Z
   - id: openapi-spec
     resource: "/references/openapi/reports-dashboards-grouped-api.json"
     title: OpenAPI 3 specification - reports-dashboards-grouped-api.json
     author: team:zoho-analytics-api-docs
-    last_modified: 2026-09-10T10:56:20Z
+    last_modified: 2026-09-16T12:30:51Z
   - id: openapi-spec
     resource: "/references/openapi/share-publish-grouped-api.json"
     title: OpenAPI 3 specification - share-publish-grouped-api.json
     author: team:zoho-analytics-api-docs
-    last_modified: 2026-09-10T10:56:21Z
+    last_modified: 2026-09-16T12:30:51Z
   - id: openapi-spec
     resource: "/references/openapi/schedules-alerts-grouped-api.json"
     title: OpenAPI 3 specification - schedules-alerts-grouped-api.json
     author: team:zoho-analytics-api-docs
-    last_modified: 2026-09-10T10:56:21Z
+    last_modified: 2026-09-16T12:30:51Z
   - id: openapi-spec
     resource: "/references/openapi/dsml-grouped-api.json"
     title: OpenAPI 3 specification - dsml-grouped-api.json
     author: team:zoho-analytics-api-docs
-    last_modified: 2026-09-10T10:56:20Z
+    last_modified: 2026-09-16T12:30:51Z
 generated:
-  at: 2026-09-14T17:14:34Z
+  at: 2026-09-16T12:54:00Z
 status: stable
 ---
 

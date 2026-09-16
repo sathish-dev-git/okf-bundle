@@ -38,12 +38,12 @@ sources:
     resource: "/references/openapi/user-groups-grouped-api.json"
     title: OpenAPI 3 specification - user-groups-grouped-api.json
     author: team:zoho-analytics-api-docs
-    last_modified: 2026-09-10T10:56:21Z
+    last_modified: 2026-09-16T12:54:00Z
   - id: endpoint-doc
     resource: "/domains/users-and-groups/workspace-users/change-workspace-users-status.md"
     title: Endpoint reference - Change Workspace Users Status
 generated:
-  at: 2026-09-14T17:14:34Z
+  at: 2026-09-16T12:54:00Z
 status: stable
 ---
 

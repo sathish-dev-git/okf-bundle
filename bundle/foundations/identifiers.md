@@ -13,54 +13,54 @@ sources:
     resource: "/references/openapi/org-management-grouped-api.json"
     title: OpenAPI 3 specification - org-management-grouped-api.json
     author: team:zoho-analytics-api-docs
-    last_modified: 2026-09-10T10:56:20Z
+    last_modified: 2026-09-16T12:30:51Z
   - id: openapi-spec
     resource: "/references/openapi/user-groups-grouped-api.json"
     title: OpenAPI 3 specification - user-groups-grouped-api.json
     author: team:zoho-analytics-api-docs
-    last_modified: 2026-09-10T10:56:21Z
+    last_modified: 2026-09-16T12:54:00Z
   - id: openapi-spec
     resource: "/references/openapi/workspace-management-grouped-api.json"
     title: OpenAPI 3 specification - workspace-management-grouped-api.json
     author: team:zoho-analytics-api-docs
-    last_modified: 2026-09-10T10:56:21Z
+    last_modified: 2026-09-16T12:30:51Z
   - id: openapi-spec
     resource: "/references/openapi/data-modeling-schema-grouped-api.json"
     title: OpenAPI 3 specification - data-modeling-schema-grouped-api.json
     author: team:zoho-analytics-api-docs
-    last_modified: 2026-09-10T10:56:20Z
+    last_modified: 2026-09-16T12:30:51Z
   - id: openapi-spec
     resource: "/references/openapi/data-operations-grouped-api.json"
     title: OpenAPI 3 specification - data-operations-grouped-api.json
     author: team:zoho-analytics-api-docs
-    last_modified: 2026-09-10T10:56:20Z
+    last_modified: 2026-09-16T12:30:51Z
   - id: openapi-spec
     resource: "/references/openapi/views-management-grouped-api.json"
     title: OpenAPI 3 specification - views-management-grouped-api.json
     author: team:zoho-analytics-api-docs
-    last_modified: 2026-09-10T10:56:21Z
+    last_modified: 2026-09-16T12:30:51Z
   - id: openapi-spec
     resource: "/references/openapi/reports-dashboards-grouped-api.json"
     title: OpenAPI 3 specification - reports-dashboards-grouped-api.json
     author: team:zoho-analytics-api-docs
-    last_modified: 2026-09-10T10:56:20Z
+    last_modified: 2026-09-16T12:30:51Z
   - id: openapi-spec
     resource: "/references/openapi/share-publish-grouped-api.json"
     title: OpenAPI 3 specification - share-publish-grouped-api.json
     author: team:zoho-analytics-api-docs
-    last_modified: 2026-09-10T10:56:21Z
+    last_modified: 2026-09-16T12:30:51Z
   - id: openapi-spec
     resource: "/references/openapi/schedules-alerts-grouped-api.json"
     title: OpenAPI 3 specification - schedules-alerts-grouped-api.json
     author: team:zoho-analytics-api-docs
-    last_modified: 2026-09-10T10:56:21Z
+    last_modified: 2026-09-16T12:30:51Z
   - id: openapi-spec
     resource: "/references/openapi/dsml-grouped-api.json"
     title: OpenAPI 3 specification - dsml-grouped-api.json
     author: team:zoho-analytics-api-docs
-    last_modified: 2026-09-10T10:56:20Z
+    last_modified: 2026-09-16T12:30:51Z
 generated:
-  at: 2026-09-14T17:14:34Z
+  at: 2026-09-16T12:54:00Z
 status: stable
 ---
 
@@ -82,7 +82,7 @@ All identifiers are numeric but are transmitted as **strings** (JSON strings in 
 
 - **Obtained from:** [Get Org List](/domains/organization-management/org-info-and-settings/get-organizations.md), [Get Meta Details From Name](/domains/organization-management/org-info-and-settings/get-meta-details.md).
 
-- **Used by:** 161 operations, for example [Get Resource Details](/domains/organization-management/org-info-and-settings/get-resource-details.md), [Get Subscription Details](/domains/organization-management/org-info-and-settings/get-subscription-details.md), [Get Meta Details From Name](/domains/organization-management/org-info-and-settings/get-meta-details.md), [Get Users](/domains/users-and-groups/org-users/get-users.md), [Add Users](/domains/users-and-groups/org-users/add-users.md), [Remove Users](/domains/users-and-groups/org-users/remove-users.md), and others.
+- **Used by:** 175 operations, for example [Get Resource Details](/domains/organization-management/org-info-and-settings/get-resource-details.md), [Get Subscription Details](/domains/organization-management/org-info-and-settings/get-subscription-details.md), [Get Meta Details From Name](/domains/organization-management/org-info-and-settings/get-meta-details.md), [Get Users](/domains/users-and-groups/org-users/get-users.md), [Add Users](/domains/users-and-groups/org-users/add-users.md), [Remove Users](/domains/users-and-groups/org-users/remove-users.md), and others.
 
 ## ZANALYTICS-DEST-ORGID
 
@@ -102,7 +102,7 @@ All identifiers are numeric but are transmitted as **strings** (JSON strings in 
 
 - **Obtained from:** [Get Meta Details From Name](/domains/organization-management/org-info-and-settings/get-meta-details.md), [Get All Workspace List](/domains/workspace-management/workspace-operations/get-all-workspaces.md), [Get Owned Workspace List](/domains/workspace-management/workspace-operations/get-owned-workspaces.md), [Get Shared Workspace List](/domains/workspace-management/workspace-operations/get-shared-workspaces.md), [Create Workspace](/domains/workspace-management/workspace-operations/create-workspace.md).
 
-- **Used by:** 145 operations, for example [Get Workspace Users](/domains/users-and-groups/workspace-users/get-workspace-users.md), [Add Workspace Users](/domains/users-and-groups/workspace-users/add-workspace-users.md), [Remove Workspace Users](/domains/users-and-groups/workspace-users/delete-workspace-users.md), [Change Workspace Users Status](/domains/users-and-groups/workspace-users/change-workspace-users-status.md), [Change Workspace Users Role](/domains/users-and-groups/workspace-users/change-workspace-users-role.md), [Get Workspace Admins](/domains/users-and-groups/workspace-users/get-workspace-admins.md), and others.
+- **Used by:** 155 operations, for example [Get Workspace Users](/domains/users-and-groups/workspace-users/get-workspace-users.md), [Add Workspace Users](/domains/users-and-groups/workspace-users/add-workspace-users.md), [Remove Workspace Users](/domains/users-and-groups/workspace-users/delete-workspace-users.md), [Change Workspace Users Status](/domains/users-and-groups/workspace-users/change-workspace-users-status.md), [Change Workspace Users Role](/domains/users-and-groups/workspace-users/change-workspace-users-role.md), [Get Workspace Admins](/domains/users-and-groups/workspace-users/get-workspace-admins.md), and others.
 
 ## view-id
 
@@ -112,7 +112,7 @@ All identifiers are numeric but are transmitted as **strings** (JSON strings in 
 
 - **Obtained from:** [Get Meta Details From Name](/domains/organization-management/org-info-and-settings/get-meta-details.md), [Get View List](/domains/views-management/view-operations/get-views.md), [Create Table](/domains/data-modeling-and-schema/table-and-schema/create-table.md), [Create Query Table](/domains/data-modeling-and-schema/query-tables/create-query-table.md), [Import Data into a New Table (Synchronous)](/domains/data-operations/sync-data-import/import-data-new-table.md), [Create Analysis View](/domains/reports-and-dashboards/reports/create-report.md), [Create Dashboard](/domains/reports-and-dashboards/dashboards/create-dashboard.md).
 
-- **Used by:** 55 operations, for example [Get Table Metadata](/domains/data-modeling-and-schema/table-and-schema/get-table-metadata.md), [Add Column](/domains/data-modeling-and-schema/columns/add-column.md), [Rename Column](/domains/data-modeling-and-schema/columns/rename-column.md), [Delete Column](/domains/data-modeling-and-schema/columns/delete-column.md), [Hide Columns](/domains/data-modeling-and-schema/columns/hide-columns.md), [Show Columns](/domains/data-modeling-and-schema/columns/show-columns.md), and others.
+- **Used by:** 58 operations, for example [Get Table Metadata](/domains/data-modeling-and-schema/table-and-schema/get-table-metadata.md), [Add Column](/domains/data-modeling-and-schema/columns/add-column.md), [Rename Column](/domains/data-modeling-and-schema/columns/rename-column.md), [Delete Column](/domains/data-modeling-and-schema/columns/delete-column.md), [Hide Columns](/domains/data-modeling-and-schema/columns/hide-columns.md), [Show Columns](/domains/data-modeling-and-schema/columns/show-columns.md), and others.
 
 ## column-id
 
@@ -249,6 +249,16 @@ All identifiers are numeric but are transmitted as **strings** (JSON strings in 
 - **What it is:** Custom role ID
 - **Where it is sent:** URL path segment `{role-id}`.
 - **OpenAPI description:** ID of the custom role.
+
+- **Used by:** 2 operations, for example [Update Custom Role](/domains/users-and-groups/custom-roles/update-custom-role.md), [Delete Custom Role](/domains/users-and-groups/custom-roles/delete-custom-role.md).
+
+## tag-id
+
+- **What it is:** ID of the tag.
+- **Where it is sent:** URL path segment `{tag-id}`.
+- **OpenAPI description:** ID of the tag.
+
+- **Used by:** 5 operations, for example [Get Tagged Views](/domains/views-management/tags/get-tagged-views.md), [Update Tag](/domains/views-management/tags/update-tag.md), [Delete Tag](/domains/views-management/tags/delete-tag.md), [Add Tag To Multiple Views](/domains/views-management/tags/add-tag-to-views.md), [Remove Tag From Multiple Views](/domains/views-management/tags/remove-tag-from-views.md).
 
 ## dashboard-id
 

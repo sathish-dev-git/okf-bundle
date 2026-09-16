@@ -24,6 +24,10 @@
       "description": "APIs to mark a view as a favorite for the authenticated user and to remove it from the favorites list. The favorite status is stored per user."
     },
     {
+      "name": "Tags",
+      "description": "APIs to create, update, delete and list the tags of a workspace, and to attach those tags to views. A tag is a workspace-scoped label with a name and a hex colour code, used to organise tables, reports, dashboards and other views. Tags carry no permissions - attaching one neither grants nor restricts access. The tag-side APIs attach or detach one tag across many views and require workspace administration; the view-side APIs attach or detach many tags on a single view and are also open to the view owner and to users with Edit Design permission. A view can carry at most 10 tags."
+    },
+    {
       "name": "Trash Management",
       "description": "APIs to list the views available in the trash of a workspace, restore a trashed view back to the workspace, and permanently delete a view from the trash."
     }
@@ -184,7 +188,7 @@
               }
             ]
           },
-                    "4XX": {
+          "4XX": {
             "$ref": "https://raw.githubusercontent.com/sathish-dev-git/Temp/refs/heads/master/zoho-analytics-api-common.json#/components/responses/CommonErrorResponse"
           },
           "500": {
@@ -411,7 +415,7 @@
               }
             ]
           },
-                    "4XX": {
+          "4XX": {
             "$ref": "https://raw.githubusercontent.com/sathish-dev-git/Temp/refs/heads/master/zoho-analytics-api-common.json#/components/responses/CommonErrorResponse"
           },
           "500": {
@@ -550,7 +554,7 @@
               }
             ]
           },
-                    "4XX": {
+          "4XX": {
             "$ref": "https://raw.githubusercontent.com/sathish-dev-git/Temp/refs/heads/master/zoho-analytics-api-common.json#/components/responses/CommonErrorResponse"
           },
           "500": {
@@ -689,7 +693,7 @@
               }
             ]
           },
-                    "4XX": {
+          "4XX": {
             "$ref": "https://raw.githubusercontent.com/sathish-dev-git/Temp/refs/heads/master/zoho-analytics-api-common.json#/components/responses/CommonErrorResponse"
           },
           "500": {
@@ -802,7 +806,7 @@
               }
             ]
           },
-                    "4XX": {
+          "4XX": {
             "$ref": "https://raw.githubusercontent.com/sathish-dev-git/Temp/refs/heads/master/zoho-analytics-api-common.json#/components/responses/CommonErrorResponse"
           },
           "500": {
@@ -1014,7 +1018,7 @@
               }
             ]
           },
-                    "4XX": {
+          "4XX": {
             "$ref": "https://raw.githubusercontent.com/sathish-dev-git/Temp/refs/heads/master/zoho-analytics-api-common.json#/components/responses/CommonErrorResponse"
           },
           "500": {
@@ -1362,7 +1366,7 @@
               }
             ]
           },
-                    "4XX": {
+          "4XX": {
             "$ref": "https://raw.githubusercontent.com/sathish-dev-git/Temp/refs/heads/master/zoho-analytics-api-common.json#/components/responses/CommonErrorResponse"
           },
           "500": {
@@ -1535,7 +1539,7 @@
               }
             ]
           },
-                    "4XX": {
+          "4XX": {
             "$ref": "https://raw.githubusercontent.com/sathish-dev-git/Temp/refs/heads/master/zoho-analytics-api-common.json#/components/responses/CommonErrorResponse"
           },
           "500": {
@@ -1696,7 +1700,7 @@
               }
             ]
           },
-                    "4XX": {
+          "4XX": {
             "$ref": "https://raw.githubusercontent.com/sathish-dev-git/Temp/refs/heads/master/zoho-analytics-api-common.json#/components/responses/CommonErrorResponse"
           },
           "500": {
@@ -1841,7 +1845,7 @@
               }
             ]
           },
-                    "4XX": {
+          "4XX": {
             "$ref": "https://raw.githubusercontent.com/sathish-dev-git/Temp/refs/heads/master/zoho-analytics-api-common.json#/components/responses/CommonErrorResponse"
           },
           "500": {
@@ -1959,7 +1963,7 @@
               }
             ]
           },
-                    "4XX": {
+          "4XX": {
             "$ref": "https://raw.githubusercontent.com/sathish-dev-git/Temp/refs/heads/master/zoho-analytics-api-common.json#/components/responses/CommonErrorResponse"
           },
           "500": {
@@ -2104,7 +2108,7 @@
               }
             ]
           },
-                    "4XX": {
+          "4XX": {
             "$ref": "https://raw.githubusercontent.com/sathish-dev-git/Temp/refs/heads/master/zoho-analytics-api-common.json#/components/responses/CommonErrorResponse"
           },
           "500": {
@@ -2179,7 +2183,7 @@
               }
             ]
           },
-                    "4XX": {
+          "4XX": {
             "$ref": "https://raw.githubusercontent.com/sathish-dev-git/Temp/refs/heads/master/zoho-analytics-api-common.json#/components/responses/CommonErrorResponse"
           },
           "500": {
@@ -2252,7 +2256,1488 @@
               }
             ]
           },
-                    "4XX": {
+          "4XX": {
+            "$ref": "https://raw.githubusercontent.com/sathish-dev-git/Temp/refs/heads/master/zoho-analytics-api-common.json#/components/responses/CommonErrorResponse"
+          },
+          "500": {
+            "$ref": "https://raw.githubusercontent.com/sathish-dev-git/Temp/refs/heads/master/zoho-analytics-api-common.json#/components/responses/UnexpectedErrorResponse"
+          }
+        }
+      }
+    },
+    "/restapi/v2/workspaces/{workspace-id}/tags": {
+      "get": {
+        "tags": [
+          "Tags"
+        ],
+        "x-zenesis-title": "Get Tags List",
+        "summary": "Get Tags List",
+        "description": "Returns every tag that exists in the workspace, with its identifier, name and colour code.\n\nA tag is listed whether or not it is attached to any view. To find out which views a tag labels, use the Get Tagged Views API. Every user who can open the workspace can read the list, including shared users on custom roles.",
+        "operationId": "getTags",
+        "parameters": [
+          {
+            "$ref": "#/components/parameters/org-id"
+          },
+          {
+            "$ref": "#/components/parameters/workspace-id"
+          }
+        ],
+        "security": [
+          {
+            "iam-oauth2-schema": [
+              "ZohoAnalytics.metadata.read"
+            ]
+          }
+        ],
+        "x-zenesis-sections": {
+          "apiRequestParameters": {
+            "1": {
+              "type": "editor",
+              "value": "<blockquote>Note:<br>\n<span style=\"font-weight:normal;\">\n<ul>\n<li>Any user with access to the workspace can invoke this API - Account Admins, Organization Admins, Workspace Admins and every shared user, including users holding a custom role.</li>\n<li>This API lists tags, not associations. A tag appears here whether or not it is attached to a view. Use the Get Tagged Views API to find out what a tag labels.</li>\n<li>The <b>id</b> values returned here are the tag-id path parameter of the Update Tag, Delete Tag, Get Tagged Views, Add Tag To Multiple Views and Remove Tag From Multiple Views APIs, and the <b>tagIds</b> entries of the Add Multiple Tags To View and Remove Multiple Tags From View APIs.</li>\n<li>There is no lookup-by-name API. To resolve a tag name to an identifier, list the tags and match client-side.</li>\n<li>The list is not paginated and its order is not guaranteed. Sort client-side if presentation order matters.</li>\n<li>An empty <b>tags</b> array is a success, not an error. It means the workspace has no tags yet.</li>\n<li>This API is available in Client Portal (White Label) contexts, subject to the same permissions.</li>\n</ul>\n</span></blockquote>"
+            }
+          }
+        },
+        "responses": {
+          "200": {
+            "description": "OK. The tags defined in the workspace.",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/GetTagsResponse"
+                },
+                "examples": {
+                  "workspaceTags": {
+                    "description": "Workspace tags",
+                    "summary": "Workspace holding four tags. Two of them share the same colour - colours are not unique.",
+                    "value": {
+                      "status": "success",
+                      "summary": "Get tags",
+                      "data": {
+                        "tags": [
+                          {
+                            "id": "320873000000425158",
+                            "name": "Finance",
+                            "colorCode": "#e72d35"
+                          },
+                          {
+                            "id": "320873000000419779",
+                            "name": "Quarterly Review",
+                            "colorCode": "#f5a623"
+                          },
+                          {
+                            "id": "320873000000421641",
+                            "name": "Marketing",
+                            "colorCode": "#55acee"
+                          },
+                          {
+                            "id": "320873000000424199",
+                            "name": "Deprecated",
+                            "colorCode": "#f5a623"
+                          }
+                        ]
+                      }
+                    }
+                  },
+                  "noTags": {
+                    "description": "No tags",
+                    "summary": "Workspace in which no tag has been created yet. An empty array is a success.",
+                    "value": {
+                      "status": "success",
+                      "summary": "Get tags",
+                      "data": {
+                        "tags": []
+                      }
+                    }
+                  }
+                }
+              }
+            },
+            "x-zenesis-statuscodes": [
+              {
+                "name": "7103",
+                "description": "Workspace not found.",
+                "resolution": "Verify that the workspace-id in the URL is correct and accessible."
+              },
+              {
+                "name": "7301",
+                "description": "The calling user has no access to the workspace.",
+                "resolution": "Ensure the workspace is shared with the calling user."
+              },
+              {
+                "name": "7390",
+                "description": "The workspace does not belong to the organization in the ZANALYTICS-ORGID header.",
+                "resolution": "Send the organization ID that owns the workspace."
+              },
+              {
+                "name": "8083",
+                "description": "The ZANALYTICS-ORGID header is missing.",
+                "resolution": "Add the ZANALYTICS-ORGID header to the request."
+              },
+              {
+                "name": "8535",
+                "description": "Invalid or expired OAuth token.",
+                "resolution": "Provide a valid token with the ZohoAnalytics.metadata.read scope."
+              }
+            ]
+          },
+          "4XX": {
+            "$ref": "https://raw.githubusercontent.com/sathish-dev-git/Temp/refs/heads/master/zoho-analytics-api-common.json#/components/responses/CommonErrorResponse"
+          },
+          "500": {
+            "$ref": "https://raw.githubusercontent.com/sathish-dev-git/Temp/refs/heads/master/zoho-analytics-api-common.json#/components/responses/UnexpectedErrorResponse"
+          }
+        }
+      },
+      "post": {
+        "tags": [
+          "Tags"
+        ],
+        "x-zenesis-title": "Create Tag",
+        "summary": "Create Tag",
+        "description": "Creates one tag in the workspace and returns its identifier.\n\nBoth name and colorCode are mandatory. A created tag labels nothing until it is attached to views with the Add Tag To Multiple Views or Add Multiple Tags To View API. The tag name must be unique within the workspace - the same name may exist in another workspace as an unrelated tag.",
+        "operationId": "createTag",
+        "parameters": [
+          {
+            "$ref": "#/components/parameters/org-id"
+          },
+          {
+            "$ref": "#/components/parameters/workspace-id"
+          }
+        ],
+        "requestBody": {
+          "required": true,
+          "content": {
+            "application/x-www-form-urlencoded": {
+              "schema": {
+                "type": "object",
+                "required": [
+                  "CONFIG"
+                ],
+                "properties": {
+                  "CONFIG": {
+                    "$ref": "#/components/schemas/CreateTagConfig"
+                  }
+                }
+              },
+              "encoding": {
+                "CONFIG": {
+                  "contentType": "application/json"
+                }
+              },
+              "examples": {
+                "sixDigitColour": {
+                  "description": "Six-digit colour",
+                  "summary": "Creates a tag with a six-digit hex colour.",
+                  "value": {
+                    "CONFIG": {
+                      "name": "Finance",
+                      "colorCode": "#1da043"
+                    }
+                  }
+                },
+                "threeDigitColour": {
+                  "description": "Three-digit colour",
+                  "summary": "Creates a tag using the short three-digit hex form.",
+                  "value": {
+                    "CONFIG": {
+                      "name": "Deprecated",
+                      "colorCode": "#f90"
+                    }
+                  }
+                },
+                "sharedColour": {
+                  "description": "Shared colour",
+                  "summary": "Creates a second tag that reuses a colour already used by another tag. Names must differ; colours need not.",
+                  "value": {
+                    "CONFIG": {
+                      "name": "Quarterly Review",
+                      "colorCode": "#f5a623"
+                    }
+                  }
+                }
+              }
+            }
+          }
+        },
+        "security": [
+          {
+            "iam-oauth2-schema": [
+              "ZohoAnalytics.modeling.create"
+            ]
+          }
+        ],
+        "x-zenesis-sections": {
+          "apiRequestParameters": {
+            "1": {
+              "type": "editor",
+              "value": "<blockquote>Note:<br>\n<span style=\"font-weight:normal;\">\n<ul>\n<li>The calling user must be an Account Admin, Organization Admin or Workspace Admin of the workspace. Any other user fails with error code <b>8179</b>.</li>\n<li>Both <b>name</b> and <b>colorCode</b> are mandatory, unlike the Update Tag API which accepts either one alone. A missing attribute fails with error code <b>8079</b>.</li>\n<li><b>name</b> is limited to 100 characters and must be unique within the workspace. A duplicate fails with error code <b>8174</b> - this API is not an upsert and does not return the existing tag. Read the Get Tags List API first if a script must be re-runnable.</li>\n<li><b>colorCode</b> must be a hex colour in the form <b>#RRGGBB</b> or <b>#RGB</b>, case-insensitive. Colour keywords, rgb() notation, values with an alpha channel and values without the leading # fail with error code <b>8509</b>. Colours need not be unique.</li>\n<li>The response key is <b>tagId</b>. The read APIs return the same value as <b>id</b> - the two names refer to the same identifier.</li>\n<li>A created tag labels nothing. Creation and association are separate steps - follow with the Add Tag To Multiple Views or Add Multiple Tags To View API.</li>\n<li>One tag is created per call. There is no bulk-create variant.</li>\n<li>The success <b>summary</b> is \"Create Tag\" with a capital T, unlike the lower-case summaries of the read APIs. Do not branch on summary text.</li>\n</ul>\n</span></blockquote>"
+            }
+          }
+        },
+        "responses": {
+          "200": {
+            "description": "OK. The tag was created.",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/CreateTagResponse"
+                },
+                "examples": {
+                  "tagCreated": {
+                    "description": "Tag created",
+                    "summary": "Returns the identifier of the newly created tag. This is the only place the identifier is returned on creation.",
+                    "value": {
+                      "status": "success",
+                      "summary": "Create Tag",
+                      "data": {
+                        "tagId": "320873000000425158"
+                      }
+                    }
+                  }
+                }
+              }
+            },
+            "x-zenesis-statuscodes": [
+              {
+                "name": "7103",
+                "description": "Workspace not found.",
+                "resolution": "Verify that the workspace-id in the URL is correct and accessible."
+              },
+              {
+                "name": "7301",
+                "description": "The calling user has no access to the workspace.",
+                "resolution": "Ensure the workspace is shared with the calling user."
+              },
+              {
+                "name": "7390",
+                "description": "The workspace does not belong to the organization in the ZANALYTICS-ORGID header.",
+                "resolution": "Send the organization ID that owns the workspace."
+              },
+              {
+                "name": "8079",
+                "description": "name or colorCode is missing from CONFIG. The error message names the attribute.",
+                "resolution": "Send both name and colorCode - both are mandatory."
+              },
+              {
+                "name": "8083",
+                "description": "The ZANALYTICS-ORGID header is missing.",
+                "resolution": "Add the ZANALYTICS-ORGID header to the request."
+              },
+              {
+                "name": "8174",
+                "description": "A tag with the given name already exists in this workspace. Tag names must be unique within a workspace.",
+                "resolution": "Choose a different name, or reuse the identifier of the existing tag."
+              },
+              {
+                "name": "8179",
+                "description": "The calling user is not an Account Admin, Organization Admin or Workspace Admin of the workspace.",
+                "resolution": "Call the API as an administrator of the workspace."
+              },
+              {
+                "name": "8504",
+                "description": "CONFIG was not sent.",
+                "resolution": "Send a CONFIG object."
+              },
+              {
+                "name": "8507",
+                "description": "name exceeds 100 characters.",
+                "resolution": "Shorten the tag name."
+              },
+              {
+                "name": "8509",
+                "description": "colorCode is not a valid hex colour.",
+                "resolution": "Send the colour as #RRGGBB or #RGB."
+              },
+              {
+                "name": "8535",
+                "description": "Invalid or expired OAuth token.",
+                "resolution": "Provide a valid token with the ZohoAnalytics.modeling.create scope."
+              }
+            ]
+          },
+          "4XX": {
+            "$ref": "https://raw.githubusercontent.com/sathish-dev-git/Temp/refs/heads/master/zoho-analytics-api-common.json#/components/responses/CommonErrorResponse"
+          },
+          "500": {
+            "$ref": "https://raw.githubusercontent.com/sathish-dev-git/Temp/refs/heads/master/zoho-analytics-api-common.json#/components/responses/UnexpectedErrorResponse"
+          }
+        }
+      }
+    },
+    "/restapi/v2/workspaces/{workspace-id}/tags/{tag-id}": {
+      "put": {
+        "tags": [
+          "Tags"
+        ],
+        "x-zenesis-title": "Update Tag",
+        "summary": "Update Tag",
+        "description": "Renames a tag, recolours it, or does both in one call.\n\nThis is a genuine partial update - the attribute that is omitted keeps its stored value. Associations are never touched: every view tagged before the update is still tagged after it.",
+        "operationId": "updateTag",
+        "parameters": [
+          {
+            "$ref": "#/components/parameters/org-id"
+          },
+          {
+            "$ref": "#/components/parameters/workspace-id"
+          },
+          {
+            "$ref": "#/components/parameters/tag-id"
+          }
+        ],
+        "requestBody": {
+          "required": true,
+          "content": {
+            "application/x-www-form-urlencoded": {
+              "schema": {
+                "type": "object",
+                "required": [
+                  "CONFIG"
+                ],
+                "properties": {
+                  "CONFIG": {
+                    "$ref": "#/components/schemas/UpdateTagConfig"
+                  }
+                }
+              },
+              "encoding": {
+                "CONFIG": {
+                  "contentType": "application/json"
+                }
+              },
+              "examples": {
+                "renameAndRecolour": {
+                  "description": "Rename and recolour",
+                  "summary": "Changes the name and the colour of the tag in one call.",
+                  "value": {
+                    "CONFIG": {
+                      "name": "Finance - Archive",
+                      "colorCode": "#e72d35"
+                    }
+                  }
+                },
+                "recolourOnly": {
+                  "description": "Recolour only",
+                  "summary": "Changes the colour and keeps the current name.",
+                  "value": {
+                    "CONFIG": {
+                      "colorCode": "#1da043"
+                    }
+                  }
+                },
+                "renameOnly": {
+                  "description": "Rename only",
+                  "summary": "Changes the name and keeps the current colour.",
+                  "value": {
+                    "CONFIG": {
+                      "name": "Finance_Archive"
+                    }
+                  }
+                }
+              }
+            }
+          }
+        },
+        "security": [
+          {
+            "iam-oauth2-schema": [
+              "ZohoAnalytics.modeling.update"
+            ]
+          }
+        ],
+        "x-zenesis-sections": {
+          "apiRequestParameters": {
+            "1": {
+              "type": "editor",
+              "value": "<blockquote>Note:<br>\n<span style=\"font-weight:normal;\">\n<ul>\n<li>The calling user must be an Account Admin, Organization Admin or Workspace Admin of the workspace. Any other user fails with error code <b>8179</b>.</li>\n<li>At least one of <b>name</b> or <b>colorCode</b> must be present. A CONFIG carrying neither, or both empty, fails with error code <b>8182</b>. Despite the wording of its message, <b>8182</b> means there is nothing to update - a real permission failure surfaces as <b>8179</b>.</li>\n<li>This is a genuine partial update. The attribute that is omitted is preserved, not reset - unlike most other V2 update APIs, which replace the whole definition.</li>\n<li>The new <b>name</b> is limited to 100 characters and must be unique within the workspace - renaming onto an existing name fails with error code <b>8174</b>. Renaming a tag to the name it already holds succeeds.</li>\n<li><b>colorCode</b> must be a hex colour in the form <b>#RRGGBB</b> or <b>#RGB</b>, otherwise error code <b>8509</b>.</li>\n<li>Associations are untouched. Every view tagged before the update is still tagged after it, because the link is by identifier.</li>\n<li>The tag-id in the request URI must belong to the workspace in the request URI. Tags are workspace-scoped, and a tag from another workspace fails with error code <b>8187</b>.</li>\n<li>The API returns HTTP 204 No Content with an empty body on success. Read the new values back with the Get Tags List API.</li>\n</ul>\n</span></blockquote>"
+            }
+          }
+        },
+        "responses": {
+          "204": {
+            "description": "No Content. The tag was updated.",
+            "x-zenesis-statuscodes": [
+              {
+                "name": "7103",
+                "description": "Workspace not found.",
+                "resolution": "Verify that the workspace-id in the URL is correct and accessible."
+              },
+              {
+                "name": "7301",
+                "description": "The calling user has no access to the workspace.",
+                "resolution": "Ensure the workspace is shared with the calling user."
+              },
+              {
+                "name": "7390",
+                "description": "The workspace does not belong to the organization in the ZANALYTICS-ORGID header.",
+                "resolution": "Send the organization ID that owns the workspace."
+              },
+              {
+                "name": "8083",
+                "description": "The ZANALYTICS-ORGID header is missing.",
+                "resolution": "Add the ZANALYTICS-ORGID header to the request."
+              },
+              {
+                "name": "8174",
+                "description": "A tag with the given name already exists in this workspace. Tag names must be unique within a workspace.",
+                "resolution": "Choose a different name, or reuse the identifier of the existing tag."
+              },
+              {
+                "name": "8179",
+                "description": "The calling user is not an Account Admin, Organization Admin or Workspace Admin of the workspace.",
+                "resolution": "Call the API as an administrator of the workspace."
+              },
+              {
+                "name": "8182",
+                "description": "The CONFIG contained neither name nor colorCode, so there is nothing to update. Despite its wording, this is not a permission error.",
+                "resolution": "Send at least one of name or colorCode."
+              },
+              {
+                "name": "8185",
+                "description": "The operation matched no tag row.",
+                "resolution": "Verify the tag-id using the Get Tags List API."
+              },
+              {
+                "name": "8187",
+                "description": "The tag does not exist in this workspace.",
+                "resolution": "Verify the tag-id using the Get Tags List API."
+              },
+              {
+                "name": "8504",
+                "description": "CONFIG was not sent.",
+                "resolution": "Send a CONFIG object."
+              },
+              {
+                "name": "8507",
+                "description": "name exceeds 100 characters.",
+                "resolution": "Shorten the tag name."
+              },
+              {
+                "name": "8509",
+                "description": "colorCode is not a valid hex colour.",
+                "resolution": "Send the colour as #RRGGBB or #RGB."
+              },
+              {
+                "name": "8535",
+                "description": "Invalid or expired OAuth token.",
+                "resolution": "Provide a valid token with the ZohoAnalytics.modeling.update scope."
+              }
+            ]
+          },
+          "4XX": {
+            "$ref": "https://raw.githubusercontent.com/sathish-dev-git/Temp/refs/heads/master/zoho-analytics-api-common.json#/components/responses/CommonErrorResponse"
+          },
+          "500": {
+            "$ref": "https://raw.githubusercontent.com/sathish-dev-git/Temp/refs/heads/master/zoho-analytics-api-common.json#/components/responses/UnexpectedErrorResponse"
+          }
+        }
+      },
+      "delete": {
+        "tags": [
+          "Tags"
+        ],
+        "x-zenesis-title": "Delete Tag",
+        "summary": "Delete Tag",
+        "description": "Deletes a tag together with every association it has.\n\nThe views that carried the tag are untouched - only the label disappears from them. There is no undo, and re-creating the same name afterwards produces a different tag with a new identifier and none of the old associations. To clear a tag's links while keeping the tag, use the Remove Tag From Multiple Views API with dissociateAll instead.",
+        "operationId": "deleteTag",
+        "parameters": [
+          {
+            "$ref": "#/components/parameters/org-id"
+          },
+          {
+            "$ref": "#/components/parameters/workspace-id"
+          },
+          {
+            "$ref": "#/components/parameters/tag-id"
+          }
+        ],
+        "security": [
+          {
+            "iam-oauth2-schema": [
+              "ZohoAnalytics.modeling.delete"
+            ]
+          }
+        ],
+        "x-zenesis-sections": {
+          "apiRequestParameters": {
+            "1": {
+              "type": "editor",
+              "value": "<blockquote>Note:<br>\n<span style=\"font-weight:normal;\">\n<ul>\n<li>The calling user must be an Account Admin, Organization Admin or Workspace Admin of the workspace. Any other user fails with error code <b>8179</b>.</li>\n<li>The delete cascades to every association. The tag is silently removed from every view it labelled; the views themselves are untouched.</li>\n<li>The operation is irreversible, and the response does not report how many associations were removed. Call the Get Tagged Views API first to see what will be unlinked.</li>\n<li>Re-creating the same name afterwards produces a different tag with a new <b>tagId</b> and none of the old associations.</li>\n<li>To keep the tag but clear its links, use the Remove Tag From Multiple Views API with <b>dissociateAll</b> set to true instead.</li>\n<li>The tag-id in the request URI must belong to the workspace in the request URI. Tags are workspace-scoped, and a tag from another workspace fails with error code <b>8184</b>.</li>\n<li>One tag is deleted per call. There is no bulk-delete variant.</li>\n<li>The API returns HTTP 204 No Content with an empty body on success. Confirm with the Get Tags List API.</li>\n</ul>\n</span></blockquote>"
+            }
+          }
+        },
+        "responses": {
+          "204": {
+            "description": "No Content. The tag and all its associations were deleted.",
+            "x-zenesis-statuscodes": [
+              {
+                "name": "7103",
+                "description": "Workspace not found.",
+                "resolution": "Verify that the workspace-id in the URL is correct and accessible."
+              },
+              {
+                "name": "7301",
+                "description": "The calling user has no access to the workspace.",
+                "resolution": "Ensure the workspace is shared with the calling user."
+              },
+              {
+                "name": "7390",
+                "description": "The workspace does not belong to the organization in the ZANALYTICS-ORGID header.",
+                "resolution": "Send the organization ID that owns the workspace."
+              },
+              {
+                "name": "8083",
+                "description": "The ZANALYTICS-ORGID header is missing.",
+                "resolution": "Add the ZANALYTICS-ORGID header to the request."
+              },
+              {
+                "name": "8179",
+                "description": "The calling user is not an Account Admin, Organization Admin or Workspace Admin of the workspace.",
+                "resolution": "Call the API as an administrator of the workspace."
+              },
+              {
+                "name": "8184",
+                "description": "The tag does not exist in this workspace.",
+                "resolution": "Verify the tag-id using the Get Tags List API."
+              },
+              {
+                "name": "8185",
+                "description": "The operation matched no tag row.",
+                "resolution": "Verify the tag-id using the Get Tags List API."
+              },
+              {
+                "name": "8535",
+                "description": "Invalid or expired OAuth token.",
+                "resolution": "Provide a valid token with the ZohoAnalytics.modeling.delete scope."
+              }
+            ]
+          },
+          "4XX": {
+            "$ref": "https://raw.githubusercontent.com/sathish-dev-git/Temp/refs/heads/master/zoho-analytics-api-common.json#/components/responses/CommonErrorResponse"
+          },
+          "500": {
+            "$ref": "https://raw.githubusercontent.com/sathish-dev-git/Temp/refs/heads/master/zoho-analytics-api-common.json#/components/responses/UnexpectedErrorResponse"
+          }
+        }
+      }
+    },
+    "/restapi/v2/workspaces/{workspace-id}/tags/{tag-id}/views": {
+      "get": {
+        "tags": [
+          "Tags"
+        ],
+        "x-zenesis-title": "Get Tagged Views",
+        "summary": "Get Tagged Views",
+        "description": "Returns the views that carry a given tag, filtered to the views the calling user is entitled to see.\n\nThe result can be paged with limit and offset. It is the inverse of the Get View Tags API - the same association table read from the tag side. A tag that exists but labels nothing returns an empty array, while a tag that does not exist fails with error 8184.",
+        "operationId": "getTaggedViews",
+        "parameters": [
+          {
+            "$ref": "#/components/parameters/org-id"
+          },
+          {
+            "$ref": "#/components/parameters/workspace-id"
+          },
+          {
+            "$ref": "#/components/parameters/tag-id"
+          },
+          {
+            "name": "CONFIG",
+            "in": "query",
+            "required": false,
+            "style": "form",
+            "explode": false,
+            "description": "JSONObject that pages the list of tagged views. As this is a GET request, the value must be stringified and URL encoded before it is sent. Omit it to return every view carrying the tag.",
+            "schema": {
+              "$ref": "#/components/schemas/GetTaggedViewsConfig"
+            },
+            "examples": {
+              "secondPage": {
+                "description": "Paged",
+                "summary": "Returns the second page of ten views carrying the tag.",
+                "value": {
+                  "limit": 10,
+                  "offset": 10
+                }
+              },
+              "firstFifty": {
+                "description": "First page",
+                "summary": "Returns the first fifty views carrying the tag.",
+                "value": {
+                  "limit": 50
+                }
+              }
+            }
+          }
+        ],
+        "security": [
+          {
+            "iam-oauth2-schema": [
+              "ZohoAnalytics.metadata.read"
+            ]
+          }
+        ],
+        "x-zenesis-sections": {
+          "apiRequestParameters": {
+            "1": {
+              "type": "editor",
+              "value": "<blockquote>Note:<br>\n<span style=\"font-weight:normal;\">\n<ul>\n<li>Any user with access to the workspace can invoke this API. The returned list is <b>filtered to the views the calling user can see</b> - a shared user sees only the tagged views shared with them, while an administrator sees all of them. Two users can legitimately receive different lists for the same tag.</li>\n<li>The CONFIG parameter is optional. Without it, every view carrying the tag is returned. As this is a GET request, the value must be stringified and URL encoded before it is sent.</li>\n<li><b>limit</b> and <b>offset</b> are the only paging controls. No cursor and no total count are returned, so request one more than needed and check for the extra row, or keep paging until a short page comes back.</li>\n<li>A tag that does not exist in the workspace fails with error code <b>8184</b>. An empty <b>views</b> array means the tag exists and labels nothing - including immediately after Remove Tag From Multiple Views with <b>dissociateAll</b> set to true.</li>\n<li><b>type</b> is a view type name such as Table, AnalysisView or Dashboard, never a numeric code.</li>\n<li>The <b>id</b> values returned here are the view-id path parameter of the Get View Tags, Add Multiple Tags To View and Remove Multiple Tags From View APIs.</li>\n<li>The order of the result is not guaranteed. Sort client-side if presentation order matters.</li>\n</ul>\n</span></blockquote>"
+            }
+          }
+        },
+        "responses": {
+          "200": {
+            "description": "OK. The views carrying the tag that the calling user can see.",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/GetTaggedViewsResponse"
+                },
+                "examples": {
+                  "mixedViewTypes": {
+                    "description": "Mixed view types",
+                    "summary": "A tag spanning four view types. Every value is a string, and type is a name rather than a number.",
+                    "value": {
+                      "status": "success",
+                      "summary": "Get tagged views",
+                      "data": {
+                        "views": [
+                          {
+                            "id": "20867000000038313",
+                            "name": "Sales_Table",
+                            "type": "Table"
+                          },
+                          {
+                            "id": "20867000000038314",
+                            "name": "Sales Dashboard",
+                            "type": "Dashboard"
+                          },
+                          {
+                            "id": "20867000000038319",
+                            "name": "Revenue by Region",
+                            "type": "AnalysisView"
+                          },
+                          {
+                            "id": "20867000000038322",
+                            "name": "Sales Pivot",
+                            "type": "Pivot"
+                          }
+                        ]
+                      }
+                    }
+                  },
+                  "unusedTag": {
+                    "description": "Unused tag",
+                    "summary": "The tag exists but labels nothing. This is also the response immediately after the tag is detached from every view.",
+                    "value": {
+                      "status": "success",
+                      "summary": "Get tagged views",
+                      "data": {
+                        "views": []
+                      }
+                    }
+                  }
+                }
+              }
+            },
+            "x-zenesis-statuscodes": [
+              {
+                "name": "7103",
+                "description": "Workspace not found.",
+                "resolution": "Verify that the workspace-id in the URL is correct and accessible."
+              },
+              {
+                "name": "7301",
+                "description": "The calling user has no access to the workspace.",
+                "resolution": "Ensure the workspace is shared with the calling user."
+              },
+              {
+                "name": "7390",
+                "description": "The workspace does not belong to the organization in the ZANALYTICS-ORGID header.",
+                "resolution": "Send the organization ID that owns the workspace."
+              },
+              {
+                "name": "8083",
+                "description": "The ZANALYTICS-ORGID header is missing.",
+                "resolution": "Add the ZANALYTICS-ORGID header to the request."
+              },
+              {
+                "name": "8184",
+                "description": "The tag does not exist in this workspace.",
+                "resolution": "Verify the tag-id using the Get Tags List API."
+              },
+              {
+                "name": "8507",
+                "description": "CONFIG exceeds 1,000 characters.",
+                "resolution": "Send only limit and offset in CONFIG."
+              },
+              {
+                "name": "8535",
+                "description": "Invalid or expired OAuth token.",
+                "resolution": "Provide a valid token with the ZohoAnalytics.metadata.read scope."
+              }
+            ]
+          },
+          "4XX": {
+            "$ref": "https://raw.githubusercontent.com/sathish-dev-git/Temp/refs/heads/master/zoho-analytics-api-common.json#/components/responses/CommonErrorResponse"
+          },
+          "500": {
+            "$ref": "https://raw.githubusercontent.com/sathish-dev-git/Temp/refs/heads/master/zoho-analytics-api-common.json#/components/responses/UnexpectedErrorResponse"
+          }
+        }
+      },
+      "post": {
+        "tags": [
+          "Tags"
+        ],
+        "x-zenesis-title": "Add Tag To Multiple Views",
+        "summary": "Add Tag To Multiple Views",
+        "description": "Attaches one tag to a batch of views in the workspace.\n\nThe batch is validated as a whole - workspace membership, tag existence and the ten-tag ceiling of every view - before anything is written, so one bad view means no view gets tagged. Pairs that already exist are skipped rather than rejected, which makes the call safe to retry. This is the tag-side counterpart of the Add Multiple Tags To View API and, unlike it, requires workspace administration.",
+        "operationId": "addTagToViews",
+        "parameters": [
+          {
+            "$ref": "#/components/parameters/org-id"
+          },
+          {
+            "$ref": "#/components/parameters/workspace-id"
+          },
+          {
+            "$ref": "#/components/parameters/tag-id"
+          }
+        ],
+        "requestBody": {
+          "required": true,
+          "content": {
+            "application/x-www-form-urlencoded": {
+              "schema": {
+                "type": "object",
+                "required": [
+                  "CONFIG"
+                ],
+                "properties": {
+                  "CONFIG": {
+                    "$ref": "#/components/schemas/AddTagToViewsConfig"
+                  }
+                }
+              },
+              "encoding": {
+                "CONFIG": {
+                  "contentType": "application/json"
+                }
+              },
+              "examples": {
+                "singleView": {
+                  "description": "Single view",
+                  "summary": "Attaches the tag to one view.",
+                  "value": {
+                    "CONFIG": {
+                      "viewIds": [
+                        "20867000000038313"
+                      ]
+                    }
+                  }
+                },
+                "mixedBatch": {
+                  "description": "Mixed batch",
+                  "summary": "Attaches the tag across a batch spanning a table, a dashboard, a chart and a pivot in one call.",
+                  "value": {
+                    "CONFIG": {
+                      "viewIds": [
+                        "20867000000038313",
+                        "20867000000038314",
+                        "20867000000038319",
+                        "20867000000038322"
+                      ]
+                    }
+                  }
+                }
+              }
+            }
+          }
+        },
+        "security": [
+          {
+            "iam-oauth2-schema": [
+              "ZohoAnalytics.modeling.create"
+            ]
+          }
+        ],
+        "x-zenesis-sections": {
+          "apiRequestParameters": {
+            "1": {
+              "type": "editor",
+              "value": "<blockquote>Note:<br>\n<span style=\"font-weight:normal;\">\n<ul>\n<li>The calling user must be an Account Admin, Organization Admin or Workspace Admin of the workspace. A View Owner who is not a Workspace Admin cannot use this API - even to tag their own view - and must use the Add Multiple Tags To View API instead.</li>\n<li>Read-only users are blocked from every association API with error code <b>8180</b>, regardless of any other permission.</li>\n<li><b>viewIds</b> is mandatory and holds 1 to 1000 view identifiers, each of which must belong to the workspace in the request URI. Duplicate identifiers within the array are collapsed.</li>\n<li>A view can carry at most 10 tags, counted across all its tags rather than per request. A view that would exceed the ceiling fails the whole batch with error code <b>8181</b>, and the error message names the offending views.</li>\n<li>The batch is all-or-nothing. Every check runs across the whole batch before anything is written, so one bad view identifier or one view at the ceiling means nothing is written for any view.</li>\n<li>The call is idempotent per pair. A (view, tag) pair that already exists is skipped rather than duplicated or rejected, so re-sending the same request is safe and still returns 204.</li>\n<li>Error code <b>8184</b> covers two different mistakes - the tag does not exist in the workspace, or one of the views does not. Verify both with the Get Tags List and Get View List APIs.</li>\n<li>No count is returned. The response does not say how many associations were new versus already present. Confirm with the Get Tagged Views API.</li>\n<li>The API returns HTTP 204 No Content with an empty body on success.</li>\n</ul>\n</span></blockquote>"
+            }
+          }
+        },
+        "responses": {
+          "204": {
+            "description": "No Content. The tag was attached to every view in the batch.",
+            "x-zenesis-statuscodes": [
+              {
+                "name": "7103",
+                "description": "Workspace not found.",
+                "resolution": "Verify that the workspace-id in the URL is correct and accessible."
+              },
+              {
+                "name": "7301",
+                "description": "The calling user is not an Account Admin, Organization Admin or Workspace Admin of the workspace.",
+                "resolution": "Call the API as an administrator, or use the Add Multiple Tags To View API instead."
+              },
+              {
+                "name": "7390",
+                "description": "The workspace does not belong to the organization in the ZANALYTICS-ORGID header.",
+                "resolution": "Send the organization ID that owns the workspace."
+              },
+              {
+                "name": "8079",
+                "description": "viewIds is missing from CONFIG.",
+                "resolution": "Send a viewIds array."
+              },
+              {
+                "name": "8083",
+                "description": "The ZANALYTICS-ORGID header is missing.",
+                "resolution": "Add the ZANALYTICS-ORGID header to the request."
+              },
+              {
+                "name": "8180",
+                "description": "The calling user is a read-only user. Read-only users cannot change tag associations regardless of any other permission.",
+                "resolution": "Call the API as a user who is not read-only."
+              },
+              {
+                "name": "8181",
+                "description": "One or more views would exceed the limit of 10 tags per view. The error message lists the offending views.",
+                "resolution": "Remove tags from those views first, or drop them from the batch."
+              },
+              {
+                "name": "8184",
+                "description": "The tag or one of the views does not exist in this workspace.",
+                "resolution": "Verify the tag-id using the Get Tags List API and the view IDs using the Get View List API."
+              },
+              {
+                "name": "8504",
+                "description": "CONFIG was not sent.",
+                "resolution": "Send a CONFIG object."
+              },
+              {
+                "name": "8507",
+                "description": "viewIds exceeds 50,000 characters when serialized.",
+                "resolution": "Split the batch into smaller requests."
+              },
+              {
+                "name": "8547",
+                "description": "viewIds is empty or has more than 1000 entries.",
+                "resolution": "Send between 1 and 1000 view IDs."
+              },
+              {
+                "name": "8535",
+                "description": "Invalid or expired OAuth token.",
+                "resolution": "Provide a valid token with the ZohoAnalytics.modeling.create scope."
+              }
+            ]
+          },
+          "4XX": {
+            "$ref": "https://raw.githubusercontent.com/sathish-dev-git/Temp/refs/heads/master/zoho-analytics-api-common.json#/components/responses/CommonErrorResponse"
+          },
+          "500": {
+            "$ref": "https://raw.githubusercontent.com/sathish-dev-git/Temp/refs/heads/master/zoho-analytics-api-common.json#/components/responses/UnexpectedErrorResponse"
+          }
+        }
+      },
+      "delete": {
+        "tags": [
+          "Tags"
+        ],
+        "x-zenesis-title": "Remove Tag From Multiple Views",
+        "summary": "Remove Tag From Multiple Views",
+        "description": "Detaches one tag from a batch of views, or from every view in the workspace at once.\n\nOnly the associations are removed - the tag survives and can be re-attached, which is the difference from the Delete Tag API. Either name the views in viewIds, or set dissociateAll to true to strip the tag from every view in the workspace.",
+        "operationId": "removeTagFromViews",
+        "parameters": [
+          {
+            "$ref": "#/components/parameters/org-id"
+          },
+          {
+            "$ref": "#/components/parameters/workspace-id"
+          },
+          {
+            "$ref": "#/components/parameters/tag-id"
+          }
+        ],
+        "requestBody": {
+          "required": true,
+          "content": {
+            "application/x-www-form-urlencoded": {
+              "schema": {
+                "type": "object",
+                "required": [
+                  "CONFIG"
+                ],
+                "properties": {
+                  "CONFIG": {
+                    "$ref": "#/components/schemas/RemoveTagFromViewsConfig"
+                  }
+                }
+              },
+              "encoding": {
+                "CONFIG": {
+                  "contentType": "application/json"
+                }
+              },
+              "examples": {
+                "namedViews": {
+                  "description": "Named views",
+                  "summary": "Detaches the tag from the named views only.",
+                  "value": {
+                    "CONFIG": {
+                      "viewIds": [
+                        "20867000000038313"
+                      ]
+                    }
+                  }
+                },
+                "dissociateAll": {
+                  "description": "Every view",
+                  "summary": "Detaches the tag from every view in the workspace while keeping the tag itself. Afterwards the Get Tagged Views API returns an empty array and the tag is still listed by the Get Tags List API.",
+                  "value": {
+                    "CONFIG": {
+                      "dissociateAll": true
+                    }
+                  }
+                },
+                "explicitFalse": {
+                  "description": "Flag explicitly off",
+                  "summary": "Equivalent to naming the views alone. Useful when a generated payload always carries the flag.",
+                  "value": {
+                    "CONFIG": {
+                      "viewIds": [
+                        "20867000000038313"
+                      ],
+                      "dissociateAll": false
+                    }
+                  }
+                }
+              }
+            }
+          }
+        },
+        "security": [
+          {
+            "iam-oauth2-schema": [
+              "ZohoAnalytics.modeling.delete"
+            ]
+          }
+        ],
+        "x-zenesis-sections": {
+          "apiRequestParameters": {
+            "1": {
+              "type": "editor",
+              "value": "<blockquote>Note:<br>\n<span style=\"font-weight:normal;\">\n<ul>\n<li>The calling user must be an Account Admin, Organization Admin or Workspace Admin of the workspace. A View Owner who is not a Workspace Admin must use the Remove Multiple Tags From View API instead.</li>\n<li>Read-only users are blocked from every association API with error code <b>8180</b>, regardless of any other permission.</li>\n<li>Exactly one of the two mechanisms applies. Either send <b>viewIds</b> with 1 to 1000 view identifiers, or set <b>dissociateAll</b> to true. An empty or absent <b>viewIds</b> with <b>dissociateAll</b> off fails with error code <b>8201</b>.</li>\n<li>When <b>dissociateAll</b> is true, any <b>viewIds</b> sent alongside it is ignored and the tag is detached from <b>every view in the workspace</b>, including views the caller may not otherwise interact with. No confirmation and no count are returned - check the blast radius with the Get Tagged Views API first.</li>\n<li>The tag survives. Only the links are removed, and the tag can be re-attached later. To remove the tag itself, use the Delete Tag API.</li>\n<li>Detaching a tag from a view that never carried it is not an error. The operation is defined by the end state.</li>\n<li>The error message for <b>8201</b> refers to an attribute named removeAll. The attribute this API actually accepts is <b>dissociateAll</b>.</li>\n<li>The API returns HTTP 204 No Content with an empty body on success. Confirm with the Get Tagged Views API.</li>\n</ul>\n</span></blockquote>"
+            }
+          }
+        },
+        "responses": {
+          "204": {
+            "description": "No Content. The tag was detached from the specified views.",
+            "x-zenesis-statuscodes": [
+              {
+                "name": "7103",
+                "description": "Workspace not found.",
+                "resolution": "Verify that the workspace-id in the URL is correct and accessible."
+              },
+              {
+                "name": "7301",
+                "description": "The calling user is not an Account Admin, Organization Admin or Workspace Admin of the workspace.",
+                "resolution": "Call the API as an administrator, or use the Remove Multiple Tags From View API instead."
+              },
+              {
+                "name": "7390",
+                "description": "The workspace does not belong to the organization in the ZANALYTICS-ORGID header.",
+                "resolution": "Send the organization ID that owns the workspace."
+              },
+              {
+                "name": "8083",
+                "description": "The ZANALYTICS-ORGID header is missing.",
+                "resolution": "Add the ZANALYTICS-ORGID header to the request."
+              },
+              {
+                "name": "8180",
+                "description": "The calling user is a read-only user. Read-only users cannot change tag associations regardless of any other permission.",
+                "resolution": "Call the API as a user who is not read-only."
+              },
+              {
+                "name": "8184",
+                "description": "The tag or one of the views does not exist in this workspace.",
+                "resolution": "Verify the tag-id using the Get Tags List API and the view IDs using the Get View List API."
+              },
+              {
+                "name": "8201",
+                "description": "viewIds is empty or absent and dissociateAll is not true.",
+                "resolution": "Send a non-empty viewIds array, or set dissociateAll to true."
+              },
+              {
+                "name": "8504",
+                "description": "CONFIG was not sent.",
+                "resolution": "Send a CONFIG object."
+              },
+              {
+                "name": "8507",
+                "description": "viewIds exceeds 50,000 characters when serialized.",
+                "resolution": "Split the batch into smaller requests."
+              },
+              {
+                "name": "8547",
+                "description": "viewIds has more than 1000 entries.",
+                "resolution": "Send at most 1000 view IDs, or use dissociateAll."
+              },
+              {
+                "name": "8535",
+                "description": "Invalid or expired OAuth token.",
+                "resolution": "Provide a valid token with the ZohoAnalytics.modeling.delete scope."
+              }
+            ]
+          },
+          "4XX": {
+            "$ref": "https://raw.githubusercontent.com/sathish-dev-git/Temp/refs/heads/master/zoho-analytics-api-common.json#/components/responses/CommonErrorResponse"
+          },
+          "500": {
+            "$ref": "https://raw.githubusercontent.com/sathish-dev-git/Temp/refs/heads/master/zoho-analytics-api-common.json#/components/responses/UnexpectedErrorResponse"
+          }
+        }
+      }
+    },
+    "/restapi/v2/workspaces/{workspace-id}/views/{view-id}/tags": {
+      "get": {
+        "tags": [
+          "Tags"
+        ],
+        "x-zenesis-title": "Get View Tags",
+        "summary": "Get View Tags",
+        "description": "Returns the tags attached to a given view.\n\nThe response has the same shape as the Get Tags List API, limited to the tags on this one view - at most ten. The length of the array is the current tag count of the view, which is the pre-flight check for the ten-tag ceiling before adding more. It is the inverse of the Get Tagged Views API.",
+        "operationId": "getViewTags",
+        "parameters": [
+          {
+            "$ref": "#/components/parameters/org-id"
+          },
+          {
+            "$ref": "#/components/parameters/workspace-id"
+          },
+          {
+            "$ref": "#/components/parameters/view-id"
+          }
+        ],
+        "security": [
+          {
+            "iam-oauth2-schema": [
+              "ZohoAnalytics.metadata.read"
+            ]
+          }
+        ],
+        "x-zenesis-sections": {
+          "apiRequestParameters": {
+            "1": {
+              "type": "editor",
+              "value": "<blockquote>Note:<br>\n<span style=\"font-weight:normal;\">\n<ul>\n<li>The calling user needs only Read permission on the view. This is narrower than the workspace-wide check used by the other two read APIs, but still open to any shared user who can open the view.</li>\n<li>The length of the <b>tags</b> array is the current tag count of the view. Count it before invoking the Add Multiple Tags To View API to know how many of the ten slots remain, rather than catching error <b>8181</b>.</li>\n<li>The response shape is identical to the Get Tags List API - the same <b>tags</b> array with <b>id</b>, <b>name</b> and <b>colorCode</b>. Only the summary and the scope of the result differ.</li>\n<li>There is no pagination. The ten-tag ceiling makes it unnecessary.</li>\n<li>The view-id in the request URI must belong to the workspace in the request URI. A view from another workspace is rejected with error code <b>7301</b>.</li>\n<li>An empty <b>tags</b> array is a success. It is what Remove Multiple Tags From View with <b>dissociateAll</b> set to true leaves behind.</li>\n</ul>\n</span></blockquote>"
+            }
+          }
+        },
+        "responses": {
+          "200": {
+            "description": "OK. The tags attached to the view.",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/GetViewTagsResponse"
+                },
+                "examples": {
+                  "taggedView": {
+                    "description": "Tagged view",
+                    "summary": "A view carrying four tags.",
+                    "value": {
+                      "status": "success",
+                      "summary": "Get view tags",
+                      "data": {
+                        "tags": [
+                          {
+                            "id": "320873000000425158",
+                            "name": "Finance",
+                            "colorCode": "#e72d35"
+                          },
+                          {
+                            "id": "320873000000419779",
+                            "name": "Quarterly Review",
+                            "colorCode": "#f5a623"
+                          },
+                          {
+                            "id": "320873000000421641",
+                            "name": "Marketing",
+                            "colorCode": "#55acee"
+                          },
+                          {
+                            "id": "320873000000424199",
+                            "name": "Deprecated",
+                            "colorCode": "#f5a623"
+                          }
+                        ]
+                      }
+                    }
+                  },
+                  "untaggedView": {
+                    "description": "Untagged view",
+                    "summary": "A view that carries no tags. An empty array is a success.",
+                    "value": {
+                      "status": "success",
+                      "summary": "Get view tags",
+                      "data": {
+                        "tags": []
+                      }
+                    }
+                  }
+                }
+              }
+            },
+            "x-zenesis-statuscodes": [
+              {
+                "name": "7104",
+                "description": "View not found.",
+                "resolution": "Verify that the view-id exists in the specified workspace using the Get View List API."
+              },
+              {
+                "name": "7301",
+                "description": "The calling user lacks Read permission on the view, or the view does not belong to the workspace in the URL.",
+                "resolution": "Ensure the view is shared with the calling user and that workspace-id and view-id are consistent."
+              },
+              {
+                "name": "7390",
+                "description": "The workspace does not belong to the organization in the ZANALYTICS-ORGID header.",
+                "resolution": "Send the organization ID that owns the workspace."
+              },
+              {
+                "name": "8083",
+                "description": "The ZANALYTICS-ORGID header is missing.",
+                "resolution": "Add the ZANALYTICS-ORGID header to the request."
+              },
+              {
+                "name": "8535",
+                "description": "Invalid or expired OAuth token.",
+                "resolution": "Provide a valid token with the ZohoAnalytics.metadata.read scope."
+              }
+            ]
+          },
+          "4XX": {
+            "$ref": "https://raw.githubusercontent.com/sathish-dev-git/Temp/refs/heads/master/zoho-analytics-api-common.json#/components/responses/CommonErrorResponse"
+          },
+          "500": {
+            "$ref": "https://raw.githubusercontent.com/sathish-dev-git/Temp/refs/heads/master/zoho-analytics-api-common.json#/components/responses/UnexpectedErrorResponse"
+          }
+        }
+      },
+      "post": {
+        "tags": [
+          "Tags"
+        ],
+        "x-zenesis-title": "Add Multiple Tags To View",
+        "summary": "Add Multiple Tags To View",
+        "description": "Attaches a batch of existing tags to one view.\n\nThis is the view-side counterpart of the Add Tag To Multiple Views API, and the one a non-administrator should use - the View Owner and any user with Edit Design permission on the view can call it. Every tag must already exist in the workspace; this API cannot create tags. Tags already on the view are skipped and do not count against the ten-tag ceiling.",
+        "operationId": "addTagsToView",
+        "parameters": [
+          {
+            "$ref": "#/components/parameters/org-id"
+          },
+          {
+            "$ref": "#/components/parameters/workspace-id"
+          },
+          {
+            "$ref": "#/components/parameters/view-id"
+          }
+        ],
+        "requestBody": {
+          "required": true,
+          "content": {
+            "application/x-www-form-urlencoded": {
+              "schema": {
+                "type": "object",
+                "required": [
+                  "CONFIG"
+                ],
+                "properties": {
+                  "CONFIG": {
+                    "$ref": "#/components/schemas/AddTagsToViewConfig"
+                  }
+                }
+              },
+              "encoding": {
+                "CONFIG": {
+                  "contentType": "application/json"
+                }
+              },
+              "examples": {
+                "twoTags": {
+                  "description": "Two tags",
+                  "summary": "Attaches two existing tags to the view.",
+                  "value": {
+                    "CONFIG": {
+                      "tagIds": [
+                        "320873000000425158",
+                        "320873000000419779"
+                      ]
+                    }
+                  }
+                },
+                "singleTag": {
+                  "description": "Single tag",
+                  "summary": "Attaches one existing tag to the view.",
+                  "value": {
+                    "CONFIG": {
+                      "tagIds": [
+                        "320873000000421641"
+                      ]
+                    }
+                  }
+                }
+              }
+            }
+          }
+        },
+        "security": [
+          {
+            "iam-oauth2-schema": [
+              "ZohoAnalytics.modeling.create"
+            ]
+          }
+        ],
+        "x-zenesis-sections": {
+          "apiRequestParameters": {
+            "1": {
+              "type": "editor",
+              "value": "<blockquote>Note:<br>\n<span style=\"font-weight:normal;\">\n<ul>\n<li>The calling user must be an Account Admin, Organization Admin or Workspace Admin of the workspace, or the View Owner, or any user with Edit Design permission on the view. This is the API to use when the caller is not a workspace administrator.</li>\n<li>Read-only users are blocked from every association API with error code <b>8180</b>, even on views they own.</li>\n<li><b>tagIds</b> is mandatory and holds 1 to 1000 tag identifiers, each of which must already exist in the workspace in the request URI. A missing tag fails with error code <b>8184</b> - this API cannot create tags, so create them first with the Create Tag API. Duplicate identifiers within the array are collapsed.</li>\n<li>A view can carry at most 10 tags. Tags already attached to the view are skipped and do not count towards the check, so sending a superset of the current tags is safe. A request that would push the view past the ceiling fails with error code <b>8181</b> and nothing is written.</li>\n<li>The batch is all-or-nothing. The ten-tag check and the existence checks run before anything is written.</li>\n<li>The call is idempotent per pair. Re-sending the same request returns 204.</li>\n<li>Use the Get View Tags API beforehand to know how many of the ten slots remain.</li>\n<li>The view-id in the request URI must belong to the workspace in the request URI.</li>\n<li>No count is returned. The response does not say how many tags were newly attached. Confirm with the Get View Tags API.</li>\n<li>The API returns HTTP 204 No Content with an empty body on success.</li>\n</ul>\n</span></blockquote>"
+            }
+          }
+        },
+        "responses": {
+          "204": {
+            "description": "No Content. The tags were attached to the view.",
+            "x-zenesis-statuscodes": [
+              {
+                "name": "7104",
+                "description": "View not found.",
+                "resolution": "Verify that the view-id exists in the specified workspace using the Get View List API."
+              },
+              {
+                "name": "7301",
+                "description": "The calling user lacks Edit Design permission on the view, or the view does not belong to the workspace in the URL.",
+                "resolution": "Call the API as an administrator, the view owner, or a user with Edit Design permission on the view."
+              },
+              {
+                "name": "7390",
+                "description": "The workspace does not belong to the organization in the ZANALYTICS-ORGID header.",
+                "resolution": "Send the organization ID that owns the workspace."
+              },
+              {
+                "name": "8079",
+                "description": "tagIds is missing from CONFIG.",
+                "resolution": "Send a tagIds array."
+              },
+              {
+                "name": "8083",
+                "description": "The ZANALYTICS-ORGID header is missing.",
+                "resolution": "Add the ZANALYTICS-ORGID header to the request."
+              },
+              {
+                "name": "8180",
+                "description": "The calling user is a read-only user. Read-only users cannot change tag associations regardless of any other permission.",
+                "resolution": "Call the API as a user who is not read-only."
+              },
+              {
+                "name": "8181",
+                "description": "One or more views would exceed the limit of 10 tags per view. The error message lists the offending views.",
+                "resolution": "Remove tags from those views first, or drop them from the batch."
+              },
+              {
+                "name": "8184",
+                "description": "One or more of the tags in tagIds does not exist in this workspace.",
+                "resolution": "Verify the identifiers using the Get Tags List API, and create missing tags with the Create Tag API."
+              },
+              {
+                "name": "8504",
+                "description": "CONFIG was not sent.",
+                "resolution": "Send a CONFIG object."
+              },
+              {
+                "name": "8507",
+                "description": "tagIds exceeds 50,000 characters when serialized.",
+                "resolution": "Split the batch into smaller requests."
+              },
+              {
+                "name": "8547",
+                "description": "tagIds is empty or has more than 1000 entries.",
+                "resolution": "Send between 1 and 1000 tag IDs."
+              },
+              {
+                "name": "8535",
+                "description": "Invalid or expired OAuth token.",
+                "resolution": "Provide a valid token with the ZohoAnalytics.modeling.create scope."
+              }
+            ]
+          },
+          "4XX": {
+            "$ref": "https://raw.githubusercontent.com/sathish-dev-git/Temp/refs/heads/master/zoho-analytics-api-common.json#/components/responses/CommonErrorResponse"
+          },
+          "500": {
+            "$ref": "https://raw.githubusercontent.com/sathish-dev-git/Temp/refs/heads/master/zoho-analytics-api-common.json#/components/responses/UnexpectedErrorResponse"
+          }
+        }
+      },
+      "delete": {
+        "tags": [
+          "Tags"
+        ],
+        "x-zenesis-title": "Remove Multiple Tags From View",
+        "summary": "Remove Multiple Tags From View",
+        "description": "Detaches a batch of tags from one view, or clears the view of every tag.\n\nThe tags survive and stay attached to every other view - only this view's links are removed. Setting dissociateAll to true is scoped to this single view, which makes it the safe way to reset a view's labels and to free slots against the ten-tag ceiling.",
+        "operationId": "removeTagsFromView",
+        "parameters": [
+          {
+            "$ref": "#/components/parameters/org-id"
+          },
+          {
+            "$ref": "#/components/parameters/workspace-id"
+          },
+          {
+            "$ref": "#/components/parameters/view-id"
+          }
+        ],
+        "requestBody": {
+          "required": true,
+          "content": {
+            "application/x-www-form-urlencoded": {
+              "schema": {
+                "type": "object",
+                "required": [
+                  "CONFIG"
+                ],
+                "properties": {
+                  "CONFIG": {
+                    "$ref": "#/components/schemas/RemoveTagsFromViewConfig"
+                  }
+                }
+              },
+              "encoding": {
+                "CONFIG": {
+                  "contentType": "application/json"
+                }
+              },
+              "examples": {
+                "namedTag": {
+                  "description": "Named tag",
+                  "summary": "Detaches one named tag from the view.",
+                  "value": {
+                    "CONFIG": {
+                      "tagIds": [
+                        "320873000000419779"
+                      ]
+                    }
+                  }
+                },
+                "dissociateAll": {
+                  "description": "Every tag",
+                  "summary": "Clears every tag from the view. Afterwards the Get View Tags API returns an empty array.",
+                  "value": {
+                    "CONFIG": {
+                      "dissociateAll": true
+                    }
+                  }
+                },
+                "explicitFalse": {
+                  "description": "Flag explicitly off",
+                  "summary": "Equivalent to naming the tags alone. Useful when a generated payload always carries the flag.",
+                  "value": {
+                    "CONFIG": {
+                      "tagIds": [
+                        "320873000000425158"
+                      ],
+                      "dissociateAll": false
+                    }
+                  }
+                }
+              }
+            }
+          }
+        },
+        "security": [
+          {
+            "iam-oauth2-schema": [
+              "ZohoAnalytics.modeling.delete"
+            ]
+          }
+        ],
+        "x-zenesis-sections": {
+          "apiRequestParameters": {
+            "1": {
+              "type": "editor",
+              "value": "<blockquote>Note:<br>\n<span style=\"font-weight:normal;\">\n<ul>\n<li>The calling user must be an Account Admin, Organization Admin or Workspace Admin of the workspace, or the View Owner, or any user with Edit Design permission on the view.</li>\n<li>Read-only users are blocked from every association API with error code <b>8180</b>, even on views they own.</li>\n<li>Exactly one of the two mechanisms applies. Either send <b>tagIds</b> with 1 to 1000 tag identifiers, or set <b>dissociateAll</b> to true. An empty or absent <b>tagIds</b> with <b>dissociateAll</b> off fails with error code <b>8202</b>.</li>\n<li>When <b>dissociateAll</b> is true, any <b>tagIds</b> sent alongside it is ignored and every tag is detached from this one view. Unlike the same flag on the Remove Tag From Multiple Views API, the blast radius is a single view.</li>\n<li>The tags survive. They remain in the workspace and stay attached to every other view.</li>\n<li>Detaching a tag that was not attached is not an error. The operation is defined by the end state.</li>\n<li>Use this API to make room at the ten-tag ceiling before invoking the Add Multiple Tags To View API.</li>\n<li>The error message for <b>8202</b> refers to an attribute named removeAll. The attribute this API actually accepts is <b>dissociateAll</b>.</li>\n<li>The view-id in the request URI must belong to the workspace in the request URI.</li>\n<li>The API returns HTTP 204 No Content with an empty body on success. Confirm with the Get View Tags API.</li>\n</ul>\n</span></blockquote>"
+            }
+          }
+        },
+        "responses": {
+          "204": {
+            "description": "No Content. The tags were detached from the view.",
+            "x-zenesis-statuscodes": [
+              {
+                "name": "7104",
+                "description": "View not found.",
+                "resolution": "Verify that the view-id exists in the specified workspace using the Get View List API."
+              },
+              {
+                "name": "7301",
+                "description": "The calling user lacks Edit Design permission on the view, or the view does not belong to the workspace in the URL.",
+                "resolution": "Call the API as an administrator, the view owner, or a user with Edit Design permission on the view."
+              },
+              {
+                "name": "7390",
+                "description": "The workspace does not belong to the organization in the ZANALYTICS-ORGID header.",
+                "resolution": "Send the organization ID that owns the workspace."
+              },
+              {
+                "name": "8083",
+                "description": "The ZANALYTICS-ORGID header is missing.",
+                "resolution": "Add the ZANALYTICS-ORGID header to the request."
+              },
+              {
+                "name": "8180",
+                "description": "The calling user is a read-only user. Read-only users cannot change tag associations regardless of any other permission.",
+                "resolution": "Call the API as a user who is not read-only."
+              },
+              {
+                "name": "8184",
+                "description": "One or more of the tags in tagIds does not exist in this workspace.",
+                "resolution": "Verify the identifiers using the Get Tags List API, and create missing tags with the Create Tag API."
+              },
+              {
+                "name": "8202",
+                "description": "tagIds is empty or absent and dissociateAll is not true.",
+                "resolution": "Send a non-empty tagIds array, or set dissociateAll to true."
+              },
+              {
+                "name": "8504",
+                "description": "CONFIG was not sent.",
+                "resolution": "Send a CONFIG object."
+              },
+              {
+                "name": "8507",
+                "description": "tagIds exceeds 50,000 characters when serialized.",
+                "resolution": "Split the batch into smaller requests."
+              },
+              {
+                "name": "8547",
+                "description": "tagIds has more than 1000 entries.",
+                "resolution": "Send at most 1000 tag IDs, or use dissociateAll."
+              },
+              {
+                "name": "8535",
+                "description": "Invalid or expired OAuth token.",
+                "resolution": "Provide a valid token with the ZohoAnalytics.modeling.delete scope."
+              }
+            ]
+          },
+          "4XX": {
             "$ref": "https://raw.githubusercontent.com/sathish-dev-git/Temp/refs/heads/master/zoho-analytics-api-common.json#/components/responses/CommonErrorResponse"
           },
           "500": {
@@ -2416,7 +3901,7 @@
               }
             ]
           },
-                    "4XX": {
+          "4XX": {
             "$ref": "https://raw.githubusercontent.com/sathish-dev-git/Temp/refs/heads/master/zoho-analytics-api-common.json#/components/responses/CommonErrorResponse"
           },
           "500": {
@@ -2541,7 +4026,7 @@
               }
             ]
           },
-                    "4XX": {
+          "4XX": {
             "$ref": "https://raw.githubusercontent.com/sathish-dev-git/Temp/refs/heads/master/zoho-analytics-api-common.json#/components/responses/CommonErrorResponse"
           },
           "500": {
@@ -2659,7 +4144,7 @@
               }
             ]
           },
-                    "4XX": {
+          "4XX": {
             "$ref": "https://raw.githubusercontent.com/sathish-dev-git/Temp/refs/heads/master/zoho-analytics-api-common.json#/components/responses/CommonErrorResponse"
           },
           "500": {
@@ -2688,6 +4173,15 @@
           "type": "string"
         },
         "description": "Organization ID (can be obtained using Get Organizations API)."
+      },
+      "tag-id": {
+        "name": "tag-id",
+        "in": "path",
+        "required": true,
+        "schema": {
+          "type": "string"
+        },
+        "description": "ID of the tag."
       },
       "view-id": {
         "name": "view-id",
@@ -2730,6 +4224,32 @@
       }
     },
     "schemas": {
+      "AddTagToViewsConfig": {
+        "type": "object",
+        "title": "AddTagToViewsConfig",
+        "description": "Configuration that names the views the tag is attached to.",
+        "required": [
+          "viewIds"
+        ],
+        "properties": {
+          "viewIds": {
+            "$ref": "#/components/schemas/TagViewIds"
+          }
+        }
+      },
+      "AddTagsToViewConfig": {
+        "type": "object",
+        "title": "AddTagsToViewConfig",
+        "description": "Configuration that names the existing tags to attach to the view.",
+        "required": [
+          "tagIds"
+        ],
+        "properties": {
+          "tagIds": {
+            "$ref": "#/components/schemas/TagIds"
+          }
+        }
+      },
       "AutoAnalyseResponse": {
         "type": "object",
         "title": "AutoAnalyseResponse",
@@ -2958,6 +4478,67 @@
           }
         }
       },
+      "CreateTagConfig": {
+        "type": "object",
+        "title": "CreateTagConfig",
+        "description": "Configuration that defines the tag to be created. Both attributes are mandatory.",
+        "required": [
+          "name",
+          "colorCode"
+        ],
+        "properties": {
+          "name": {
+            "type": "string",
+            "description": "Display name of the tag, 1 to 100 characters. Must be unique within the workspace, otherwise error 8174. The same name may exist in another workspace as an unrelated tag.",
+            "minLength": 1,
+            "maxLength": 100,
+            "examples": [
+              "Finance"
+            ]
+          },
+          "colorCode": {
+            "type": "string",
+            "description": "Hex colour of the tag in the form #RRGGBB or #RGB, case-insensitive. Colour keywords, rgb() notation, eight-digit values with an alpha channel and values without the leading # fail with error 8509. The colour is presentation only and need not be unique.",
+            "pattern": "^#([0-9A-Fa-f]{6}|[0-9A-Fa-f]{3})$",
+            "examples": [
+              "#1da043"
+            ]
+          }
+        }
+      },
+      "CreateTagResponse": {
+        "type": "object",
+        "title": "CreateTagResponse",
+        "description": "Response returned by the Create Tag API.",
+        "properties": {
+          "status": {
+            "type": "string",
+            "description": "Status of the request.",
+            "enum": [
+              "success",
+              "failure"
+            ],
+            "x-zenesis-enums-desc": [
+              "Request succeeded",
+              "Request failed"
+            ]
+          },
+          "summary": {
+            "type": "string",
+            "description": "Summary of the operation performed."
+          },
+          "data": {
+            "type": "object",
+            "description": "Container that holds the identifier of the newly created tag.",
+            "properties": {
+              "tagId": {
+                "type": "string",
+                "description": "ID of the newly created tag, returned as a string. The read APIs return the same value as id. Use it as the tag-id path parameter and as a tagIds entry in the association APIs."
+              }
+            }
+          }
+        }
+      },
       "DashboardTab": {
         "type": "object",
         "title": "DashboardTab",
@@ -3130,6 +4711,88 @@
           }
         }
       },
+      "GetTaggedViewsConfig": {
+        "type": "object",
+        "title": "GetTaggedViewsConfig",
+        "description": "Configuration that pages the list of views carrying the tag. When omitted, every view carrying the tag is returned. No total count or cursor is returned.",
+        "properties": {
+          "limit": {
+            "type": "integer",
+            "description": "Maximum number of views to return. When omitted, every view carrying the tag is returned.",
+            "minimum": 1
+          },
+          "offset": {
+            "type": "integer",
+            "description": "Number of views to skip before collecting the result. Used together with limit to page through a large association list.",
+            "default": 0,
+            "minimum": 0
+          }
+        }
+      },
+      "GetTaggedViewsResponse": {
+        "type": "object",
+        "title": "GetTaggedViewsResponse",
+        "description": "Response returned by the Get Tagged Views API.",
+        "properties": {
+          "status": {
+            "type": "string",
+            "description": "Status of the request.",
+            "enum": [
+              "success",
+              "failure"
+            ],
+            "x-zenesis-enums-desc": [
+              "Request succeeded",
+              "Request failed"
+            ]
+          },
+          "summary": {
+            "type": "string",
+            "description": "Summary of the operation performed."
+          },
+          "data": {
+            "type": "object",
+            "description": "Container that holds the tagged views.",
+            "properties": {
+              "views": {
+                "$ref": "#/components/schemas/TaggedViews"
+              }
+            }
+          }
+        }
+      },
+      "GetTagsResponse": {
+        "type": "object",
+        "title": "GetTagsResponse",
+        "description": "Response returned by the Get Tags List API.",
+        "properties": {
+          "status": {
+            "type": "string",
+            "description": "Status of the request.",
+            "enum": [
+              "success",
+              "failure"
+            ],
+            "x-zenesis-enums-desc": [
+              "Request succeeded",
+              "Request failed"
+            ]
+          },
+          "summary": {
+            "type": "string",
+            "description": "Summary of the operation performed."
+          },
+          "data": {
+            "type": "object",
+            "description": "Container that holds the tag list.",
+            "properties": {
+              "tags": {
+                "$ref": "#/components/schemas/Tags"
+              }
+            }
+          }
+        }
+      },
       "GetTrashViewsResponse": {
         "type": "object",
         "title": "GetTrashViewsResponse",
@@ -3295,6 +4958,38 @@
           "criteriaZuid": {
             "type": "string",
             "description": "ZUID of a user, restricting the result to the views that user created or last modified. When omitted, the views of every user are returned."
+          }
+        }
+      },
+      "GetViewTagsResponse": {
+        "type": "object",
+        "title": "GetViewTagsResponse",
+        "description": "Response returned by the Get View Tags API.",
+        "properties": {
+          "status": {
+            "type": "string",
+            "description": "Status of the request.",
+            "enum": [
+              "success",
+              "failure"
+            ],
+            "x-zenesis-enums-desc": [
+              "Request succeeded",
+              "Request failed"
+            ]
+          },
+          "summary": {
+            "type": "string",
+            "description": "Summary of the operation performed."
+          },
+          "data": {
+            "type": "object",
+            "description": "Container that holds the tags attached to the view.",
+            "properties": {
+              "tags": {
+                "$ref": "#/components/schemas/Tags"
+              }
+            }
           }
         }
       },
@@ -3588,6 +5283,44 @@
           ]
         ]
       },
+      "RemoveTagFromViewsConfig": {
+        "type": "object",
+        "title": "RemoveTagFromViewsConfig",
+        "description": "Configuration that names the views the tag is detached from, or requests that the tag be detached from every view in the workspace. Exactly one of the two mechanisms applies - either send viewIds, or set dissociateAll to true. An empty or absent viewIds with dissociateAll off fails with error 8201.",
+        "properties": {
+          "viewIds": {
+            "$ref": "#/components/schemas/TagViewIds"
+          },
+          "dissociateAll": {
+            "type": "boolean",
+            "description": "When true, the tag is detached from every view in the workspace and viewIds is ignored. The reach is workspace-wide, including views the caller may not otherwise interact with, and no count is returned. Required unless viewIds is sent.",
+            "default": false,
+            "enum": [
+              true,
+              false
+            ]
+          }
+        }
+      },
+      "RemoveTagsFromViewConfig": {
+        "type": "object",
+        "title": "RemoveTagsFromViewConfig",
+        "description": "Configuration that names the tags to detach from the view, or requests that every tag be detached from it. Exactly one of the two mechanisms applies - either send tagIds, or set dissociateAll to true. An empty or absent tagIds with dissociateAll off fails with error 8202.",
+        "properties": {
+          "tagIds": {
+            "$ref": "#/components/schemas/TagIds"
+          },
+          "dissociateAll": {
+            "type": "boolean",
+            "description": "When true, every tag is detached from this one view and tagIds is ignored. The reach is limited to the view in the request URI. Required unless tagIds is sent.",
+            "default": false,
+            "enum": [
+              true,
+              false
+            ]
+          }
+        }
+      },
       "RenameViewConfig": {
         "type": "object",
         "title": "RenameViewConfig",
@@ -3708,6 +5441,170 @@
           }
         }
       },
+      "Tag": {
+        "type": "object",
+        "title": "Tag",
+        "description": "A tag of the workspace.",
+        "properties": {
+          "id": {
+            "type": "string",
+            "description": "Unique identifier of the tag, returned as a string. The Create Tag API returns the same value as tagId. This is the tag-id path parameter of the tag-side APIs and a tagIds entry for the view-side APIs."
+          },
+          "name": {
+            "type": "string",
+            "description": "Display name of the tag, unique within the workspace."
+          },
+          "colorCode": {
+            "type": "string",
+            "description": "Hex colour of the tag, returned exactly as it was stored."
+          }
+        }
+      },
+      "TagIds": {
+        "type": "array",
+        "title": "TagIds",
+        "description": "JSONArray of tag identifiers, 1 to 1000 entries. Every tag must already exist in the workspace in the request URI, otherwise error 8184. Duplicate identifiers are collapsed. The serialized array is limited to 50,000 characters.",
+        "items": {
+          "type": "string",
+          "description": "ID of a tag in the workspace."
+        },
+        "minItems": 1,
+        "maxItems": 1000,
+        "examples": [
+          [
+            "320873000000425158",
+            "320873000000419779"
+          ]
+        ]
+      },
+      "TagViewIds": {
+        "type": "array",
+        "title": "TagViewIds",
+        "description": "JSONArray of view identifiers, 1 to 1000 entries. Every view must belong to the workspace in the request URI, otherwise error 8184. Duplicate identifiers are collapsed. The serialized array is limited to 50,000 characters.",
+        "items": {
+          "type": "string",
+          "description": "ID of a view in the workspace."
+        },
+        "minItems": 1,
+        "maxItems": 1000,
+        "examples": [
+          [
+            "20867000000038313",
+            "20867000000038314"
+          ]
+        ]
+      },
+      "TaggedView": {
+        "type": "object",
+        "title": "TaggedView",
+        "description": "A view that carries the tag.",
+        "properties": {
+          "id": {
+            "type": "string",
+            "description": "Unique identifier of the view, returned as a string. This is the view-id path parameter of the Get View Tags, Add Multiple Tags To View and Remove Multiple Tags From View APIs."
+          },
+          "name": {
+            "type": "string",
+            "description": "Display name of the view."
+          },
+          "type": {
+            "type": "string",
+            "description": "Type of the view, returned as a name and never as a numeric code.",
+            "enum": [
+              "Table",
+              "Report",
+              "AnalysisView",
+              "Pivot",
+              "SummaryView",
+              "TableView",
+              "QueryTable",
+              "Dashboard",
+              "WIDGET",
+              "Tab",
+              "PipelineTable",
+              "DataModelObject"
+            ],
+            "x-zenesis-enums-desc": [
+              "Data table",
+              "Tabular view",
+              "Chart view",
+              "Pivot view",
+              "Summary view",
+              "Table view",
+              "Query table",
+              "Dashboard",
+              "Dashboard widget",
+              "Dashboard tab",
+              "Pipeline table",
+              "Data model object"
+            ]
+          }
+        }
+      },
+      "TaggedViews": {
+        "type": "array",
+        "title": "TaggedViews",
+        "description": "JSONArray holding the views that carry the tag and that the calling user is entitled to see. Empty when the tag labels nothing visible to the caller.",
+        "items": {
+          "$ref": "#/components/schemas/TaggedView"
+        },
+        "examples": [
+          [
+            {
+              "id": "20867000000038313",
+              "name": "Sales_Table",
+              "type": "Table"
+            },
+            {
+              "id": "20867000000038314",
+              "name": "Sales Dashboard",
+              "type": "Dashboard"
+            },
+            {
+              "id": "20867000000038319",
+              "name": "Revenue by Region",
+              "type": "AnalysisView"
+            },
+            {
+              "id": "20867000000038322",
+              "name": "Sales Pivot",
+              "type": "Pivot"
+            }
+          ]
+        ]
+      },
+      "Tags": {
+        "type": "array",
+        "title": "Tags",
+        "description": "JSONArray of tags. Empty when there are none. For the Get View Tags API it holds at most 10 entries.",
+        "items": {
+          "$ref": "#/components/schemas/Tag"
+        },
+        "examples": [
+          [
+            {
+              "id": "320873000000425158",
+              "name": "Finance",
+              "colorCode": "#e72d35"
+            },
+            {
+              "id": "320873000000419779",
+              "name": "Quarterly Review",
+              "colorCode": "#f5a623"
+            },
+            {
+              "id": "320873000000421641",
+              "name": "Marketing",
+              "colorCode": "#55acee"
+            },
+            {
+              "id": "320873000000424199",
+              "name": "Deprecated",
+              "colorCode": "#f5a623"
+            }
+          ]
+        ]
+      },
       "TrashView": {
         "type": "object",
         "title": "TrashView",
@@ -3798,6 +5695,30 @@
             }
           ]
         ]
+      },
+      "UpdateTagConfig": {
+        "type": "object",
+        "title": "UpdateTagConfig",
+        "description": "Configuration that carries the new name and/or colour of the tag. At least one of the two must be present, otherwise error 8182. The attribute that is omitted keeps its stored value.",
+        "properties": {
+          "name": {
+            "type": "string",
+            "description": "New display name of the tag, 1 to 100 characters. Must be unique within the workspace, otherwise error 8174. Omit to keep the current name.",
+            "minLength": 1,
+            "maxLength": 100,
+            "examples": [
+              "Finance - Archive"
+            ]
+          },
+          "colorCode": {
+            "type": "string",
+            "description": "Hex colour of the tag in the form #RRGGBB or #RGB, case-insensitive. Colour keywords, rgb() notation, eight-digit values with an alpha channel and values without the leading # fail with error 8509. The colour is presentation only and need not be unique. Omit to keep the current colour.",
+            "pattern": "^#([0-9A-Fa-f]{6}|[0-9A-Fa-f]{3})$",
+            "examples": [
+              "#e72d35"
+            ]
+          }
+        }
       },
       "ViewColumn": {
         "type": "object",

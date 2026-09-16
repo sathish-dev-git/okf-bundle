@@ -38,12 +38,12 @@ sources:
     resource: "/references/openapi/data-operations-grouped-api.json"
     title: OpenAPI 3 specification - data-operations-grouped-api.json
     author: team:zoho-analytics-api-docs
-    last_modified: 2026-09-10T10:56:20Z
+    last_modified: 2026-09-16T12:30:51Z
   - id: endpoint-doc
     resource: "/domains/data-operations/async-data-import/create-import-job-existing-table.md"
     title: Endpoint reference - Create Import Job for an Existing Table (Asynchronous)
 generated:
-  at: 2026-09-14T17:14:34Z
+  at: 2026-09-16T12:54:00Z
 status: stable
 ---
 

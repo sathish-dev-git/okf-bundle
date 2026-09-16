@@ -1,6 +1,6 @@
 {
   "base_url": "https://analyticsapi.zoho.com",
-  "endpoint_count": 168,
+  "endpoint_count": 182,
   "endpoints": [
     {
       "operation_id": "getOrganizations",
@@ -394,6 +394,192 @@
       "openapi": {
         "file": "/references/openapi/user-groups-grouped-api.json",
         "pointer": "#/paths/~1restapi~1v2~1orgadmins/get"
+      }
+    },
+    {
+      "operation_id": "getCustomRoles",
+      "title": "Get Custom Roles",
+      "method": "GET",
+      "path": "/restapi/v2/orgs/roles",
+      "domain": "users-and-groups",
+      "domain_title": "Users & Groups",
+      "group": "custom-roles",
+      "group_title": "Custom Roles",
+      "oauth_scopes": [
+        "ZohoAnalytics.usermanagement.read"
+      ],
+      "org_id_header": "required",
+      "config_parameter": {
+        "location": "none",
+        "required": false
+      },
+      "request_content_type": null,
+      "success_status": 200,
+      "response_content_types": [
+        "application/json"
+      ],
+      "permission_required": "",
+      "error_codes": [
+        6142,
+        7301,
+        7309,
+        8083,
+        8535
+      ],
+      "doc": "/domains/users-and-groups/custom-roles/get-custom-roles.md",
+      "sdk_examples": "/sdk-examples/users-and-groups/custom-roles/get-custom-roles.md",
+      "openapi": {
+        "file": "/references/openapi/user-groups-grouped-api.json",
+        "pointer": "#/paths/~1restapi~1v2~1orgs~1roles/get"
+      }
+    },
+    {
+      "operation_id": "createCustomRole",
+      "title": "Create Custom Role",
+      "method": "POST",
+      "path": "/restapi/v2/orgs/roles",
+      "domain": "users-and-groups",
+      "domain_title": "Users & Groups",
+      "group": "custom-roles",
+      "group_title": "Custom Roles",
+      "oauth_scopes": [
+        "ZohoAnalytics.usermanagement.create"
+      ],
+      "org_id_header": "required",
+      "config_parameter": {
+        "location": "form",
+        "required": true
+      },
+      "request_content_type": "application/x-www-form-urlencoded",
+      "success_status": 200,
+      "response_content_types": [
+        "application/json"
+      ],
+      "permission_required": "",
+      "error_codes": [
+        6142,
+        7301,
+        7309,
+        7553,
+        7554,
+        7559,
+        7573,
+        7574,
+        7575,
+        7576,
+        7577,
+        7578,
+        7579,
+        7584,
+        7585,
+        7586,
+        8078,
+        8083,
+        8504,
+        8507,
+        8509,
+        8534,
+        8535,
+        8539
+      ],
+      "doc": "/domains/users-and-groups/custom-roles/create-custom-role.md",
+      "sdk_examples": "/sdk-examples/users-and-groups/custom-roles/create-custom-role.md",
+      "openapi": {
+        "file": "/references/openapi/user-groups-grouped-api.json",
+        "pointer": "#/paths/~1restapi~1v2~1orgs~1roles/post"
+      }
+    },
+    {
+      "operation_id": "updateCustomRole",
+      "title": "Update Custom Role",
+      "method": "PUT",
+      "path": "/restapi/v2/orgs/roles/{role-id}",
+      "domain": "users-and-groups",
+      "domain_title": "Users & Groups",
+      "group": "custom-roles",
+      "group_title": "Custom Roles",
+      "oauth_scopes": [
+        "ZohoAnalytics.usermanagement.update"
+      ],
+      "org_id_header": "required",
+      "config_parameter": {
+        "location": "form",
+        "required": true
+      },
+      "request_content_type": "application/x-www-form-urlencoded",
+      "success_status": 204,
+      "response_content_types": [],
+      "permission_required": "",
+      "error_codes": [
+        6142,
+        7301,
+        7309,
+        7548,
+        7553,
+        7554,
+        7559,
+        7573,
+        7574,
+        7575,
+        7576,
+        7577,
+        7578,
+        7579,
+        7580,
+        7581,
+        7584,
+        7585,
+        7586,
+        8083,
+        8504,
+        8507,
+        8509,
+        8525,
+        8534,
+        8535
+      ],
+      "doc": "/domains/users-and-groups/custom-roles/update-custom-role.md",
+      "sdk_examples": "/sdk-examples/users-and-groups/custom-roles/update-custom-role.md",
+      "openapi": {
+        "file": "/references/openapi/user-groups-grouped-api.json",
+        "pointer": "#/paths/~1restapi~1v2~1orgs~1roles~1{role-id}/put"
+      }
+    },
+    {
+      "operation_id": "deleteCustomRole",
+      "title": "Delete Custom Role",
+      "method": "DELETE",
+      "path": "/restapi/v2/orgs/roles/{role-id}",
+      "domain": "users-and-groups",
+      "domain_title": "Users & Groups",
+      "group": "custom-roles",
+      "group_title": "Custom Roles",
+      "oauth_scopes": [
+        "ZohoAnalytics.usermanagement.delete"
+      ],
+      "org_id_header": "required",
+      "config_parameter": {
+        "location": "none",
+        "required": false
+      },
+      "request_content_type": null,
+      "success_status": 204,
+      "response_content_types": [],
+      "permission_required": "",
+      "error_codes": [
+        6142,
+        7301,
+        7309,
+        7548,
+        8083,
+        8525,
+        8535
+      ],
+      "doc": "/domains/users-and-groups/custom-roles/delete-custom-role.md",
+      "sdk_examples": "/sdk-examples/users-and-groups/custom-roles/delete-custom-role.md",
+      "openapi": {
+        "file": "/references/openapi/user-groups-grouped-api.json",
+        "pointer": "#/paths/~1restapi~1v2~1orgs~1roles~1{role-id}/delete"
       }
     },
     {
@@ -4558,6 +4744,409 @@
       "openapi": {
         "file": "/references/openapi/views-management-grouped-api.json",
         "pointer": "#/paths/~1restapi~1v2~1workspaces~1{workspace-id}~1views~1{view-id}~1columns~1{column-id}~1autoanalyse/post"
+      }
+    },
+    {
+      "operation_id": "getTags",
+      "title": "Get Tags List",
+      "method": "GET",
+      "path": "/restapi/v2/workspaces/{workspace-id}/tags",
+      "domain": "views-management",
+      "domain_title": "Views Management",
+      "group": "tags",
+      "group_title": "Tags",
+      "oauth_scopes": [
+        "ZohoAnalytics.metadata.read"
+      ],
+      "org_id_header": "required",
+      "config_parameter": {
+        "location": "none",
+        "required": false
+      },
+      "request_content_type": null,
+      "success_status": 200,
+      "response_content_types": [
+        "application/json"
+      ],
+      "permission_required": "",
+      "error_codes": [
+        7103,
+        7301,
+        7390,
+        8083,
+        8535
+      ],
+      "doc": "/domains/views-management/tags/get-tags.md",
+      "sdk_examples": "/sdk-examples/views-management/tags/get-tags.md",
+      "openapi": {
+        "file": "/references/openapi/views-management-grouped-api.json",
+        "pointer": "#/paths/~1restapi~1v2~1workspaces~1{workspace-id}~1tags/get"
+      }
+    },
+    {
+      "operation_id": "getTaggedViews",
+      "title": "Get Tagged Views",
+      "method": "GET",
+      "path": "/restapi/v2/workspaces/{workspace-id}/tags/{tag-id}/views",
+      "domain": "views-management",
+      "domain_title": "Views Management",
+      "group": "tags",
+      "group_title": "Tags",
+      "oauth_scopes": [
+        "ZohoAnalytics.metadata.read"
+      ],
+      "org_id_header": "required",
+      "config_parameter": {
+        "location": "query",
+        "required": false
+      },
+      "request_content_type": null,
+      "success_status": 200,
+      "response_content_types": [
+        "application/json"
+      ],
+      "permission_required": "",
+      "error_codes": [
+        7103,
+        7301,
+        7390,
+        8083,
+        8184,
+        8507,
+        8535
+      ],
+      "doc": "/domains/views-management/tags/get-tagged-views.md",
+      "sdk_examples": "/sdk-examples/views-management/tags/get-tagged-views.md",
+      "openapi": {
+        "file": "/references/openapi/views-management-grouped-api.json",
+        "pointer": "#/paths/~1restapi~1v2~1workspaces~1{workspace-id}~1tags~1{tag-id}~1views/get"
+      }
+    },
+    {
+      "operation_id": "getViewTags",
+      "title": "Get View Tags",
+      "method": "GET",
+      "path": "/restapi/v2/workspaces/{workspace-id}/views/{view-id}/tags",
+      "domain": "views-management",
+      "domain_title": "Views Management",
+      "group": "tags",
+      "group_title": "Tags",
+      "oauth_scopes": [
+        "ZohoAnalytics.metadata.read"
+      ],
+      "org_id_header": "required",
+      "config_parameter": {
+        "location": "none",
+        "required": false
+      },
+      "request_content_type": null,
+      "success_status": 200,
+      "response_content_types": [
+        "application/json"
+      ],
+      "permission_required": "",
+      "error_codes": [
+        7104,
+        7301,
+        7390,
+        8083,
+        8535
+      ],
+      "doc": "/domains/views-management/tags/get-view-tags.md",
+      "sdk_examples": "/sdk-examples/views-management/tags/get-view-tags.md",
+      "openapi": {
+        "file": "/references/openapi/views-management-grouped-api.json",
+        "pointer": "#/paths/~1restapi~1v2~1workspaces~1{workspace-id}~1views~1{view-id}~1tags/get"
+      }
+    },
+    {
+      "operation_id": "createTag",
+      "title": "Create Tag",
+      "method": "POST",
+      "path": "/restapi/v2/workspaces/{workspace-id}/tags",
+      "domain": "views-management",
+      "domain_title": "Views Management",
+      "group": "tags",
+      "group_title": "Tags",
+      "oauth_scopes": [
+        "ZohoAnalytics.modeling.create"
+      ],
+      "org_id_header": "required",
+      "config_parameter": {
+        "location": "form",
+        "required": true
+      },
+      "request_content_type": "application/x-www-form-urlencoded",
+      "success_status": 200,
+      "response_content_types": [
+        "application/json"
+      ],
+      "permission_required": "",
+      "error_codes": [
+        7103,
+        7301,
+        7390,
+        8079,
+        8083,
+        8174,
+        8179,
+        8504,
+        8507,
+        8509,
+        8535
+      ],
+      "doc": "/domains/views-management/tags/create-tag.md",
+      "sdk_examples": "/sdk-examples/views-management/tags/create-tag.md",
+      "openapi": {
+        "file": "/references/openapi/views-management-grouped-api.json",
+        "pointer": "#/paths/~1restapi~1v2~1workspaces~1{workspace-id}~1tags/post"
+      }
+    },
+    {
+      "operation_id": "updateTag",
+      "title": "Update Tag",
+      "method": "PUT",
+      "path": "/restapi/v2/workspaces/{workspace-id}/tags/{tag-id}",
+      "domain": "views-management",
+      "domain_title": "Views Management",
+      "group": "tags",
+      "group_title": "Tags",
+      "oauth_scopes": [
+        "ZohoAnalytics.modeling.update"
+      ],
+      "org_id_header": "required",
+      "config_parameter": {
+        "location": "form",
+        "required": true
+      },
+      "request_content_type": "application/x-www-form-urlencoded",
+      "success_status": 204,
+      "response_content_types": [],
+      "permission_required": "",
+      "error_codes": [
+        7103,
+        7301,
+        7390,
+        8083,
+        8174,
+        8179,
+        8182,
+        8185,
+        8187,
+        8504,
+        8507,
+        8509,
+        8535
+      ],
+      "doc": "/domains/views-management/tags/update-tag.md",
+      "sdk_examples": "/sdk-examples/views-management/tags/update-tag.md",
+      "openapi": {
+        "file": "/references/openapi/views-management-grouped-api.json",
+        "pointer": "#/paths/~1restapi~1v2~1workspaces~1{workspace-id}~1tags~1{tag-id}/put"
+      }
+    },
+    {
+      "operation_id": "deleteTag",
+      "title": "Delete Tag",
+      "method": "DELETE",
+      "path": "/restapi/v2/workspaces/{workspace-id}/tags/{tag-id}",
+      "domain": "views-management",
+      "domain_title": "Views Management",
+      "group": "tags",
+      "group_title": "Tags",
+      "oauth_scopes": [
+        "ZohoAnalytics.modeling.delete"
+      ],
+      "org_id_header": "required",
+      "config_parameter": {
+        "location": "none",
+        "required": false
+      },
+      "request_content_type": null,
+      "success_status": 204,
+      "response_content_types": [],
+      "permission_required": "",
+      "error_codes": [
+        7103,
+        7301,
+        7390,
+        8083,
+        8179,
+        8184,
+        8185,
+        8535
+      ],
+      "doc": "/domains/views-management/tags/delete-tag.md",
+      "sdk_examples": "/sdk-examples/views-management/tags/delete-tag.md",
+      "openapi": {
+        "file": "/references/openapi/views-management-grouped-api.json",
+        "pointer": "#/paths/~1restapi~1v2~1workspaces~1{workspace-id}~1tags~1{tag-id}/delete"
+      }
+    },
+    {
+      "operation_id": "addTagToViews",
+      "title": "Add Tag To Multiple Views",
+      "method": "POST",
+      "path": "/restapi/v2/workspaces/{workspace-id}/tags/{tag-id}/views",
+      "domain": "views-management",
+      "domain_title": "Views Management",
+      "group": "tags",
+      "group_title": "Tags",
+      "oauth_scopes": [
+        "ZohoAnalytics.modeling.create"
+      ],
+      "org_id_header": "required",
+      "config_parameter": {
+        "location": "form",
+        "required": true
+      },
+      "request_content_type": "application/x-www-form-urlencoded",
+      "success_status": 204,
+      "response_content_types": [],
+      "permission_required": "",
+      "error_codes": [
+        7103,
+        7301,
+        7390,
+        8079,
+        8083,
+        8180,
+        8181,
+        8184,
+        8504,
+        8507,
+        8535,
+        8547
+      ],
+      "doc": "/domains/views-management/tags/add-tag-to-views.md",
+      "sdk_examples": "/sdk-examples/views-management/tags/add-tag-to-views.md",
+      "openapi": {
+        "file": "/references/openapi/views-management-grouped-api.json",
+        "pointer": "#/paths/~1restapi~1v2~1workspaces~1{workspace-id}~1tags~1{tag-id}~1views/post"
+      }
+    },
+    {
+      "operation_id": "removeTagFromViews",
+      "title": "Remove Tag From Multiple Views",
+      "method": "DELETE",
+      "path": "/restapi/v2/workspaces/{workspace-id}/tags/{tag-id}/views",
+      "domain": "views-management",
+      "domain_title": "Views Management",
+      "group": "tags",
+      "group_title": "Tags",
+      "oauth_scopes": [
+        "ZohoAnalytics.modeling.delete"
+      ],
+      "org_id_header": "required",
+      "config_parameter": {
+        "location": "form",
+        "required": true
+      },
+      "request_content_type": "application/x-www-form-urlencoded",
+      "success_status": 204,
+      "response_content_types": [],
+      "permission_required": "",
+      "error_codes": [
+        7103,
+        7301,
+        7390,
+        8083,
+        8180,
+        8184,
+        8201,
+        8504,
+        8507,
+        8535,
+        8547
+      ],
+      "doc": "/domains/views-management/tags/remove-tag-from-views.md",
+      "sdk_examples": "/sdk-examples/views-management/tags/remove-tag-from-views.md",
+      "openapi": {
+        "file": "/references/openapi/views-management-grouped-api.json",
+        "pointer": "#/paths/~1restapi~1v2~1workspaces~1{workspace-id}~1tags~1{tag-id}~1views/delete"
+      }
+    },
+    {
+      "operation_id": "addTagsToView",
+      "title": "Add Multiple Tags To View",
+      "method": "POST",
+      "path": "/restapi/v2/workspaces/{workspace-id}/views/{view-id}/tags",
+      "domain": "views-management",
+      "domain_title": "Views Management",
+      "group": "tags",
+      "group_title": "Tags",
+      "oauth_scopes": [
+        "ZohoAnalytics.modeling.create"
+      ],
+      "org_id_header": "required",
+      "config_parameter": {
+        "location": "form",
+        "required": true
+      },
+      "request_content_type": "application/x-www-form-urlencoded",
+      "success_status": 204,
+      "response_content_types": [],
+      "permission_required": "",
+      "error_codes": [
+        7104,
+        7301,
+        7390,
+        8079,
+        8083,
+        8180,
+        8181,
+        8184,
+        8504,
+        8507,
+        8535,
+        8547
+      ],
+      "doc": "/domains/views-management/tags/add-tags-to-view.md",
+      "sdk_examples": "/sdk-examples/views-management/tags/add-tags-to-view.md",
+      "openapi": {
+        "file": "/references/openapi/views-management-grouped-api.json",
+        "pointer": "#/paths/~1restapi~1v2~1workspaces~1{workspace-id}~1views~1{view-id}~1tags/post"
+      }
+    },
+    {
+      "operation_id": "removeTagsFromView",
+      "title": "Remove Multiple Tags From View",
+      "method": "DELETE",
+      "path": "/restapi/v2/workspaces/{workspace-id}/views/{view-id}/tags",
+      "domain": "views-management",
+      "domain_title": "Views Management",
+      "group": "tags",
+      "group_title": "Tags",
+      "oauth_scopes": [
+        "ZohoAnalytics.modeling.delete"
+      ],
+      "org_id_header": "required",
+      "config_parameter": {
+        "location": "form",
+        "required": true
+      },
+      "request_content_type": "application/x-www-form-urlencoded",
+      "success_status": 204,
+      "response_content_types": [],
+      "permission_required": "",
+      "error_codes": [
+        7104,
+        7301,
+        7390,
+        8083,
+        8180,
+        8184,
+        8202,
+        8504,
+        8507,
+        8535,
+        8547
+      ],
+      "doc": "/domains/views-management/tags/remove-tags-from-view.md",
+      "sdk_examples": "/sdk-examples/views-management/tags/remove-tags-from-view.md",
+      "openapi": {
+        "file": "/references/openapi/views-management-grouped-api.json",
+        "pointer": "#/paths/~1restapi~1v2~1workspaces~1{workspace-id}~1views~1{view-id}~1tags/delete"
       }
     },
     {

@@ -1,14 +1,14 @@
 ---
 type: Reference
 title: Error codes - quick reference
-description: "Compact one-line-per-code table of all 278 Zoho Analytics REST API v2 error codes (code, summary constant, HTTP status, meaning); use the full catalog for per-operation reasons and solutions."
+description: "Compact one-line-per-code table of all 306 Zoho Analytics REST API v2 error codes (code, summary constant, HTTP status, meaning); use the full catalog for per-operation reasons and solutions."
 tags:
   - zoho-analytics
   - rest-api-v2
   - errors
   - error-codes
   - quick-reference
-error_code_count: 278
+error_code_count: 306
 full_catalog: "/foundations/error-codes.md"
 sources:
   - id: error-catalog
@@ -16,7 +16,7 @@ sources:
     title: Error code catalog (this bundle)
     author: team:zoho-analytics-api-docs
 generated:
-  at: 2026-09-14T17:14:34Z
+  at: 2026-09-16T12:54:00Z
 status: stable
 ---
 
@@ -39,12 +39,13 @@ One row per error code. Follow the code link for the full entry with per-operati
 | [6089](/foundations/error-codes.md#error-6089) | - | 400 (typical) | Attempted to assign the ORGADMIN role through a custom domain (domainName). The Organization Admin role cannot be assigned through a custom portal domain. | 2 |
 | [6121](/foundations/error-codes.md#error-6121) | `EXCEEDING_USR_PLN_PRIVATE_LINKS` | 400 (typical) | The organization has used all private links allowed by its plan. | 1 |
 | [6122](/foundations/error-codes.md#error-6122) | `EXCEEDING_USR_PLN_PRIVATE_LINKS_DM` | 400 (typical) | Same limit, reported to a non-super-admin caller. | 1 |
+| [6142](/foundations/error-codes.md#error-6142) | `CUSTOMROLES_NOT_ALLOWED_IN_PLAN` | 400 (observed) | The subscription plan of the organization does not include custom roles. | 4 |
 | [7005](/foundations/error-codes.md#error-7005) | `COMMON_INTERNAL_SERVER_ERROR` | 500 (typical) | Unexpected error on the Zoho Analytics server while processing an otherwise valid request. Not caused by the request payload. | 1 |
 | [7082](/foundations/error-codes.md#error-7082) | - | 400 (typical) | An unexpected error occurred during the trash restore operation. | 2 |
 | [7089](/foundations/error-codes.md#error-7089) | - | 400 (typical) | All the columns of the table cannot be hidden at the same time. | 2 |
 | [7092](/foundations/error-codes.md#error-7092) | `DDL_LOCK_SINCE_IMPORT_IN_PROGRESS` | 400 (typical) | A DDL lock is active on the table. | 12 |
-| [7103](/foundations/error-codes.md#error-7103) | `META_OBJECT_NOT_PRESENT` | 404 (typical) | The organization or workspace addressed by the request does not exist, has been deleted, or is not visible to the caller. | 91 |
-| [7104](/foundations/error-codes.md#error-7104) | `META_OBJECT_NOT_PRESENT` | 404 (typical) | The view (table, report, dashboard, query table) or other named object addressed by the request does not exist in the given workspace. | 42 |
+| [7103](/foundations/error-codes.md#error-7103) | `META_OBJECT_NOT_PRESENT` | 404 (typical) | The organization or workspace addressed by the request does not exist, has been deleted, or is not visible to the caller. | 98 |
+| [7104](/foundations/error-codes.md#error-7104) | `META_OBJECT_NOT_PRESENT` | 404 (typical) | The view (table, report, dashboard, query table) or other named object addressed by the request does not exist in the given workspace. | 45 |
 | [7105](/foundations/error-codes.md#error-7105) | - | 400 (typical) | The specified view does not exist. | 1 |
 | [7106](/foundations/error-codes.md#error-7106) | `META_OBJECT_NOT_PRESENT` | 404 (observed) | The schedule has no surviving views to send. | 1 |
 | [7107](/foundations/error-codes.md#error-7107) | `META_OBJECT_NOT_PRESENT` | 400 (observed) | The specified column does not exist in the table. | 13 |
@@ -81,8 +82,9 @@ One row per error code. Follow the code link for the full entry with per-operati
 | [7277](/foundations/error-codes.md#error-7277) | - | 400 (typical) | The folder holds tables that have dependent child views, so the deletion is blocked. | 3 |
 | [7280](/foundations/error-codes.md#error-7280) | - | 400 (typical) | A lookup relationship already exists on this child column. | 1 |
 | [7282](/foundations/error-codes.md#error-7282) | - | 400 (typical) | A group with the same name already exists in this workspace. Group names must be unique within a workspace. | 2 |
-| [7301](/foundations/error-codes.md#error-7301) | `SECURITY_NOT_PERMITTED` | 403 (observed) | The request is authenticated, but the user does not hold the role or view permission required for this operation on the requested resource. | 161 |
+| [7301](/foundations/error-codes.md#error-7301) | `SECURITY_NOT_PERMITTED` | 403 (observed) | The request is authenticated, but the user does not hold the role or view permission required for this operation on the requested resource. | 175 |
 | [7307](/foundations/error-codes.md#error-7307) | `OWNER_CANNOT_SHARE_HIMSELF` | 400 (typical) | The sharer attempted to share a view to themselves. | 1 |
+| [7309](/foundations/error-codes.md#error-7309) | `SECURITY_NEEDS_LOGIN` | 400 (typical) | No authentication was supplied with the request. | 4 |
 | [7319](/foundations/error-codes.md#error-7319) | `OBJID_NOT_BELONGS_TO_DB` | 400 (typical) | The view does not belong to the specified workspace. | 48 |
 | [7320](/foundations/error-codes.md#error-7320) | `CANNOT_SHARETO_SELF` | 400 (typical) | Same as above (alternate path). | 1 |
 | [7321](/foundations/error-codes.md#error-7321) | `VIEW_ALREADY_SHARED` | 400 (typical) | The view is already shared with this user. | 1 |
@@ -95,14 +97,14 @@ One row per error code. Follow the code link for the full entry with per-operati
 | [7333](/foundations/error-codes.md#error-7333) | `INVALID_GROUP_FUNC_USE_IN_FILTERCRITERIA` | 400 (typical) | An aggregate function was used in criteria. | 2 |
 | [7336](/foundations/error-codes.md#error-7336) | `BATCH_IMPORT_LIMIT_EXCEEDED` | 400 (observed) | More than 100 batches were sent for one job. | 2 |
 | [7337](/foundations/error-codes.md#error-7337) | `BATCH_IMPORT_LAST_BATCH_ALREADY_RECEIVED` | 400 (observed) | A batch was sent after isLastBatch: true. | 2 |
-| [7338](/foundations/error-codes.md#error-7338) | `BATCH_IMPORT_INVALID_KEY`, `GRPID_NOT_BELONGS_TO_DB` | 400 (observed) | The specified group-id does not belong to this workspace. | 7 |
+| [7338](/foundations/error-codes.md#error-7338) | `BATCH_IMPORT_INVALID_KEY` | 400 (observed) | The specified group-id does not belong to this workspace. | 7 |
 | [7340](/foundations/error-codes.md#error-7340) | `BATCH_IMPORT_VIEWID_MISMATCH` | 400 (observed) | The batchKey belongs to a different table. | 1 |
 | [7351](/foundations/error-codes.md#error-7351) | `SLIDESHOW_NOT_BELONGS_TO_DB` | 400 (observed) | The slideshow does not exist, or belongs to a different workspace. | 4 |
 | [7367](/foundations/error-codes.md#error-7367) | - | 400 (typical) | The lookup is used by one or more dependent views and the removal has been blocked. | 1 |
 | [7377](/foundations/error-codes.md#error-7377) | - | 400 (typical) | An identical lookup relationship between the same child column and the same reference column is already defined. | 1 |
 | [7378](/foundations/error-codes.md#error-7378) | - | 400 (typical) | No lookup relationship is defined on this column. | 1 |
 | [7379](/foundations/error-codes.md#error-7379) | - | 400 (typical) | A lookup column cannot refer to a column within the same table. | 2 |
-| [7390](/foundations/error-codes.md#error-7390) | - | 400 (typical) | One or more of the specified users holds the org-level Viewer role and cannot be promoted to Workspace Admin. | 1 |
+| [7390](/foundations/error-codes.md#error-7390) | `WORKSPACE_NOT_BELONGS_TO_ORG` | 400 (typical) | The workspace does not belong to the organization in the ZANALYTICS-ORGID header. | 11 |
 | [7395](/foundations/error-codes.md#error-7395) | - | 400 (typical) | The column specified in LOOKUPCOLUMN.COLUMNNAME does not exist in the referenced table. | 1 |
 | [7396](/foundations/error-codes.md#error-7396) | `SLIDE_NOT_PRESENT_IN_DB` | 400 (typical) | The slideshow record exists but no slide details could be read for it. | 2 |
 | [7397](/foundations/error-codes.md#error-7397) | - | 400 (typical) | The specified view is not a table. | 6 |
@@ -141,10 +143,26 @@ One row per error code. Follow the code link for the full entry with per-operati
 | [7542](/foundations/error-codes.md#error-7542) | `FILTER_CRITERIA_NOT_PERMITTED_FOR_SHARED_USER` | 400 (typical) | criteria update is not permitted for this share type. | 1 |
 | [7543](/foundations/error-codes.md#error-7543) | `ONLY_BASETABLE_COL_IN_TABULAR_FILTERCRITERIA`, `VUD_OR_DRILL_COLUMNS_EDIT_NOT_SUPPORTED_FOR_MULTI_VIEW_SHARE` | 400 (typical) | criteria on a tabular view referenced a column outside its base table. | 3 |
 | [7545](/foundations/error-codes.md#error-7545) | `SHARE_AND_WRITE_PERMISSIONS_NOT_ALLOWED_FOR_RO_USERS` | 400 (typical) | A Read-Only/embedded user was granted share together with a write permission. | 2 |
+| [7548](/foundations/error-codes.md#error-7548) | `NO_SUCH_ROLE_EXIST` | 400 (observed) | No custom role exists for the given role-id in this organization. | 2 |
 | [7549](/foundations/error-codes.md#error-7549) | `CANNOT_SHARE_TO_CUSTOMROLE_USER` | 400 (typical) | Attempted to share directly to a user who only has a custom-role-based org-level permission. | 1 |
 | [7550](/foundations/error-codes.md#error-7550) | - | 400 (typical) | The specified role name does not exist as a custom role in the organization. | 2 |
+| [7553](/foundations/error-codes.md#error-7553) | `ROLENAME_EXISTS` | 400 (observed) | A role with the given roleName already exists in the organization. The check covers built-in role names as well as other custom roles. | 2 |
+| [7554](/foundations/error-codes.md#error-7554) | `INVALID_VIEWTYPE_GROUP` | 400 (typical) | The accessType value did not resolve to a known access level. | 2 |
+| [7559](/foundations/error-codes.md#error-7559) | `EXPORT_PERM_NEEDED_FOR_EMAILSCH` | 400 (observed) | manageEmailSchedules is enabled but export is not. | 2 |
 | [7565](/foundations/error-codes.md#error-7565) | `UNVERIFIED_EMAIL` | 400 (typical) | The calling user's primary email address is not verified. | 11 |
 | [7571](/foundations/error-codes.md#error-7571) | `UNKNOWN_VIEWID_PASSED` | 400 (typical) | A tableCriteriaList[].viewId does not exist in this workspace. | 1 |
+| [7573](/foundations/error-codes.md#error-7573) | `CR_DATA_PERM_NOT_ALLOWED_FOR_ACCESS_TYPE` | 400 (observed) | A dataPermissions flag is enabled while accessType is below ALL_DATA_REPORTS_AND_DASHBOARDS. | 2 |
+| [7574](/foundations/error-codes.md#error-7574) | `CR_DESIGN_PERM_NOT_ALLOWED_FOR_ACCESS_TYPE` | 400 (typical) | designModify is enabled while accessType is below ALL_DATA_REPORTS_AND_DASHBOARDS. | 2 |
+| [7575](/foundations/error-codes.md#error-7575) | `CR_CREATE_PERM_NOT_ALLOWED_FOR_ACCESS_TYPE` | 400 (typical) | createTable, createQueryTable or createFormula is enabled while accessType is below ALL_DATA_REPORTS_AND_DASHBOARDS. | 2 |
+| [7576](/foundations/error-codes.md#error-7576) | `CR_ALERT_PERM_NOT_ALLOWED_FOR_ACCESS_TYPE`, `ALL_DASHBOARDS` | 400 (typical) | manageDataAlerts is enabled while accessType is ALL_DASHBOARDS. | 2 |
+| [7577](/foundations/error-codes.md#error-7577) | `CR_SCHEDULED_DATA_DELETION_PERM_NOT_ALLOWED` | 400 (typical) | dataArchives is enabled but not every other dataPermissions flag is enabled. | 2 |
+| [7578](/foundations/error-codes.md#error-7578) | `CR_DESIGN_MODIFY_REQUIRES_PRESET_PERMS` | 400 (typical) | designModify is enabled without both accessAdminPresets and createPreset. | 2 |
+| [7579](/foundations/error-codes.md#error-7579) | `CR_READ_PERM_MUST_BE_ENABLED` | 400 (observed) | interactionPermissions.read is missing or false. Read permission must always be enabled. | 2 |
+| [7580](/foundations/error-codes.md#error-7580) | `CR_ACCESS_TYPE_AND_PERMS_REQUIRED_TOGETHER` | 400 (observed) | One of accessType and permissions was sent without the other. | 1 |
+| [7581](/foundations/error-codes.md#error-7581) | `CR_NO_FIELDS_TO_UPDATE` | 400 (observed) | The CONFIG contained neither roleName nor accessType, so there is nothing to update. | 1 |
+| [7584](/foundations/error-codes.md#error-7584) | `CR_DATASOURCE_PERM_NOT_ALLOWED_FOR_ACCESS_TYPE` | 400 (typical) | A datasourcePermissions flag is enabled while accessType is below ALL_DATA_REPORTS_AND_DASHBOARDS. | 2 |
+| [7585](/foundations/error-codes.md#error-7585) | `CR_USE_DATASOURCE_REQUIRES_CREATETABLE` | 400 (typical) | useDatasource is enabled but createTable is not. | 2 |
+| [7586](/foundations/error-codes.md#error-7586) | `CR_VIEW_DATASOURCE_REQUIRED_FOR_DATASOURCE_PERMS` | 400 (typical) | editDatasource, syncData, useDatasource or removeDatasource is enabled without viewDatasource. | 2 |
 | [7801](/foundations/error-codes.md#error-7801) | `MARGIN_VALUE_EXCEEDS` | 400 (typical) | A PDF margin is outside 0–1 inches. | 3 |
 | [7803](/foundations/error-codes.md#error-7803) | `INVALID_DIMENSION` | 400 (typical) | width or height is outside the permitted image range. | 2 |
 | [7806](/foundations/error-codes.md#error-7806) | `XLS_CELL_LIMIT_EXCEEDS` | 400 (typical) | The XLS export exceeds the per-sheet cell limit. | 1 |
@@ -199,10 +217,10 @@ One row per error code. Follow the code link for the full entry with per-operati
 | [8074](/foundations/error-codes.md#error-8074) | `READ_PERM_SHOULD_BE_TRUE_FOR_SHARING` | 400 (typical) | permissions.read was sent as false. | 4 |
 | [8075](/foundations/error-codes.md#error-8075) | - | 400 (typical) | Invalid chart type parameter. | 2 |
 | [8077](/foundations/error-codes.md#error-8077) | `EMPTY_JSON_CONFIGURATION`, `CONFIG` | 400 (typical) | CONFIG was not sent, or was sent empty. | 2 |
-| [8078](/foundations/error-codes.md#error-8078) | `EMPTY_JSON_ATTRIBUTE_FOUND` | 400 (observed) | sqlQuery was sent but is blank. | 5 |
-| [8079](/foundations/error-codes.md#error-8079) | `ATTRIBUTE_NOT_PRESENT_IN_JSON_CONFIGURATION`, `UPDATEADD` | 400 (typical) | A mandatory attribute is missing from the configuration. | 17 |
+| [8078](/foundations/error-codes.md#error-8078) | `EMPTY_JSON_ATTRIBUTE_FOUND` | 400 (observed) | A mandatory attribute was sent with an empty value. The error message names the attribute. | 6 |
+| [8079](/foundations/error-codes.md#error-8079) | `ATTRIBUTE_NOT_PRESENT_IN_JSON_CONFIGURATION`, `UPDATEADD` | 400 (typical) | A mandatory attribute is missing from the configuration. | 20 |
 | [8080](/foundations/error-codes.md#error-8080) | `INVALID_JSON_CONFIGURATION` | 400 (typical) | CONFIG is not valid JSON, was not URL-encoded correctly, contains an unsupported key, or violates a type or length constraint. | 14 |
-| [8083](/foundations/error-codes.md#error-8083) | `ORGID_NOT_PRESENT_IN_THE_HEADER` | 400 (typical) | The ZANALYTICS-ORGID header is missing from a request that requires it. | 0 |
+| [8083](/foundations/error-codes.md#error-8083) | `ORGID_NOT_PRESENT_IN_THE_HEADER` | 400 (typical) | The ZANALYTICS-ORGID header is missing from a request that requires it. | 14 |
 | [8085](/foundations/error-codes.md#error-8085) | `SHAREDTO_EXTERNAL_DOMAIN_NOT_ALLOWED` | 400 (typical) | Sharing to an email outside the allowed domain(s) is disabled by org policy. | 1 |
 | [8086](/foundations/error-codes.md#error-8086) | `SHAREDTO_EXTERNAL_DOMAIN_NOT_ALLOWED` | 400 (typical) | Sharing to an email outside the allowed domain(s) is disabled by org policy. | 1 |
 | [8088](/foundations/error-codes.md#error-8088) | `SECURITY_CONTROLS_FEATURE_DISABLED` | 400 (typical) | Export is disabled for the organization. | 7 |
@@ -236,24 +254,34 @@ One row per error code. Follow the code link for the full entry with per-operati
 | [8152](/foundations/error-codes.md#error-8152) | `INTERVAL_SHOULD_BE_120_OR_ABOVE` | 400 (observed) | autoRefresh is a positive value below 120 seconds. | 1 |
 | [8154](/foundations/error-codes.md#error-8154) | `COLUMN_NOT_PRESENT_IN_TABLE` | 400 (typical) | A column in vudColumns / drillColumns (or in criteria) does not exist in the given table. | 4 |
 | [8173](/foundations/error-codes.md#error-8173) | - | 400 (typical) | The number of columns sent in bulk mode exceeds the allowed limit. | 1 |
+| [8174](/foundations/error-codes.md#error-8174) | `DUPLICATE_TAG_NAME_FOUND` | 403 (observed) | A tag with the given name already exists in this workspace. Tag names must be unique within a workspace. | 2 |
 | [8175](/foundations/error-codes.md#error-8175) | `OEM_KEY_NOT_PRESENT` | 404 (observed) | No embed URL on this view matches the supplied rsConfig. | 1 |
 | [8176](/foundations/error-codes.md#error-8176) | `OEM_VIEW_HOLD_NO_KEYS` | 404 (observed) | deleteAllUrls was requested but the view has no embed URLs. | 1 |
 | [8177](/foundations/error-codes.md#error-8177) | `MAX_ALLOWED_VALUE_EXCEEDED` | 400 (typical) | validityPeriod exceeds the maximum of 86400 seconds (1 day). | 1 |
 | [8178](/foundations/error-codes.md#error-8178) | `INVALID_DELETE_EMBED_URL_CONFIGURATION` | 400 (observed) | Both rsConfig and deleteAllUrls: true were sent, or neither was. | 1 |
-| [8179](/foundations/error-codes.md#error-8179) | - | 400 (typical) | One or more non-system columns are missing from the columns array. | 1 |
-| [8180](/foundations/error-codes.md#error-8180) | - | 400 (typical) | One or more column IDs in the columns array do not belong to this view. | 2 |
-| [8182](/foundations/error-codes.md#error-8182) | `SYNC_CANNOT_BE_INITIATED_FOR_CONNECTOR_WITH_MULTIPLE_SCHEDULES` | 403 (observed) | resetSort and sortOrder cannot be used together. | 2 |
+| [8179](/foundations/error-codes.md#error-8179) | `DONT_HAVE_PERMISSION_TO_CREATE_TAGS` | 403 (observed) | The calling user is not an Account Admin, Organization Admin or Workspace Admin of the workspace. | 4 |
+| [8180](/foundations/error-codes.md#error-8180) | `DONT_HAVE_PERMISSION_TO_ASSOCIATE_AND_UNASSOCIATE_TAGS` | 403 (observed) | The calling user is a read-only user. Read-only users cannot change tag associations regardless of any other permission. | 6 |
+| [8181](/foundations/error-codes.md#error-8181) | `TAG_COUNT_EXCEEDS` | 403 (observed) | One or more views would exceed the limit of 10 tags per view. The error message lists the offending views. | 2 |
+| [8182](/foundations/error-codes.md#error-8182) | `SYNC_CANNOT_BE_INITIATED_FOR_CONNECTOR_WITH_MULTIPLE_SCHEDULES`, `CANNOT_UPDATE_THE_TAG` | 403 (observed) | resetSort and sortOrder cannot be used together. | 3 |
 | [8183](/foundations/error-codes.md#error-8183) | `SCHEDULE_ID_NOT_ASSOCIATED_WITH_CONNECTOR` | 400 (typical) | The syncIntervalId does not belong to this datasource. | 1 |
+| [8184](/foundations/error-codes.md#error-8184) | `VIEW_OR_TAG_NOT_PRESENT_IN_DB_TO_TAG` | 403 (observed) | The tag does not exist in this workspace. | 6 |
+| [8185](/foundations/error-codes.md#error-8185) | `CANNOT_DELETE_OR_UPDATE_TAG` | 400 (typical) | The operation matched no tag row. | 2 |
+| [8187](/foundations/error-codes.md#error-8187) | `TAG_NOT_PRESENT_IN_DB` | 400 (observed) | The tag does not exist in this workspace. | 1 |
 | [8188](/foundations/error-codes.md#error-8188) | `EXPORT_INVALID_PASSWORD` | 400 (typical) | password is blank or shorter than 6 characters. | 3 |
+| [8201](/foundations/error-codes.md#error-8201) | `INVALID_CONFIGURATION_REMOVE_VIEWS_LINKED_WITH_TAG` | 400 (observed) | viewIds is empty or absent and dissociateAll is not true. | 1 |
+| [8202](/foundations/error-codes.md#error-8202) | `INVALID_CONFIGURATION_REMOVE_TAGS_FOR_VIEW` | 400 (observed) | tagIds is empty or absent and dissociateAll is not true. | 1 |
 | [8241](/foundations/error-codes.md#error-8241) | `SYSTEM_TAG_DATA_WARNING_V2_VALIDATION_CONFIRMATION` | 409 (typical) | The view carries a restricted DATAWARNING system tag. | 13 |
 | [8252](/foundations/error-codes.md#error-8252) | - | 400 (typical) | Invalid report type. | 2 |
-| [8504](/foundations/error-codes.md#error-8504) | `LESS_THAN_MIN_OCCURANCE`, `CONFIG` | 400 (typical) | CONFIG was not sent, or a mandatory key is missing. | 13 |
-| [8507](/foundations/error-codes.md#error-8507) | `MORE_THAN_MAX_LENGTH`, `CONFIG` | 400 (typical) | CONFIG exceeds 100,000 characters. | 6 |
-| [8509](/foundations/error-codes.md#error-8509) | `PATTERN_NOT_MATCHED` | 400 (typical) | serviceName or databaseType is not one of the accepted values. | 1 |
+| [8504](/foundations/error-codes.md#error-8504) | `LESS_THAN_MIN_OCCURANCE`, `CONFIG` | 400 (typical) | CONFIG was not sent. | 21 |
+| [8507](/foundations/error-codes.md#error-8507) | `MORE_THAN_MAX_LENGTH`, `CONFIG` | 400 (typical) | roleName exceeds 30 characters, or the serialized permissions object exceeds its size limit. | 15 |
+| [8509](/foundations/error-codes.md#error-8509) | `PATTERN_NOT_MATCHED` | 400 (typical) | roleName contains characters other than letters, digits, spaces, underscore and hyphen, or accessType is not one of the three allowed values. | 5 |
 | [8516](/foundations/error-codes.md#error-8516) | `UNABLE_TO_PARSE_DATA_TYPE` | 400 (typical) | A CONFIG value has the wrong JSON type. | 4 |
-| [8535](/foundations/error-codes.md#error-8535) | `INVALID_OAUTHTOKEN` | 401 (typical) | The OAuth access token is missing, expired, revoked, or does not carry the scope required by this operation. | 121 |
+| [8525](/foundations/error-codes.md#error-8525) | `URL_RULE_NOT_CONFIGURED` | 400 (typical) | The role-id in the request URI is not numeric, so the request matched no route. | 2 |
+| [8534](/foundations/error-codes.md#error-8534) | `JSON_PARSE_ERROR`, `CONFIG` | 400 (typical) | CONFIG is not valid JSON. | 2 |
+| [8535](/foundations/error-codes.md#error-8535) | `INVALID_OAUTHTOKEN` | 401 (typical) | The OAuth access token is missing, expired, revoked, or does not carry the scope required by this operation. | 135 |
+| [8539](/foundations/error-codes.md#error-8539) | `INVALID_VALUE_NOT_ALLOWED` | 400 (typical) | An attribute carries a value that is structurally valid but not accepted, such as an empty roleName. | 1 |
 | [8544](/foundations/error-codes.md#error-8544) | `OUT_OF_RANGE` | 400 (typical) | A schedule value is outside its declared range. | 1 |
-| [8547](/foundations/error-codes.md#error-8547) | `ARRAY_SIZE_OUT_OF_RANGE` | 400 (typical) | selectedColumns is empty or holds more than 300 entries. | 4 |
+| [8547](/foundations/error-codes.md#error-8547) | `ARRAY_SIZE_OUT_OF_RANGE` | 400 (typical) | viewIds is empty or has more than 1000 entries. | 8 |
 | [9102](/foundations/error-codes.md#error-9102) | `LANGUAGE_NOT_SUPPORTED` | 400 (typical) | language is not one of the supported language names. | 1 |
 | [12049](/foundations/error-codes.md#error-12049) | - | 400 (typical) | The workspace is already enabled for White Label domain access. Enabling an already enabled workspace is not idempotent. | 1 |
 | [12050](/foundations/error-codes.md#error-12050) | - | 400 (typical) | The workspace is not currently enabled for White Label domain access. Disabling an already disabled workspace is not idempotent. | 1 |

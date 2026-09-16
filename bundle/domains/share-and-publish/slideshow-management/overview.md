@@ -42,9 +42,9 @@ sources:
     resource: "/references/openapi/share-publish-grouped-api.json"
     title: OpenAPI 3 specification - share-publish-grouped-api.json
     author: team:zoho-analytics-api-docs
-    last_modified: 2026-09-10T10:56:21Z
+    last_modified: 2026-09-16T12:30:51Z
 generated:
-  at: 2026-09-14T17:14:34Z
+  at: 2026-09-16T12:54:00Z
 status: stable
 ---
 
@@ -193,7 +193,7 @@ Each slideshow also carries an **access type** that decides whether a viewer mus
 | [7351](/foundations/error-codes.md#error-7351) | 400 | The slideshow does not exist, or belongs to a different workspace. |
 | [7396](/foundations/error-codes.md#error-7396) | 400 | The slideshow record exists but no slide details could be read for it. |
 | [7565](/foundations/error-codes.md#error-7565) | 400 | The calling user's primary email address is not verified. |
-| [8078](/foundations/error-codes.md#error-8078) | 400 | sqlQuery was sent but is blank. |
+| [8078](/foundations/error-codes.md#error-8078) | 400 | A mandatory attribute was sent with an empty value. The error message names the attribute. |
 | [8079](/foundations/error-codes.md#error-8079) | 400 | A mandatory attribute is missing from the configuration. |
 | [8080](/foundations/error-codes.md#error-8080) | 400 | CONFIG is not valid JSON, was not URL-encoded correctly, contains an unsupported key, or violates a type or length constraint. |
 | [8088](/foundations/error-codes.md#error-8088) | 400 | Export is disabled for the organization. |

@@ -1,14 +1,14 @@
 ---
 type: API Catalog
 title: Endpoint catalog
-description: "All 168 Zoho Analytics REST API v2 endpoints in one table: method, path, operation ID, group, OAuth scope, success status and organization-header requirement."
+description: "All 182 Zoho Analytics REST API v2 endpoints in one table: method, path, operation ID, group, OAuth scope, success status and organization-header requirement."
 tags:
   - zoho-analytics
   - rest-api-v2
   - catalog
   - endpoints
   - index
-endpoint_count: 168
+endpoint_count: 182
 base_url: https://analyticsapi.zoho.com
 machine_readable: "/references/endpoint-catalog.json"
 sources:
@@ -16,58 +16,61 @@ sources:
     resource: "/references/openapi/org-management-grouped-api.json"
     title: OpenAPI 3 specification - org-management-grouped-api.json
     author: team:zoho-analytics-api-docs
-    last_modified: 2026-09-10T10:56:20Z
+    last_modified: 2026-09-16T12:30:51Z
   - id: openapi-spec
     resource: "/references/openapi/user-groups-grouped-api.json"
     title: OpenAPI 3 specification - user-groups-grouped-api.json
     author: team:zoho-analytics-api-docs
-    last_modified: 2026-09-10T10:56:21Z
+    last_modified: 2026-09-16T12:54:00Z
   - id: openapi-spec
     resource: "/references/openapi/workspace-management-grouped-api.json"
     title: OpenAPI 3 specification - workspace-management-grouped-api.json
     author: team:zoho-analytics-api-docs
-    last_modified: 2026-09-10T10:56:21Z
+    last_modified: 2026-09-16T12:30:51Z
   - id: openapi-spec
     resource: "/references/openapi/data-modeling-schema-grouped-api.json"
     title: OpenAPI 3 specification - data-modeling-schema-grouped-api.json
     author: team:zoho-analytics-api-docs
-    last_modified: 2026-09-10T10:56:20Z
+    last_modified: 2026-09-16T12:30:51Z
   - id: openapi-spec
     resource: "/references/openapi/data-operations-grouped-api.json"
     title: OpenAPI 3 specification - data-operations-grouped-api.json
     author: team:zoho-analytics-api-docs
-    last_modified: 2026-09-10T10:56:20Z
+    last_modified: 2026-09-16T12:30:51Z
   - id: openapi-spec
     resource: "/references/openapi/views-management-grouped-api.json"
     title: OpenAPI 3 specification - views-management-grouped-api.json
     author: team:zoho-analytics-api-docs
-    last_modified: 2026-09-10T10:56:21Z
+    last_modified: 2026-09-16T12:30:51Z
   - id: openapi-spec
     resource: "/references/openapi/reports-dashboards-grouped-api.json"
     title: OpenAPI 3 specification - reports-dashboards-grouped-api.json
     author: team:zoho-analytics-api-docs
-    last_modified: 2026-09-10T10:56:20Z
+    last_modified: 2026-09-16T12:30:51Z
   - id: openapi-spec
     resource: "/references/openapi/share-publish-grouped-api.json"
     title: OpenAPI 3 specification - share-publish-grouped-api.json
     author: team:zoho-analytics-api-docs
-    last_modified: 2026-09-10T10:56:21Z
+    last_modified: 2026-09-16T12:30:51Z
   - id: openapi-spec
     resource: "/references/openapi/schedules-alerts-grouped-api.json"
     title: OpenAPI 3 specification - schedules-alerts-grouped-api.json
     author: team:zoho-analytics-api-docs
-    last_modified: 2026-09-10T10:56:21Z
+    last_modified: 2026-09-16T12:30:51Z
   - id: openapi-spec
     resource: "/references/openapi/dsml-grouped-api.json"
     title: OpenAPI 3 specification - dsml-grouped-api.json
     author: team:zoho-analytics-api-docs
-    last_modified: 2026-09-10T10:56:20Z
+    last_modified: 2026-09-16T12:30:51Z
   - id: group-org-info-and-settings
     resource: "/domains/organization-management/org-info-and-settings/overview.md"
     title: Organization Info & Settings - group overview
   - id: group-org-users
     resource: "/domains/users-and-groups/org-users/overview.md"
     title: Organization Users - group overview
+  - id: group-custom-roles
+    resource: "/domains/users-and-groups/custom-roles/overview.md"
+    title: Custom Roles - group overview
   - id: group-workspace-users
     resource: "/domains/users-and-groups/workspace-users/overview.md"
     title: Workspace Users - group overview
@@ -137,6 +140,9 @@ sources:
   - id: group-auto-analysis
     resource: "/domains/views-management/auto-analysis/overview.md"
     title: Auto Analysis - group overview
+  - id: group-tags
+    resource: "/domains/views-management/tags/overview.md"
+    title: Tags - group overview
   - id: group-reports
     resource: "/domains/reports-and-dashboards/reports/overview.md"
     title: Reports (Analysis Views) - group overview
@@ -162,7 +168,7 @@ sources:
     resource: "/domains/dsml/automl/overview.md"
     title: AutoML - group overview
 generated:
-  at: 2026-09-14T17:14:34Z
+  at: 2026-09-16T12:54:00Z
 status: stable
 ---
 
@@ -185,6 +191,10 @@ Base URL: `https://analyticsapi.zoho.com` (or the data-center equivalent, see [D
 | [Deactivate Users](/domains/users-and-groups/org-users/de-activate-users.md) | PUT | `/restapi/v2/users/inactive` | `deActivateUsers` | [Organization Users](/domains/users-and-groups/org-users/overview.md) | `ZohoAnalytics.usermanagement.update` | 204 | required |
 | [Change User Role](/domains/users-and-groups/org-users/change-user-role.md) | PUT | `/restapi/v2/users/role` | `changeUserRole` | [Organization Users](/domains/users-and-groups/org-users/overview.md) | `ZohoAnalytics.usermanagement.update` | 204 | required |
 | [Get Org Admins](/domains/users-and-groups/org-users/get-org-admins.md) | GET | `/restapi/v2/orgadmins` | `getOrgAdmins` | [Organization Users](/domains/users-and-groups/org-users/overview.md) | `ZohoAnalytics.share.read` | 200 | required |
+| [Get Custom Roles](/domains/users-and-groups/custom-roles/get-custom-roles.md) | GET | `/restapi/v2/orgs/roles` | `getCustomRoles` | [Custom Roles](/domains/users-and-groups/custom-roles/overview.md) | `ZohoAnalytics.usermanagement.read` | 200 | required |
+| [Create Custom Role](/domains/users-and-groups/custom-roles/create-custom-role.md) | POST | `/restapi/v2/orgs/roles` | `createCustomRole` | [Custom Roles](/domains/users-and-groups/custom-roles/overview.md) | `ZohoAnalytics.usermanagement.create` | 200 | required |
+| [Update Custom Role](/domains/users-and-groups/custom-roles/update-custom-role.md) | PUT | `/restapi/v2/orgs/roles/{role-id}` | `updateCustomRole` | [Custom Roles](/domains/users-and-groups/custom-roles/overview.md) | `ZohoAnalytics.usermanagement.update` | 204 | required |
+| [Delete Custom Role](/domains/users-and-groups/custom-roles/delete-custom-role.md) | DELETE | `/restapi/v2/orgs/roles/{role-id}` | `deleteCustomRole` | [Custom Roles](/domains/users-and-groups/custom-roles/overview.md) | `ZohoAnalytics.usermanagement.delete` | 204 | required |
 | [Get Workspace Users](/domains/users-and-groups/workspace-users/get-workspace-users.md) | GET | `/restapi/v2/workspaces/{workspace-id}/users` | `getWorkspaceUsers` | [Workspace Users](/domains/users-and-groups/workspace-users/overview.md) | `ZohoAnalytics.usermanagement.read` | 200 | required |
 | [Add Workspace Users](/domains/users-and-groups/workspace-users/add-workspace-users.md) | POST | `/restapi/v2/workspaces/{workspace-id}/users` | `addWorkspaceUsers` | [Workspace Users](/domains/users-and-groups/workspace-users/overview.md) | `ZohoAnalytics.usermanagement.create` | 204 | required |
 | [Remove Workspace Users](/domains/users-and-groups/workspace-users/delete-workspace-users.md) | DELETE | `/restapi/v2/workspaces/{workspace-id}/users` | `deleteWorkspaceUsers` | [Workspace Users](/domains/users-and-groups/workspace-users/overview.md) | `ZohoAnalytics.usermanagement.delete` | 204 | required |
@@ -294,6 +304,16 @@ Base URL: `https://analyticsapi.zoho.com` (or the data-center equivalent, see [D
 | [Delete Trash View](/domains/views-management/trash-management/delete-trash-view.md) | DELETE | `/restapi/v2/workspaces/{workspace-id}/trash/{view-id}` | `deleteTrashView` | [Trash Management](/domains/views-management/trash-management/overview.md) | `ZohoAnalytics.modeling.delete` | 204 | required |
 | [Auto Analyse View](/domains/views-management/auto-analysis/auto-analyse-view.md) | POST | `/restapi/v2/workspaces/{workspace-id}/views/{view-id}/autoanalyse` | `autoAnalyseView` | [Auto Analysis](/domains/views-management/auto-analysis/overview.md) | `ZohoAnalytics.modeling.create` | 200 | required |
 | [Auto Analyse Column](/domains/views-management/auto-analysis/auto-analyse-column.md) | POST | `/restapi/v2/workspaces/{workspace-id}/views/{view-id}/columns/{column-id}/autoanalyse` | `autoAnalyseColumn` | [Auto Analysis](/domains/views-management/auto-analysis/overview.md) | `ZohoAnalytics.modeling.create` | 200 | required |
+| [Get Tags List](/domains/views-management/tags/get-tags.md) | GET | `/restapi/v2/workspaces/{workspace-id}/tags` | `getTags` | [Tags](/domains/views-management/tags/overview.md) | `ZohoAnalytics.metadata.read` | 200 | required |
+| [Get Tagged Views](/domains/views-management/tags/get-tagged-views.md) | GET | `/restapi/v2/workspaces/{workspace-id}/tags/{tag-id}/views` | `getTaggedViews` | [Tags](/domains/views-management/tags/overview.md) | `ZohoAnalytics.metadata.read` | 200 | required |
+| [Get View Tags](/domains/views-management/tags/get-view-tags.md) | GET | `/restapi/v2/workspaces/{workspace-id}/views/{view-id}/tags` | `getViewTags` | [Tags](/domains/views-management/tags/overview.md) | `ZohoAnalytics.metadata.read` | 200 | required |
+| [Create Tag](/domains/views-management/tags/create-tag.md) | POST | `/restapi/v2/workspaces/{workspace-id}/tags` | `createTag` | [Tags](/domains/views-management/tags/overview.md) | `ZohoAnalytics.modeling.create` | 200 | required |
+| [Update Tag](/domains/views-management/tags/update-tag.md) | PUT | `/restapi/v2/workspaces/{workspace-id}/tags/{tag-id}` | `updateTag` | [Tags](/domains/views-management/tags/overview.md) | `ZohoAnalytics.modeling.update` | 204 | required |
+| [Delete Tag](/domains/views-management/tags/delete-tag.md) | DELETE | `/restapi/v2/workspaces/{workspace-id}/tags/{tag-id}` | `deleteTag` | [Tags](/domains/views-management/tags/overview.md) | `ZohoAnalytics.modeling.delete` | 204 | required |
+| [Add Tag To Multiple Views](/domains/views-management/tags/add-tag-to-views.md) | POST | `/restapi/v2/workspaces/{workspace-id}/tags/{tag-id}/views` | `addTagToViews` | [Tags](/domains/views-management/tags/overview.md) | `ZohoAnalytics.modeling.create` | 204 | required |
+| [Remove Tag From Multiple Views](/domains/views-management/tags/remove-tag-from-views.md) | DELETE | `/restapi/v2/workspaces/{workspace-id}/tags/{tag-id}/views` | `removeTagFromViews` | [Tags](/domains/views-management/tags/overview.md) | `ZohoAnalytics.modeling.delete` | 204 | required |
+| [Add Multiple Tags To View](/domains/views-management/tags/add-tags-to-view.md) | POST | `/restapi/v2/workspaces/{workspace-id}/views/{view-id}/tags` | `addTagsToView` | [Tags](/domains/views-management/tags/overview.md) | `ZohoAnalytics.modeling.create` | 204 | required |
+| [Remove Multiple Tags From View](/domains/views-management/tags/remove-tags-from-view.md) | DELETE | `/restapi/v2/workspaces/{workspace-id}/views/{view-id}/tags` | `removeTagsFromView` | [Tags](/domains/views-management/tags/overview.md) | `ZohoAnalytics.modeling.delete` | 204 | required |
 | [Create Analysis View](/domains/reports-and-dashboards/reports/create-report.md) | POST | `/restapi/v2/workspaces/{workspace-id}/reports` | `createReport` | [Reports (Analysis Views)](/domains/reports-and-dashboards/reports/overview.md) | `ZohoAnalytics.modeling.create` | 200 | required |
 | [Update Analysis View](/domains/reports-and-dashboards/reports/update-report.md) | PUT | `/restapi/v2/workspaces/{workspace-id}/reports/{view-id}` | `updateReport` | [Reports (Analysis Views)](/domains/reports-and-dashboards/reports/overview.md) | `ZohoAnalytics.modeling.update` | 204 | required |
 | [Get Report Metadata](/domains/reports-and-dashboards/reports/get-report-metadata.md) | GET | `/restapi/v2/workspaces/{workspace-id}/reports/{view-id}/metadata` | `getReportMetadata` | [Reports (Analysis Views)](/domains/reports-and-dashboards/reports/overview.md) | `ZohoAnalytics.modeling.read` | 200 | required |
